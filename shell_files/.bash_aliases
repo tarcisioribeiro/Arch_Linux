@@ -1,5 +1,5 @@
 # Terminal Tools
-alias bat='batcat --theme="Dracula"'
+alias bat='bat --theme="Dracula"'
 alias cls='clear'
 alias eza='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
 alias glow='glow -p'
