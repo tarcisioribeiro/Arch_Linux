@@ -1,0 +1,12 @@
+@import url("./colors.css");
+/* example usage */
+window#waybar {
+background: @background;
+color: @purple;
+/* or cyan, green, orange, pink, red, yellow, foreground, background-darker etc. */
+}
+
+
+* {
+    font-family: 'JetBrainsMono NFM';
+}
