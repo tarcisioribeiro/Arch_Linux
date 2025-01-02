@@ -1,0 +1,56 @@
+/* Cor de fundo da janela */
+window {
+    background-color: #282a36; /* Cor de fundo base do Dracula */
+}
+
+/* Container externo da barra, ocupa toda a largura/altura da janela */
+#outer-box {
+    margin: 0px;
+}
+
+/* Container interno da barra, em torno dos botões */
+#inner-box {
+    background-color: #44475a; /* Cor de fundo para o interior, mais suave que a base */
+    border-radius: 12px; /* Cantos mais arredondados */
+    border-style: none;
+    border-width: 1px;
+    border-color: #6272a4; /* Cor para a borda, azul claro */
+    padding: 8px;
+    margin: 8px;
+}
+
+/* Estilo dos botões e imagens */
+button, image {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+/* Estilo dos botões */
+button {
+    padding: 12px 20px; /* Ícones maiores, mais espaçamento */
+    margin: 8px;
+    font-size: 18px; /* Tamanho maior de texto */
+    color: #f8f8f2; /* Cor clara para o texto (Dracula light) */
+    border-radius: 10px; /* Cantos arredondados nos botões */
+    transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover nos botões */
+button:hover {
+    background-color: #6272a4; /* Azul suave para o hover */
+}
+
+/* Ícones com maior tamanho */
+image {
+    width: 24px; /* Tamanho maior para os ícones */
+    height: 24px;
+    filter: brightness(0) saturate(100%) invert(18%) sepia(70%) saturate(469%) hue-rotate(127deg) brightness(96%) contrast(93%);
+    transition: transform 0.3s ease;
+}
+
+/* Efeito de hover nos ícones */
+button:hover image {
+    transform: scale(1.2); /* Aumentar o ícone quando hover */
+}
+
