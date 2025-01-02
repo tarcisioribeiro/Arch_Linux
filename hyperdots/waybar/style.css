@@ -1,11 +1,10 @@
 @import url("./colors.css");
-/* example usage */
-window#waybar {
-background: @background;
-color: @purple;
-/* or cyan, green, orange, pink, red, yellow, foreground, background-darker etc. */
-}
 
+window#waybar {
+    background: rgba(40, 42, 54, 0.6);  /* Fundo semi-transparente com 80% de opacidade */
+    color: @purple;
+    border-radius: 10px;  /* Borda arredondada para um visual mais moderno */
+}
 
 * {
     font-family: 'JetBrainsMono NFM';
