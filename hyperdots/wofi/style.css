@@ -1,91 +1,78 @@
-/* Definindo a fonte JetBrains Mono */
 * {
     font-family: "JetBrainsMono NFM";
 }
 
-/* Janela principal */
 window {
     margin: 0px;
     border: 1px solid #bd93f9;
-    background-color: rgba(40, 42, 54, 0.75); /* Aumentei a transparência da cor de fundo */
-    border-radius: 15px; /* Cantos arredondados */
-    backdrop-filter: blur(12px); /* Aumentei o efeito de blur */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Aumentei a sombra para um efeito mais suave */
+    background-color: rgba(40, 42, 54, 0.75);
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Caixa de entrada de texto */
 #input {
     margin: 5px;
     border: none;
     color: #f8f8f2;
-    background-color: rgba(68, 71, 90, 0.7); /* Aumentei a transparência */
-    border-radius: 10px; /* Cantos mais arredondados */
+    background-color: rgba(68, 71, 90, 0.7);
+    border-radius: 10px;
     padding: 10px;
 }
 
-/* Caixa interna */
 #inner-box, #outer-box {
     margin: 5px;
     border: none;
-    background-color: rgba(40, 42, 54, 0.75); /* Aumentei a transparência */
-    border-radius: 15px; /* Cantos arredondados */
-    backdrop-filter: blur(6px); /* Aumentei um pouco o blur */
+    background-color: rgba(40, 42, 54, 0.75);
+    border-radius: 15px;
+    backdrop-filter: blur(6px);
 }
 
-/* Scroll */
 #scroll {
     margin: 0px;
     border: none;
 }
 
-/* Estilo para o texto */
 #text {
     margin: 5px;
     border: none;
     color: #f8f8f2;
-    font-size: 18px; /* Aumentei o tamanho da fonte */
+    font-size: 18px;
 }
 
-/* Mudança de cor de texto ao selecionar um item */
 #entry.activatable #text {
     color: #f8f8f2;
 }
 
-/* Estilo do texto do item selecionado */
 #entry > * {
     color: #f8f8f2;
-    font-size: 18px; /* Aumentei o tamanho da fonte */
+    font-size: 18px;
 }
 
-/* Estilo do item selecionado */
 #entry:selected {
-    background-color: rgba(68, 71, 90, 0.7); /* Aumentei a transparência */
-    border-radius: 15px; /* Cantos arredondados */
+    background-color: rgba(68, 71, 90, 0.7);
+    border-radius: 15px;
 }
 
-/* Estilo do texto do item selecionado */
 #entry:selected #text {
     font-weight: bold;
 }
 
-/* Ícones grandes */
 #entry .icon {
-    width: 30px; /* Aumentei o tamanho dos ícones */
-    height: 30px; /* Aumentei o tamanho dos ícones */
-    margin-right: 15px; /* Aumentei o espaço entre o ícone e o texto */
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
 }
 
-/* Ajustes finais para a aparência dos itens */
 #entry {
     display: flex;
     align-items: center;
-    padding: 10px 15px; /* Aumentei o preenchimento */
-    border-radius: 15px; /* Cantos arredondados */
+    padding: 10px 15px;
+    border-radius: 15px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #entry:hover {
-    background-color: rgba(68, 71, 90, 0.6); /* Fundo mais transparente ao passar o mouse */
-    transform: scale(1.05); /* Efeito sutil ao passar o mouse */
+    background-color: rgba(68, 71, 90, 0.6);
+    transform: scale(1.05);
 }
-

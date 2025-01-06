@@ -1,56 +1,52 @@
-/* Cor de fundo da janela */
 window {
-    background-color: #282a36; /* Cor de fundo base do Dracula */
+    background-color: rgba(40, 42, 54, 0.7);
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
 }
 
-/* Container externo da barra, ocupa toda a largura/altura da janela */
 #outer-box {
-    margin: 0px;
+    margin: 2px;
+    border-radius: 5px;
 }
 
-/* Container interno da barra, em torno dos botões */
 #inner-box {
-    background-color: #44475a; /* Cor de fundo para o interior, mais suave que a base */
-    border-radius: 12px; /* Cantos mais arredondados */
+    background-color: #44475a;
+    border-radius: 12px;
     border-style: none;
     border-width: 1px;
-    border-color: #6272a4; /* Cor para a borda, azul claro */
+    border-color: #6272a4;
     padding: 8px;
     margin: 8px;
 }
 
-/* Estilo dos botões e imagens */
 button, image {
     background: none;
     border: none;
     box-shadow: none;
 }
 
-/* Estilo dos botões */
 button {
-    padding: 12px 20px; /* Ícones maiores, mais espaçamento */
+    padding: 12px 20px;
     margin: 8px;
-    font-size: 18px; /* Tamanho maior de texto */
-    color: #f8f8f2; /* Cor clara para o texto (Dracula light) */
-    border-radius: 10px; /* Cantos arredondados nos botões */
+    font-size: 18px;
+    color: #f8f8f2;
+    border-radius: 10px;
     transition: background-color 0.3s ease;
 }
 
-/* Efeito de hover nos botões */
 button:hover {
-    background-color: #6272a4; /* Azul suave para o hover */
+    background-color: #6272a4;
 }
 
-/* Ícones com maior tamanho */
 image {
-    width: 24px; /* Tamanho maior para os ícones */
-    height: 24px;
+    width: 24px;
+    height: 40px;
     filter: brightness(0) saturate(100%) invert(18%) sepia(70%) saturate(469%) hue-rotate(127deg) brightness(96%) contrast(93%);
     transition: transform 0.3s ease;
 }
 
-/* Efeito de hover nos ícones */
 button:hover image {
-    transform: scale(1.2); /* Aumentar o ícone quando hover */
+    transform: scale(1.5);
 }
 

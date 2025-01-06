@@ -12,15 +12,18 @@
     ],
     "modules-right": [
         "pulseaudio",
+        "bluetooth",
         "network",
+        "battery",
         "power-profiles-daemon",
+        "temperature",
         "cpu",
         "memory",
         "backlight",
         "keyboard-state",
-        "bluetooth",
         "clock",
-        "custom/power"
+        "tray",
+        "idle_inhibitor"
     ],
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -37,43 +40,18 @@
             "focused": "",
             "default": ""
         },
+        "on_click": "activate",
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1"
     },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
-        "format": "{name} {icon}",
+        "format": "{name} {icon} ",
         "format-icons": {
-            "locked": " ",
-            "unlocked": " "
+            "locked": "",
+            "unlocked": ""
         }
-    },
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -82,13 +60,9 @@
             "deactivated": ""
         }
     },
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%d-%m-%y}"
     },
     "cpu": {
         "format": "{usage}% ",
@@ -111,7 +85,7 @@
     },
     "backlight": {
         "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": "{percent}% {icon} ",
         "format-icons": [
             "",
             "",
@@ -133,6 +107,7 @@
         "format": "{capacity}% {icon}",
         "format-full": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
+        "format-discharging": "{capacity}% 󱟤",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
         "format-good": "",
@@ -144,27 +119,8 @@
             ""
         ]
     },
-    "power-profiles-daemon": {
-        "format": "{icon}",
-        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-        "tooltip": true,
-        "format-icons": {
-            "default": "",
-            "performance": "",
-            "balanced": "",
-            "power-saver": ""
-        }
-    },
-    "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
     "pulseaudio": {
-        "scroll-step": 1,
+        "scroll-step": 5,
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
@@ -179,26 +135,49 @@
             "portable": "",
             "car": "",
             "default": [
-                "",
-                "",
-                ""
+                " ",
+                " ",
+                " "
             ]
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Desconectado ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "power-profiles-daemon": {
+        "format": "{icon} {profile} ",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
         "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
     },
     "custom/power": {
         "format": "⏻ ",
         "on_click": "nwg-bar"
-    }
+    },
+    "bluetooth": {
+	"format": " {status}",
+	"format-connected": " {device_alias}",
+	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	"format-device-preference": [ "device1", "device2" ],
+	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on_click": "blueman-manager"
+}
 }
