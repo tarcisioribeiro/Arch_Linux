@@ -11,8 +11,6 @@ blue() {
     echo -e "\033[34m$1\033[0m"
 }
 
-sudo pacman -S cargo scdoc libreoffice-still rhythmbox linux-headers-6.12.8-arch1-1 linux-headers linux-lts linux-lts-headers evince iniparses fftw3 pyright fzf
-
 brew install eza glow tldr fd git-delta
 nvm install 20.17.0
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim

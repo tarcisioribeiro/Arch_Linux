@@ -18,7 +18,30 @@ sudo pacman -Syu
 green "\nAtualizando o sistema...\n"
 sleep 3
 
-sudo pacman -S curl wget iwd neofetch hyprpaper nano neovim net-tools vim btop htop ttf-dejavu noto-fonts noto-fonts-emoji ttf-liberation gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly ffmpeg gstreamer hyprland kitty xdg-desktop-portal xdg-desktop-portal-hyprland zip unzip p7zip unrar tar gzip wofi firefox flatpak python3 python-pip vlc obs-studio zsh tmux waybar bat nm-connection-editor openssh ufw gnome-tweaks gnome-disk-utility power-profiles-daemon cliphist wl-clipboard dunst network-manager-applet man-db grim slurp kvantum kvantum-qt5 qt5ct qt6ct nwg-look nwg-bar arc-gtk-theme hyprlock hypridle glib2 gnome-settings-daemon base-devel polkit-gnome gsettings-desktop-schemas nautilus gedit pavucontrol wpa_supplicant shotcut obsidian gimp eog evince
+sudo pacman -S \
+curl wget iwd neofetch \
+hyprpaper nano neovim net-tools \
+vim btop htop ttf-dejavu \
+noto-fonts noto-fonts-emoji ttf-liberation \
+gst-libav gst-plugins-good gst-plugins-bad \
+gst-plugins-ugly ffmpeg gstreamer hyprland \
+kitty xdg-desktop-portal xdg-desktop-portal-hyprland \
+zip unzip p7zip unrar \
+tar gzip wofi firefox \
+flatpak python3 python-pip vlc \
+obs-studio zsh tmux waybar \
+bat nm-connection-editor openssh ufw \
+gnome-tweaks gnome-disk-utility power-profiles-daemon \
+cliphist wl-clipboard dunst network-manager-applet \
+man-db grim slurp kvantum \
+kvantum-qt5 qt5ct qt6ct nwg-look \
+nwg-bar arc-gtk-theme hyprlock hypridle \
+glib2 gnome-settings-daemon base-devel polkit-gnome \
+gsettings-desktop-schemas nautilus gedit \
+pavucontrol wpa_supplicant shotcut obsidian \
+gimp eog evince cargo scdoc libreoffice-still \
+rhythmbox evince iniparser fftw3 pyright fzf
+
 
 sudo pacman -Syu
 
@@ -30,10 +53,14 @@ sudo usermod -aG wheel,storage,disk $USER
 
 sleep 3
 
-sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
 cd ~
 sudo rm -r yay
 yay -Syu
+yay -S paman
 
 sudo gpasswd -a $USER input
 
@@ -52,11 +79,17 @@ cp -r ~/repos/Arch_Linux/hyperdots/nwg-bar ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/btop ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/cava ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/gtk-3.0 ~/.config
+cp -r ~/repos/Arch_Linux/hyperdots/dunst ~/.config
 
 blue "\nAtivando o bluetooth...\n"
 sleep 3
 
-sudo pacman -S bluez bluez-utils blueman
+sudo pacman -S \
+bluez bluez-utils \
+blueman pulseaudio \
+pulseaudio-bluetooth pavucontrol \
+pulseaudio-alsa
+pulseaudio --start
 sudo nano /etc/bluetooth/main.conf
 sudo systemctl start bluetooth.service
 sudo systemctl enable bluetooth.service
@@ -80,6 +113,9 @@ wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/theme
 unzip ~/.poshthemes/themes.zip -d ~/.poshthemes
 chmod u+rw ~/.poshthemes/*.omp.*
 rm ~/.poshthemes/themes.zip
+
+cd ~/repos/
+git clone https://github.com/tarcisioribeiro/Terminal.git
 
 cd ~
 cp repos/Terminal/customization/zsh/tj-dracula.omp.json /home/tarcisio/.poshthemes
@@ -118,14 +154,11 @@ sleep 3
 # Tmux Plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-cd ~/repos/
-
-git clone https://github.com/tarcisioribeiro/Terminal.git
-
 cp ~/repos/Terminal/customization/git/.gitconfig ~
 cp ~/repos/Terminal/customization/tmux/.tmux.conf ~
 cp ~/repos/Terminal/customization/starship/starship.toml ~/.config
-sudo cp ~/repos/Terminal/customization/powershell/JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
+cd ~/repos/Terminal/customization/powershell/
+sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
 
 cp ~/repos/Arch_Linux/shell_files/.bashrc ~
 cp ~/repos/Arch_Linux/shell_files/.zshrc ~
