@@ -65,7 +65,3 @@ _fzf_comprun() {
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=nvim
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
-
-if [[ $(tty) == /dev/tty1 ]]; then
-  exec /usr/local/bin/prelogin-hyprlock.sh
-fi
