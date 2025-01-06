@@ -61,3 +61,6 @@ cp ~/repos/Arch_Linux/packages/ookla-speedtest-1.2.0-linux-x86_64.tgz ~/Download
 cd ~/Downloads
 sudo tar -xvzf ookla-speedtest-1.2.0-linux-x86_64.tgz -C /usr/bin
 rm ookla-speedtest-1.2.0-linux-x86_64.tgz
+
+sudo cp ~/repos/Arch_Linux/scripts/prelogin-hyprlock.sh /usr/local/bin
+sudo chmod +x /usr/local/bin/prelogin-hyprlock.sh
