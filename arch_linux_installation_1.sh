@@ -85,12 +85,8 @@ cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
 blue "\nAtivando o bluetooth...\n"
 sleep 3
 
-sudo pacman -S \
-bluez bluez-utils \
-blueman pulseaudio \
-pulseaudio-bluetooth pavucontrol \
-pulseaudio-alsa
-pulseaudio --start
+sudo pacman -S  pulseaudio pulseaudio-bluetooth \
+bluez bluez-utils blueman pavucontrol \
 sudo nano /etc/bluetooth/main.conf
 sudo systemctl start bluetooth.service
 sudo systemctl enable bluetooth.service
