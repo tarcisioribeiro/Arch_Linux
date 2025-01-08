@@ -56,14 +56,3 @@ rmdir "Modelos"
 rmdir "Vídeos"
 
 yay -S cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset
-
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cd ~/Downloads
-git clone https://github.com/elkowar/eww
-cd eww
-cargo build --release --no-default-features --features=wayland
-cd target/release
-chmod +x ./eww
-sudo cp eww /usr/bin/
-cd ~/Downloads
-sudo rm -r eww/

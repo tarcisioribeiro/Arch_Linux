@@ -41,7 +41,7 @@ gsettings-desktop-schemas nautilus gedit \
 pavucontrol wpa_supplicant shotcut obsidian \
 gimp eog evince cargo scdoc libreoffice-still \
 rhythmbox evince iniparser pyright fzf \
-htop fastfetch font-manager pipewire pipewire-pulse \
+htop fastfetch font-manager
 
 sudo pacman -Syu
 
@@ -85,7 +85,7 @@ cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
 blue "\nAtivando o bluetooth...\n"
 sleep 3
 
-sudo pacman -S  pulseaudio pulseaudio-bluetooth \
+sudo pacman -S pulseaudio pulseaudio-bluetooth \
 bluez bluez-utils blueman pavucontrol \
 sudo nano /etc/bluetooth/main.conf
 sudo systemctl start bluetooth.service
@@ -156,7 +156,7 @@ cp ~/repos/Terminal/customization/tmux/.tmux.conf ~
 cp ~/repos/Terminal/customization/starship/starship.toml ~/.config
 cd ~/repos/Terminal/customization/powershell/
 sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
-sudo cp ~/repos/Arch_Linux/DS-DIGIB.TTF /usr/share/fonts
+sudo cp ~/repos/Arch_Linux/fonts/DS-DIGIB.TTF /usr/share/fonts
 
 cp ~/repos/Arch_Linux/shell_files/.bashrc ~
 cp ~/repos/Arch_Linux/shell_files/.zshrc ~
