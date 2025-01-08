@@ -40,8 +40,8 @@ glib2 gnome-settings-daemon base-devel polkit-gnome \
 gsettings-desktop-schemas nautilus gedit \
 pavucontrol wpa_supplicant shotcut obsidian \
 gimp eog evince cargo scdoc libreoffice-still \
-rhythmbox evince iniparser fftw3 pyright fzf
-
+rhythmbox evince iniparser pyright fzf \
+htop fastfetch font-manager pipewire pipewire-pulse \
 
 sudo pacman -Syu
 
@@ -80,6 +80,7 @@ cp -r ~/repos/Arch_Linux/hyperdots/btop ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/cava ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/gtk-3.0 ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/dunst ~/.config
+cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
 
 blue "\nAtivando o bluetooth...\n"
 sleep 3
@@ -159,6 +160,7 @@ cp ~/repos/Terminal/customization/tmux/.tmux.conf ~
 cp ~/repos/Terminal/customization/starship/starship.toml ~/.config
 cd ~/repos/Terminal/customization/powershell/
 sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
+sudo cp ~/repos/Arch_Linux/DS-DIGIB.TTF /usr/share/fonts
 
 cp ~/repos/Arch_Linux/shell_files/.bashrc ~
 cp ~/repos/Arch_Linux/shell_files/.zshrc ~

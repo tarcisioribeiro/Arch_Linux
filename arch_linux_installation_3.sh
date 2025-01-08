@@ -10,6 +10,9 @@ blue() {
     echo -e "\033[34m$1\033[0m"
 }
 
+systemctl --user enable pipewire.service
+systemctl --user enable hypridle.service
+
 blue "\nComeçando a instalação do VirtualBox...\n"
 
 sleep 3
@@ -62,5 +65,13 @@ cd ~/Downloads
 sudo tar -xvzf ookla-speedtest-1.2.0-linux-x86_64.tgz -C /usr/bin
 rm ookla-speedtest-1.2.0-linux-x86_64.tgz
 
-sudo cp ~/repos/Arch_Linux/scripts/prelogin-hyprlock.sh /usr/local/bin
-sudo chmod +x /usr/local/bin/prelogin-hyprlock.sh
+yay -S ly
+sudo systemctl enable ly.service
+
+green "\nInstalação finalizada.\n"
+sleep 5
+
+red "\nReiniciando a máquina.\n"
+sleep 5
+
+sudo reboot now

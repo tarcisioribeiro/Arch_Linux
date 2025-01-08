@@ -34,15 +34,14 @@ cd Tela-icon-theme
 ./install.sh -n dracula
 cd ..
 sudo rm -r Tela-icon-theme
+
 wget https://github.com/dracula/zsh-syntax-highlighting/archive/master.zip
 unzip master.zip
 cp zsh-syntax-highlighting-master/zsh-syntax-highlighting.sh ~/scripts/
 rm master.zip
 sudo rm -r zsh-syntax-highlighting-master
 cd ~/Downloads
-mkdir -p  $HOME/.local/share/gedit/styles/
-wget https://raw.githubusercontent.com/dracula/gedit/master/dracula-46.xml -O dracula.xml
-mv dracula.xml $HOME/.local/share/gedit/styles/
+
 gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
 gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
 gsettings set org.gnome.desktop.interface icon-theme "dracula-dark"
@@ -56,4 +55,15 @@ rmdir "Público"
 rmdir "Modelos"
 rmdir "Vídeos"
 
-yay -S cava yazi google-chrome visual-studio-code-bin
+yay -S cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cd ~/Downloads
+git clone https://github.com/elkowar/eww
+cd eww
+cargo build --release --no-default-features --features=wayland
+cd target/release
+chmod +x ./eww
+sudo cp eww /usr/bin/
+cd ~/Downloads
+sudo rm -r eww/
