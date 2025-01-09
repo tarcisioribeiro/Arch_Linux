@@ -55,4 +55,4 @@ rmdir "Público"
 rmdir "Modelos"
 rmdir "Vídeos"
 
-yay -S cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset
+yay -S cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset yed

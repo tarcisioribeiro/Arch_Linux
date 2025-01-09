@@ -33,8 +33,8 @@ obs-studio zsh tmux waybar \
 bat nm-connection-editor openssh ufw \
 gnome-tweaks gnome-disk-utility power-profiles-daemon \
 cliphist wl-clipboard dunst network-manager-applet \
-man-db grim slurp kvantum \
-kvantum-qt5 qt5ct qt6ct nwg-look \
+man-db grim slurp flameshot \
+qt5ct qt5-base qt5-tools nwg-look \
 nwg-bar arc-gtk-theme hyprlock hypridle \
 glib2 gnome-settings-daemon base-devel polkit-gnome \
 gsettings-desktop-schemas nautilus gedit \
@@ -60,7 +60,6 @@ makepkg -si
 cd ~
 sudo rm -r yay
 yay -Syu
-yay -S paman
 
 sudo gpasswd -a $USER input
 
@@ -81,15 +80,6 @@ cp -r ~/repos/Arch_Linux/hyperdots/cava ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/gtk-3.0 ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/dunst ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
-
-blue "\nAtivando o bluetooth...\n"
-sleep 3
-
-sudo pacman -S pulseaudio pulseaudio-bluetooth \
-bluez bluez-utils blueman pavucontrol \
-sudo nano /etc/bluetooth/main.conf
-sudo systemctl start bluetooth.service
-sudo systemctl enable bluetooth.service
 
 chsh -s /usr/bin/zsh
 
