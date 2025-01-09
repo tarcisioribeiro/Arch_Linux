@@ -1,3 +1,0 @@
-#!/bin/bash
-eww open text-box || eww reload && eww open text-box
-

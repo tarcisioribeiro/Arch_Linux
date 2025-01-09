@@ -69,9 +69,6 @@ sudo snap install youtube-music-desktop-app
 
 yay -S deluge deluge-gtk
 
-sudo systemctl stop dhcpcd
-sudo systemctl disable dhcpcd
-
 sudo systemctl enable systemd-networkd
 sudo systemctl start systemd-networkd
 
