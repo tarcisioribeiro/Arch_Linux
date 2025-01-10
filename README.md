@@ -84,7 +84,6 @@ Abaixo estão as combinações de teclas configuradas no Hyprland, organizadas e
 | `Windows + Shift + ↑`    | `exec, hyprsunset --temperature 6000` | Ajusta o modo noturno para 6000K.       |
 | `Windows + Shift + ↓`    | `exec, hyprsunset --temperature 5000` | Ajusta o modo noturno para 5000K.       |
 | `Print`                  | `exec, grim -g "$(slurp)" &`         | Captura uma área da tela com o Grim.     |
-| `Windows + C`            | `exec, ~/.config/eww/eww-script`     | Executa o script do Eww configurado.     |
 
 ---
 

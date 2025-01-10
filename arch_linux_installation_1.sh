@@ -33,7 +33,7 @@ obs-studio zsh tmux waybar \
 bat nm-connection-editor openssh ufw \
 gnome-tweaks gnome-disk-utility power-profiles-daemon \
 cliphist wl-clipboard dunst network-manager-applet \
-man-db grim slurp flameshot nwg-look \
+man-db grim slurp nwg-look \
 nwg-bar hyprlock hypridle \
 glib2 gnome-settings-daemon base-devel polkit-gnome \
 gsettings-desktop-schemas nautilus gedit \
