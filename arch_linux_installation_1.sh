@@ -33,9 +33,8 @@ obs-studio zsh tmux waybar \
 bat nm-connection-editor openssh ufw \
 gnome-tweaks gnome-disk-utility power-profiles-daemon \
 cliphist wl-clipboard dunst network-manager-applet \
-man-db grim slurp flameshot \
-qt5ct qt5-base qt5-tools nwg-look \
-nwg-bar arc-gtk-theme hyprlock hypridle \
+man-db grim slurp flameshot nwg-look \
+nwg-bar hyprlock hypridle \
 glib2 gnome-settings-daemon base-devel polkit-gnome \
 gsettings-desktop-schemas nautilus gedit \
 pavucontrol wpa_supplicant shotcut obsidian \
