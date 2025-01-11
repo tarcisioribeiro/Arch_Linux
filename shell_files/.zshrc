@@ -65,3 +65,4 @@ _fzf_comprun() {
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=nvim
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+export PATH="$PATH:$HOME/development/flutter/bin"

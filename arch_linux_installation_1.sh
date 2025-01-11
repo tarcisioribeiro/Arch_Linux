@@ -16,12 +16,12 @@ mkdir -p ~/.icons
 mkdir -p ~/.themes
 sudo pacman -Syu
 green "\nAtualizando o sistema...\n"
-sleep 3
+sleep 10
 
 sudo pacman -S \
 curl wget iwd neofetch \
 hyprpaper nano neovim net-tools \
-vim btop htop ttf-dejavu \
+vim btop htop ttf-dejavu cmake ninja clang pkgconf \
 noto-fonts noto-fonts-emoji ttf-liberation \
 gst-libav gst-plugins-good gst-plugins-bad \
 gst-plugins-ugly ffmpeg gstreamer hyprland \
@@ -42,7 +42,16 @@ gimp eog evince cargo scdoc libreoffice-still \
 rhythmbox evince iniparser pyright fzf \
 htop fastfetch font-manager
 
+sleep 10
+
 sudo pacman -Syu
+
+sudo pacman -S bluez blueman bluez-utils
+
+sudo nano /etc/bluetooth/main.conf
+
+sudo systemctl start bluetooth.service
+sudo systemctl enable bluetooth.service
 
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
@@ -50,7 +59,7 @@ blue "\nInstalando o Yay...\n"
 
 sudo usermod -aG wheel,storage,disk $USER
 
-sleep 3
+sleep 10
 
 sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
@@ -82,9 +91,9 @@ cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
 
 chsh -s /usr/bin/zsh
 
-sleep 3
+sleep 10
 green "\nAlterando o shell do sistema...\n"
-sleep 3
+sleep 10
 zsh
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -120,22 +129,22 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # NVM
 blue "\nInstalando o NVM...\n"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-sleep 3
+sleep 10
 
 # Brew
 blue "\nInstalando o HomeBrew...\n"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-sleep 3
+sleep 10
 
 # Oh My Bash
 blue "\nInstalando o Oh My Bash...\n"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-sleep 3
+sleep 10
 
 # Starship
 blue "\nInstalando o Starship...\n"
 curl -sS https://starship.rs/install.sh | sh
-sleep 3
+sleep 10
 
 # Tmux Plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -146,6 +155,7 @@ cp ~/repos/Terminal/customization/starship/starship.toml ~/.config
 cd ~/repos/Terminal/customization/powershell/
 sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/DS-DIGIB.TTF /usr/share/fonts
+sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-*.ttff /usr/share/fonts
 
 cp ~/repos/Arch_Linux/shell_files/.bashrc ~
 cp ~/repos/Arch_Linux/shell_files/.zshrc ~
