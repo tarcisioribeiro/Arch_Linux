@@ -17,7 +17,7 @@ git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 mv ~/.config/nvim ~/.config/nvim_old
 cp -r ~/repos/Terminal/customization/nvim ~/.config
 sudo rm -r ~/.config/nvim_old
-sudo pacman -S ruby
+sudo pacman -S --noconfirm ruby
 
 cd ~
 cp ~/repos/Arch_Linux/wallpapers/*.png ~/Pictures/
@@ -46,13 +46,43 @@ gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
 gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
 gsettings set org.gnome.desktop.interface icon-theme "dracula-dark"
 gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM"
+
 cd ~
 
-rmdir "Documentos"
-rmdir "Imagens"
-rmdir "Músicas"
-rmdir "Público"
-rmdir "Modelos"
-rmdir "Vídeos"
+if [-d "Documentos"]; then
+  rmdir "Documentos"
+else
+  echo "Diretório não encontrado."
+fi
 
-yay -S cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset yed
+if [-d "Imagens"]; then
+  rmdir "Imagens"
+else
+  echo "Diretório não encontrado."
+fi
+
+if [-d "D Músicas"]; then
+  rmdir "Músicas"
+else
+  echo "Diretório não encontrado."
+fi
+
+if [-d "Público"]; then
+  rmdir "Público"
+else
+  echo "Diretório não encontrado."
+fi
+
+if [-d "Modelos"]; then
+  rmdir "Modelos"
+else
+  echo "Diretório não encontrado."
+fi
+
+if [-d "Vídeos"]; then
+  rmdir "Vídeos"
+else
+  echo "Diretório não encontrado."
+fi
+
+yay -S --noconfirm cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset yed

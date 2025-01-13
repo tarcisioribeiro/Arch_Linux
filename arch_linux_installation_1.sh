@@ -11,14 +11,17 @@ blue() {
 }
 
 cd ~
-mkdir Pictures scripts Downloads Desktop
+mkdir -p Pictures
+mkdir -p scripts
+mkdir -p Downloads
+mkdir -p Desktop
 mkdir -p ~/.icons
 mkdir -p ~/.themes
 sudo pacman -Syu
 green "\nAtualizando o sistema...\n"
 sleep 10
 
-sudo pacman -S \
+sudo pacman -S --noconfirm \
 curl wget iwd neofetch \
 hyprpaper nano neovim net-tools \
 vim btop htop ttf-dejavu cmake ninja clang pkgconf \
@@ -37,7 +40,7 @@ man-db grim slurp nwg-look \
 nwg-bar hyprlock hypridle \
 glib2 gnome-settings-daemon base-devel polkit-gnome \
 gsettings-desktop-schemas nautilus gedit \
-pavucontrol wpa_supplicant shotcut obsidian \
+pavucontrol wpa_supplicant obsidian \
 gimp eog evince cargo scdoc libreoffice-still \
 rhythmbox evince iniparser pyright fzf \
 htop fastfetch font-manager
@@ -61,6 +64,7 @@ sudo usermod -aG wheel,storage,disk $USER
 
 sleep 10
 
+cd ~/Downloads
 sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -155,7 +159,9 @@ cp ~/repos/Terminal/customization/starship/starship.toml ~/.config
 cd ~/repos/Terminal/customization/powershell/
 sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/DS-DIGIB.TTF /usr/share/fonts
-sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-*.ttff /usr/share/fonts
+sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-Italic.ttf /usr/share/fonts
+sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-Bold.ttf /usr/share/fonts
+sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-BoldItalic.ttf /usr/share/fonts
 
 cp ~/repos/Arch_Linux/shell_files/.bashrc ~
 cp ~/repos/Arch_Linux/shell_files/.zshrc ~
@@ -170,4 +176,10 @@ sudo systemctl enable sshd
 
 sudo ufw allow SSH
 
-blue "\nReinicie o PC e execute o segundo instalador.\n"
+sleep 5
+
+blue "\nReiniciando a máquina. Ao logar novamente, execute o segundo instalador.\n"
+
+sleep 10
+
+sudo reboot now
