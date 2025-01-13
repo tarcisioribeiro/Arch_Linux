@@ -36,11 +36,6 @@ cd Tela-icon-theme
 cd ..
 sudo rm -r Tela-icon-theme
 
-wget https://github.com/dracula/zsh-syntax-highlighting/archive/master.zip
-unzip master.zip
-cp zsh-syntax-highlighting-master/zsh-syntax-highlighting.sh ~/scripts/
-rm master.zip
-sudo rm -r zsh-syntax-highlighting-master
 cd ~/Downloads
 
 gsettings set org.gnome.desktop.interface gtk-theme "Dracula"

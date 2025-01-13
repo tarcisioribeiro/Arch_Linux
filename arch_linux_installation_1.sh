@@ -169,6 +169,13 @@ cp ~/repos/Arch_Linux/shell_files/.zshrc ~
 cp ~/repos/Arch_Linux/shell_files/.bash_aliases ~
 cp ~/repos/Arch_Linux/shell_files/.zsh_aliases ~
 
+cd ~/Downloads
+wget https://github.com/dracula/zsh-syntax-highlighting/archive/master.zip
+unzip master.zip
+cp zsh-syntax-highlighting-master/zsh-syntax-highlighting.sh ~/scripts/
+rm master.zip
+sudo rm -r zsh-syntax-highlighting-master
+
 sudo systemctl enable --now ufw.service
 sudo ufw enable
 
