@@ -1,21 +1,24 @@
 #!/usr/bin/bash
-red() {
-    echo -e "\033[31m$1\033[0m"
-}
-green() {
-    echo -e "\033[32m$1\033[0m"
+title_red() {
+    echo -e "\033[31m$(toilet --font pagga --filter border "$1")\033[0m"
 }
 
-blue() {
-    echo -e "\033[34m$1\033[0m"
+title_green() {
+    echo -e "\033[32m$(toilet --font pagga --filter border "$1")\033[0m"
 }
+
+title_blue() {
+    echo -e "\033[34m$(toilet --font pagga --filter border "$1")\033[0m"
+}
+
+title_green "Instalação - Parte 3"
 
 systemctl --user enable pipewire.service
 systemctl --user enable hypridle.service
 
-blue "\nComeçando a instalação do VirtualBox...\n"
+title_blue "Começando a instalação do VirtualBox..."
 
-sleep 10
+sleep 5
 
 sudo pacman -Syu --noconfirm virtualbox virtualbox-host-dkms linux-headers linux-lts-headers virtualbox-guest-iso
 sudo dkms install vboxhost/$(pacman -Qi virtualbox-host-dkms | grep Version | awk '{print $3}')
@@ -28,17 +31,17 @@ yay -S --noconfirm virtualbox-ext-oracle
 sudo systemctl enable vboxweb.service
 sudo systemctl start vboxweb.service
 
-green "\nInstalação do Virtualbox concluída.\n"
+title_green "Instalação do Virtualbox concluída."
 
-sleep 10
+sleep 5
 
-blue "\nGerando chave SSH...\n"
+title_blue "Gerando chave SSH..."
 
 ssh-keygen
 
-blue "\nInstalando o snap...\n"
+title_blue "Instalando o snap..."
 
-sleep 10
+sleep 5
 
 cd ~/Downloads
 git clone https://aur.archlinux.org/snapd.git
@@ -52,13 +55,13 @@ sudo ln -s /var/lib/snapd/snap /snap
 cd ~/Downloads
 sudo rm -r snapd
 
-green "\nInstalação do snap concluída. Recomendamos que reinicie a máquina antes de instalar os programas.\n"
+title_green "Instalação do snap concluída. Recomendamos que reinicie a máquina antes de instalar os programas."
 
-sleep 10
+sleep 5
 
-blue "\nInstalando o Speed Test.\n"
+title_blue "Instalando o Speed Test."
 
-sleep 10
+sleep 5
 
 cp ~/repos/Arch_Linux/packages/ookla-speedtest-1.2.0-linux-x86_64.tgz ~/Downloads
 cd ~/Downloads
@@ -71,14 +74,14 @@ sudo snap install spotify
 sudo snap install dbeaver-ce
 sudo snap install android-studio --classic
 
-sleep 10
+sleep 5
 
 yay -S --noconfirm deluge deluge-gtk
 yay -S github-desktop-bin --noconfirm
 
-sleep 10
+sleep 5
 
-blue "\nBaixando o Flutter...\n"
+title_blue "Baixando o Flutter..."
 
 cd ~/Downloads
 wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.27.1-stable.tar.xz
@@ -103,10 +106,10 @@ sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/
 
 powerprofilesctl set performance
 
-green "\nInstalação finalizada.\n"
+title_green "Instalação finalizada."
 sleep 5
 
-red "\nReiniciando a máquina.\n"
+title_red "Reiniciando a máquina."
 sleep 5
 
 sudo reboot now

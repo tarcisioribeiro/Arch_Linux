@@ -1,18 +1,19 @@
 #!/usr/bin/bash
-
-red() {
-    echo -e "\033[31m$1\033[0m"
-}
-green() {
-    echo -e "\033[32m$1\033[0m"
+title_red() {
+    echo -e "\033[31m$(toilet --font pagga --filter border "$1")\033[0m"
 }
 
-blue() {
-    echo -e "\033[34m$1\033[0m"
+title_green() {
+    echo -e "\033[32m$(toilet --font pagga --filter border "$1")\033[0m"
 }
+
+title_blue() {
+    echo -e "\033[34m$(toilet --font pagga --filter border "$1")\033[0m"
+}
+
+title_blue "Insalação - Parte 2"
 
 brew install eza glow tldr fd git-delta
-nvm install 20.17.0
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 mv ~/.config/nvim ~/.config/nvim_old
 cp -r ~/repos/Terminal/customization/nvim ~/.config
@@ -85,4 +86,4 @@ else
   echo "Diretório não encontrado."
 fi
 
-yay -S --noconfirm cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset yed
+yay -S --noconfirm cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset yed shotcut

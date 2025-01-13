@@ -1,13 +1,14 @@
 #!/usr/bin/bash
-red() {
-    echo -e "\033[31m$1\033[0m"
-}
-green() {
-    echo -e "\033[32m$1\033[0m"
+title_red() {
+    echo -e "\033[31m$(toilet --font pagga --filter border "$1")\033[0m"
 }
 
-blue() {
-    echo -e "\033[34m$1\033[0m"
+title_green() {
+    echo -e "\033[32m$(toilet --font pagga --filter border "$1")\033[0m"
+}
+
+title_blue() {
+    echo -e "\033[34m$(toilet --font pagga --filter border "$1")\033[0m"
 }
 
 cd ~
@@ -18,11 +19,11 @@ mkdir -p Desktop
 mkdir -p ~/.icons
 mkdir -p ~/.themes
 sudo pacman -Syu
-green "\nAtualizando o sistema...\n"
-sleep 10
+title_green "Atualizando o sistema..."
+sleep 5
 
 sudo pacman -S --noconfirm \
-curl wget iwd neofetch \
+curl wget iwd neofetch toilet \
 hyprpaper nano neovim net-tools \
 vim btop htop ttf-dejavu cmake ninja clang pkgconf \
 noto-fonts noto-fonts-emoji ttf-liberation \
@@ -45,7 +46,7 @@ gimp eog evince cargo scdoc libreoffice-still \
 rhythmbox evince iniparser pyright fzf \
 htop fastfetch font-manager
 
-sleep 10
+sleep 5
 
 sudo pacman -Syu
 
@@ -58,11 +59,11 @@ sudo systemctl enable bluetooth.service
 
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
-blue "\nInstalando o Yay...\n"
+title_blue "Instalando o Yay..."
 
 sudo usermod -aG wheel,storage,disk $USER
 
-sleep 10
+sleep 5
 
 cd ~/Downloads
 sudo pacman -S --needed git base-devel
@@ -95,9 +96,9 @@ cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
 
 chsh -s /usr/bin/zsh
 
-sleep 10
-green "\nAlterando o shell do sistema...\n"
-sleep 10
+sleep 5
+title_green "Alterando o shell do sistema..."
+sleep 5
 zsh
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -131,24 +132,24 @@ rm logo-ls_Linux_x86_64.tar.gz
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # NVM
-blue "\nInstalando o NVM...\n"
+title_blue "Instalando o NVM..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-sleep 10
+sleep 5
 
 # Brew
-blue "\nInstalando o HomeBrew...\n"
+title_blue "Instalando o HomeBrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-sleep 10
+sleep 5
 
 # Oh My Bash
-blue "\nInstalando o Oh My Bash...\n"
+title_blue "Instalando o Oh My Bash..."
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-sleep 10
+sleep 5
 
 # Starship
-blue "\nInstalando o Starship...\n"
+title_blue "Instalando o Starship..."
 curl -sS https://starship.rs/install.sh | sh
-sleep 10
+sleep 5
 
 # Tmux Plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -178,8 +179,8 @@ sudo ufw allow SSH
 
 sleep 5
 
-blue "\nReiniciando a máquina. Ao logar novamente, execute o segundo instalador.\n"
+title_blue "Reiniciando a máquina. Ao logar novamente, execute o segundo instalador."
 
-sleep 10
+sleep 5
 
 sudo reboot now
