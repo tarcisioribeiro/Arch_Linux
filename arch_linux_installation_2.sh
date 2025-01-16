@@ -81,4 +81,4 @@ else
   echo "Diretório não encontrado."
 fi
 
-yay -S --noconfirm cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset yed shotcut
+yay -S --noconfirm cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset yed

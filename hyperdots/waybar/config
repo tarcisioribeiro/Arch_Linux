@@ -165,10 +165,6 @@
         "icon-size": 21,
         "spacing": 10
     },
-    "custom/power": {
-        "format": "⏻ ",
-        "on_click": "nwg-bar"
-    },
     "bluetooth": {
 	"format": " {status}",
 	"format-connected": " {device_alias}",

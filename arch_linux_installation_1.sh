@@ -1,14 +1,21 @@
 #!/usr/bin/bash
+
+sudo pacman -S toilet zsh --noconfirm
+
 title_red() {
-    echo -e "\033[31m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
 }
 
 title_green() {
-    echo -e "\033[32m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[32m$(toilet --font pagga --filter border --width 200  "$1")\033[0m"
 }
 
 title_blue() {
-    echo -e "\033[34m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+}
+
+title() {
+  echo -e "$(toilet --font pagga --filter border --width 200 "$1")"
 }
 
 cd ~
@@ -19,11 +26,16 @@ mkdir -p Desktop
 mkdir -p ~/.icons
 mkdir -p ~/.themes
 sudo pacman -Syu
+
+echo ""
+title "Instalação Arch Linux - Parte 1"
+
+echo ""
 title_green "Atualizando o sistema..."
-sleep 5
+sleep 3
 
 sudo pacman -S --noconfirm \
-curl wget iwd neofetch toilet \
+curl wget iwd neofetch \
 hyprpaper nano neovim net-tools \
 vim btop htop ttf-dejavu cmake ninja clang pkgconf \
 noto-fonts noto-fonts-emoji ttf-liberation \
@@ -38,7 +50,7 @@ bat nm-connection-editor openssh ufw \
 gnome-tweaks gnome-disk-utility power-profiles-daemon \
 cliphist wl-clipboard dunst network-manager-applet \
 man-db grim slurp nwg-look \
-nwg-bar hyprlock hypridle \
+hyprlock hypridle \
 glib2 gnome-settings-daemon base-devel polkit-gnome \
 gsettings-desktop-schemas nautilus gedit \
 pavucontrol wpa_supplicant obsidian \
@@ -46,11 +58,20 @@ gimp eog evince cargo scdoc libreoffice-still \
 rhythmbox evince iniparser pyright fzf \
 htop fastfetch font-manager
 
-sleep 5
+sleep 3
 
 sudo pacman -Syu
+sudo pacman -S bluez blueman bluez-utils --noconfirm
 
-sudo pacman -S bluez blueman bluez-utils
+clear
+
+echo ""
+title_blue "Ativação do Bluetooth"
+echo ""
+
+echo "Procure pela seção AutoEnable, e descomente a linha #AutoEnable=True. Após isso, salve e feche o arquivo."
+echo ""
+read -p "Pressione ENTER para confirmar e prosseguir."
 
 sudo nano /etc/bluetooth/main.conf
 
@@ -59,14 +80,15 @@ sudo systemctl enable bluetooth.service
 
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
+echo ""
 title_blue "Instalando o Yay..."
 
 sudo usermod -aG wheel,storage,disk $USER
 
-sleep 5
+sleep 3
 
 cd ~/Downloads
-sudo pacman -S --needed git base-devel
+sudo pacman -S --needed git base-devel --noconfirm
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
@@ -94,12 +116,21 @@ cp -r ~/repos/Arch_Linux/hyperdots/gtk-3.0 ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/dunst ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
 
+clear
+
+sleep 3
+echo ""
+title_green "Alterando o shell do sistema..."
+echo ""
+echo "Certifique-se de digitar corretamente a sua senha."
+echo ""
+sleep 3
+read -p "Pressione ENTER para confirmar e prosseguir."
+echo ""
 chsh -s /usr/bin/zsh
 
-sleep 5
-title_green "Alterando o shell do sistema..."
-sleep 5
-zsh
+title_green "Instalação - Oh My ZSH"
+echo "" 
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -132,24 +163,32 @@ rm logo-ls_Linux_x86_64.tar.gz
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # NVM
+echo ""
 title_blue "Instalando o NVM..."
+eho ""
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-sleep 5
+sleep 3
 
 # Brew
+echo ""
 title_blue "Instalando o HomeBrew..."
+echo ""
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-sleep 5
+sleep 3
 
 # Oh My Bash
+echo ""
 title_blue "Instalando o Oh My Bash..."
+echo ""
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-sleep 5
+sleep 3
 
 # Starship
+echo ""
 title_blue "Instalando o Starship..."
+echo ""
 curl -sS https://starship.rs/install.sh | sh
-sleep 5
+sleep 3
 
 # Tmux Plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -169,6 +208,8 @@ cp ~/repos/Arch_Linux/shell_files/.zshrc ~
 cp ~/repos/Arch_Linux/shell_files/.bash_aliases ~
 cp ~/repos/Arch_Linux/shell_files/.zsh_aliases ~
 
+sleep 3
+
 cd ~/Downloads
 wget https://github.com/dracula/zsh-syntax-highlighting/archive/master.zip
 unzip master.zip
@@ -184,10 +225,17 @@ sudo systemctl enable sshd
 
 sudo ufw allow SSH
 
-sleep 5
+sleep 3
 
+clear
+
+echo ""
 title_blue "Reiniciando a máquina. Ao logar novamente, execute o segundo instalador."
+echo ""
 
-sleep 5
+sleep 3
 
-sudo reboot now
+read -p "Pressione ENTER para confirmar."
+echo ""
+
+# sudo reboot now
