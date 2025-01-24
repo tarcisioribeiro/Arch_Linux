@@ -1,14 +1,14 @@
 #!/usr/bin/bash
 title_red() {
-    echo -e "\033[31m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
 }
 
 title_green() {
-    echo -e "\033[32m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
 }
 
 title_blue() {
-    echo -e "\033[34m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
 }
 
 title_blue "Insalação - Parte 2"

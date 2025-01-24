@@ -1,14 +1,14 @@
 #!/usr/bin/bash
 title_red() {
-    echo -e "\033[31m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
 }
 
 title_green() {
-    echo -e "\033[32m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
 }
 
 title_blue() {
-    echo -e "\033[34m$(toilet --font pagga --filter border "$1")\033[0m"
+    echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
 }
 
 title_green "Instalação - Parte 3"
@@ -83,6 +83,7 @@ sleep 5
 
 title_blue "Baixando o Flutter..."
 
+mkdir -p ~/development
 cd ~/Downloads
 wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.27.1-stable.tar.xz
 tar -xf ~/Downloads/flutter_linux_3.27.1-stable.tar.xz -C ~/development/
