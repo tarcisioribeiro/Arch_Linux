@@ -18,7 +18,7 @@ systemctl --user enable hypridle.service
 
 title_blue "Começando a instalação do VirtualBox..."
 
-sleep 5
+sleep 3
 
 sudo pacman -Syu --noconfirm virtualbox virtualbox-host-dkms linux-headers linux-lts-headers virtualbox-guest-iso
 sudo dkms install vboxhost/$(pacman -Qi virtualbox-host-dkms | grep Version | awk '{print $3}')
@@ -33,7 +33,7 @@ sudo systemctl start vboxweb.service
 
 title_green "Instalação do Virtualbox concluída."
 
-sleep 5
+sleep 3
 
 title_blue "Gerando chave SSH..."
 
@@ -41,7 +41,7 @@ ssh-keygen
 
 title_blue "Instalando o snap..."
 
-sleep 5
+sleep 3
 
 cd ~/Downloads
 git clone https://aur.archlinux.org/snapd.git
@@ -57,11 +57,11 @@ sudo rm -r snapd
 
 title_green "Instalação do snap concluída. Recomendamos que reinicie a máquina antes de instalar os programas."
 
-sleep 5
+sleep 3
 
 title_blue "Instalando o Speed Test."
 
-sleep 5
+sleep 3
 
 cp ~/repos/Arch_Linux/packages/ookla-speedtest-1.2.0-linux-x86_64.tgz ~/Downloads
 cd ~/Downloads
@@ -74,12 +74,12 @@ sudo snap install spotify
 sudo snap install dbeaver-ce
 sudo snap install android-studio --classic
 
-sleep 5
+sleep 3
 
 yay -S --noconfirm deluge deluge-gtk
 yay -S github-desktop-bin --noconfirm
 
-sleep 5
+sleep 3
 
 title_blue "Baixando o Flutter..."
 
@@ -108,9 +108,9 @@ sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/
 powerprofilesctl set performance
 
 title_green "Instalação finalizada."
-sleep 5
+sleep 3
 
 title_red "Reiniciando a máquina."
-sleep 5
+sleep 3
 
 sudo reboot now

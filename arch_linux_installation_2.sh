@@ -11,7 +11,7 @@ title_blue() {
     echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
 }
 
-title_blue "Insalação - Parte 2"
+title_blue "Instalação - Parte 2"
 
 brew install eza glow tldr fd git-delta
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
@@ -43,42 +43,9 @@ gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
 gsettings set org.gnome.desktop.interface icon-theme "dracula-dark"
 gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM"
 
-cd ~
-
-if [-d "Documentos"]; then
-  rmdir "Documentos"
-else
-  echo "Diretório não encontrado."
-fi
-
-if [-d "Imagens"]; then
-  rmdir "Imagens"
-else
-  echo "Diretório não encontrado."
-fi
-
-if [-d "D Músicas"]; then
-  rmdir "Músicas"
-else
-  echo "Diretório não encontrado."
-fi
-
-if [-d "Público"]; then
-  rmdir "Público"
-else
-  echo "Diretório não encontrado."
-fi
-
-if [-d "Modelos"]; then
-  rmdir "Modelos"
-else
-  echo "Diretório não encontrado."
-fi
-
-if [-d "Vídeos"]; then
-  rmdir "Vídeos"
-else
-  echo "Diretório não encontrado."
-fi
-
 yay -S --noconfirm cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset yed
+
+echo ""
+title "Reiniciando a máquina..."
+sleep 3
+sudo reboot now

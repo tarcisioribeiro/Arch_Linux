@@ -230,7 +230,7 @@ sleep 3
 clear
 
 echo ""
-title_blue "Reiniciando a máquina. Ao logar novamente, execute o segundo instalador."
+title_blue "Reiniciando a máquina."
 echo ""
 
 sleep 3
@@ -238,4 +238,4 @@ sleep 3
 read -p "Pressione ENTER para confirmar."
 echo ""
 
-# sudo reboot now
+sudo reboot now
