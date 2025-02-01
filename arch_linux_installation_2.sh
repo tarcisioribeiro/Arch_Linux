@@ -45,6 +45,7 @@ gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM"
 
 yay -S --noconfirm cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset wlogout
 
+clear
 echo ""
 title "Reiniciando a máquina..."
 sleep 3

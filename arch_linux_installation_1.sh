@@ -28,7 +28,7 @@ mkdir -p ~/.themes
 sudo pacman -Syu
 
 echo ""
-title "Instalação Arch Linux - Parte 1"
+title "Instalação - Parte 1"
 
 echo ""
 title_green "Atualizando o sistema..."
@@ -64,7 +64,6 @@ sudo pacman -Syu
 sudo pacman -S bluez blueman bluez-utils --noconfirm
 
 clear
-
 echo ""
 title_blue "Ativação do Bluetooth"
 echo ""
@@ -80,6 +79,7 @@ sudo systemctl enable bluetooth.service
 
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
+clear
 echo ""
 title_blue "Instalando o Yay..."
 
@@ -164,6 +164,7 @@ rm logo-ls_Linux_x86_64.tar.gz
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Brew
+clear
 echo ""
 title_blue "Instalando o HomeBrew..."
 echo ""
@@ -171,6 +172,7 @@ echo ""
 sleep 3
 
 # Oh My Bash
+clear
 echo ""
 title_blue "Instalando o Oh My Bash..."
 echo ""
@@ -178,6 +180,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/mast
 sleep 3
 
 # Starship
+clear
 echo ""
 title_blue "Instalando o Starship..."
 echo ""

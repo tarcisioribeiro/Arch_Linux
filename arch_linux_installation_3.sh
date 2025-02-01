@@ -31,15 +31,24 @@ yay -S --noconfirm virtualbox-ext-oracle
 sudo systemctl enable vboxweb.service
 sudo systemctl start vboxweb.service
 
+clear
+echo ""
 title_green "Instalação do Virtualbox concluída."
+echo ""
 
 sleep 3
 
+clear
+echo ""
 title_blue "Gerando chave SSH..."
+echo ""
 
 ssh-keygen
 
+clear
+echo ""
 title_blue "Instalando o snap..."
+echo ""
 
 sleep 3
 
@@ -75,7 +84,11 @@ yay -S github-desktop-bin --noconfirm
 
 sleep 3
 
+clear
+echo ""
 title_blue "Baixando o Flutter..."
+echo ""
+sleep 3
 
 mkdir -p ~/development
 cd ~/Downloads
@@ -97,10 +110,10 @@ sudo rm -r snapd
 
 powerprofilesctl set performance
 
-title_green "Instalação finalizada."
-sleep 3
-
+clear
+echo ""
 title_red "Reiniciando a máquina."
+echo ""
 sleep 3
 
 sudo reboot now

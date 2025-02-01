@@ -14,7 +14,7 @@ title_blue() {
 title_blue "Instalação - Parte 4"
 echo ""
 
-yay -S --noconfirm ly
+yay -S --noconfirm ly tdf upscayl-bin
 sudo systemctl enable ly.service
 sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/
 
@@ -22,6 +22,8 @@ sudo snap install android-studio --classic
 sudo snap install dbeaver-ce
 sudo snap install youtube-music-desktop-app
 
+clear
+echo ""
 title_green "Instalação concluída."
 echo ""
 
