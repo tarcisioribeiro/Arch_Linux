@@ -68,6 +68,8 @@ title_green "Instalação do snap concluída."
 
 sleep 3
 
+clear
+echo ""
 title_blue "Instalando o Speed Test."
 
 sleep 3
@@ -79,8 +81,8 @@ rm ookla-speedtest-1.2.0-linux-x86_64.tgz
 
 sleep 3
 
-yay -S --noconfirm deluge deluge-gtk tdf upscayl-bin wlogout
-yay -S github-desktop-bin --noconfirm
+yay -S deluge deluge-gtk tdf upscayl-bin wlogout
+yay -S github-desktop-bin
 
 sleep 3
 

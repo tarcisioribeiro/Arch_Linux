@@ -18,7 +18,7 @@ Abaixo estão as combinações de teclas configuradas no Hyprland, organizadas e
 | `Windows + Enter`     | `exec, $terminal`                  | Abre o terminal.                                      |
 | `Windows + Q`         | `killactive`                      | Fecha a janela ativa.                                 |
 | `Windows + L`         | `exec, hyprlock`                  | Bloqueia a tela.                                      |
-| `Windows + Shift + L` | `exec, nwg-bar`                   | Inicia o NWG-Bar.                                     |
+| `Windows + Shift + L` | `exec, wlogout`                   | Inicia o Wlogout.                                     |
 | `Windows + D`         | `exec, $browser`                  | Abre o navegador configurado.                        |
 | `Windows + E`         | `exec, $fileManager`              | Abre o gerenciador de arquivos.                      |
 | `Windows + T`         | `exec, $ide`                      | Abre o IDE configurado.                              |

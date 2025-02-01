@@ -12,9 +12,14 @@ title_blue() {
 }
 
 title_blue "Instalação - Parte 4"
+
+echo ""
+clear
 echo ""
 
-yay -S --noconfirm ly tdf upscayl-bin
+yay -S ly
+yay -S tdf
+yay -S upscayl-bin
 sudo systemctl enable ly.service
 sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/
 

@@ -18,7 +18,10 @@ git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 mv ~/.config/nvim ~/.config/nvim_old
 cp -r ~/repos/Terminal/customization/nvim ~/.config
 sudo rm -r ~/.config/nvim_old
-sudo pacman -S --noconfirm ruby
+sudo pacman -S ruby
+
+clear
+echo ""
 
 cd ~
 cp ~/repos/Arch_Linux/wallpapers/*.png ~/Pictures/
@@ -43,7 +46,9 @@ gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
 gsettings set org.gnome.desktop.interface icon-theme "dracula-dark"
 gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM"
 
-yay -S --noconfirm cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset wlogout
+clear
+
+yay -S cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset wlogout
 
 clear
 echo ""

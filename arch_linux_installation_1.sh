@@ -34,8 +34,7 @@ echo ""
 title_green "Atualizando o sistema..."
 sleep 3
 
-sudo pacman -S --noconfirm \
-curl wget iwd neofetch \
+sudo pacman -S curl wget iwd neofetch \
 hyprpaper nano neovim net-tools \
 vim btop htop ttf-dejavu cmake ninja clang pkgconf \
 noto-fonts noto-fonts-emoji ttf-liberation \
@@ -61,7 +60,7 @@ htop fastfetch font-manager nodejs npm
 sleep 3
 
 sudo pacman -Syu
-sudo pacman -S bluez blueman bluez-utils --noconfirm
+sudo pacman -S bluez blueman bluez-utils
 
 clear
 echo ""
@@ -88,7 +87,7 @@ sudo usermod -aG wheel,storage,disk $USER
 sleep 3
 
 cd ~/Downloads
-sudo pacman -S --needed git base-devel --noconfirm
+sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
@@ -130,6 +129,7 @@ read -p "Pressione ENTER para confirmar e prosseguir."
 echo ""
 chsh -s /usr/bin/zsh
 
+clear
 title_green "Instalação - Oh My ZSH"
 echo "" 
 
