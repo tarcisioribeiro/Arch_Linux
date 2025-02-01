@@ -56,7 +56,7 @@ gsettings-desktop-schemas nautilus gedit \
 pavucontrol wpa_supplicant obsidian \
 gimp eog evince cargo scdoc libreoffice-still \
 rhythmbox evince iniparser pyright fzf \
-htop fastfetch font-manager
+htop fastfetch font-manager nodejs npm
 
 sleep 3
 
@@ -114,6 +114,7 @@ cp -r ~/repos/Arch_Linux/hyperdots/btop ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/cava ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/gtk-3.0 ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/dunst ~/.config
+cp -r ~/repos/Arch_Linux/hyperdots/wlogout ~/.config
 cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
 
 clear
@@ -161,13 +162,6 @@ rm -r logo-ls_Linux_x86_64
 rm logo-ls_Linux_x86_64.tar.gz
 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-# NVM
-echo ""
-title_blue "Instalando o NVM..."
-eho ""
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-sleep 3
 
 # Brew
 echo ""
@@ -231,11 +225,6 @@ clear
 
 echo ""
 title_blue "Reiniciando a máquina."
-echo ""
-
 sleep 3
-
-read -p "Pressione ENTER para confirmar."
-echo ""
 
 sudo reboot now

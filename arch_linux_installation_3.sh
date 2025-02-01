@@ -55,7 +55,7 @@ sudo ln -s /var/lib/snapd/snap /snap
 cd ~/Downloads
 sudo rm -r snapd
 
-title_green "Instalação do snap concluída. Recomendamos que reinicie a máquina antes de instalar os programas."
+title_green "Instalação do snap concluída."
 
 sleep 3
 
@@ -68,15 +68,9 @@ cd ~/Downloads
 sudo tar -xvzf ookla-speedtest-1.2.0-linux-x86_64.tgz -C /usr/bin
 rm ookla-speedtest-1.2.0-linux-x86_64.tgz
 
-sudo snap install youtube-music-desktop-app spotify dbeaver-ce
-sudo snap install youtube-music-desktop-app
-sudo snap install spotify
-sudo snap install dbeaver-ce
-sudo snap install android-studio --classic
-
 sleep 3
 
-yay -S --noconfirm deluge deluge-gtk
+yay -S --noconfirm deluge deluge-gtk tdf upscayl-bin wlogout
 yay -S github-desktop-bin --noconfirm
 
 sleep 3
@@ -100,10 +94,6 @@ mv youtube-music-desktop-app ~/snap
 rm youtube-music-desktop-app.zip
 sudo rm -r Dracula
 sudo rm -r snapd
-
-yay -S --noconfirm ly
-sudo systemctl enable ly.service
-sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/
 
 powerprofilesctl set performance
 
