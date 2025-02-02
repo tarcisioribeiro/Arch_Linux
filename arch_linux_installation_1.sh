@@ -79,22 +79,8 @@ sudo systemctl enable bluetooth.service
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 
 clear
-echo ""
-title_blue "Instalando o Yay..."
 
 sudo usermod -aG wheel,storage,disk $USER
-
-sleep 3
-
-cd ~/Downloads
-sudo pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ~
-sudo rm -r yay
-yay -Syu
-
 sudo gpasswd -a $USER input
 
 sudo systemctl enable systemd-networkd

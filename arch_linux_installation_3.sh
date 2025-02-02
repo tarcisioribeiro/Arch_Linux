@@ -16,6 +16,20 @@ title_green "Instalação - Parte 3"
 systemctl --user enable pipewire.service
 systemctl --user enable hypridle.service
 
+echo ""
+title_blue "Instalando o Yay..."
+echo ""
+sleep 3
+
+cd ~/Downloads
+sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ~
+sudo rm -r yay
+yay -Syu
+
 title_blue "Começando a instalação do VirtualBox..."
 
 sleep 3
@@ -78,11 +92,6 @@ cp ~/repos/Arch_Linux/packages/ookla-speedtest-1.2.0-linux-x86_64.tgz ~/Download
 cd ~/Downloads
 sudo tar -xvzf ookla-speedtest-1.2.0-linux-x86_64.tgz -C /usr/bin
 rm ookla-speedtest-1.2.0-linux-x86_64.tgz
-
-sleep 3
-
-yay -S deluge deluge-gtk tdf upscayl-bin wlogout
-yay -S github-desktop-bin
 
 sleep 3
 

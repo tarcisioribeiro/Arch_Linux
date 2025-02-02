@@ -48,7 +48,18 @@ gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM"
 
 clear
 
-yay -S cava yazi google-chrome visual-studio-code-bin make gnome-calculator-gtk3 ngrok hyprsunset wlogout
+title_blue "Instalando o Yay..."
+
+sleep 3
+
+cd ~/Downloads
+sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ~
+sudo rm -r yay
+yay -Syu
 
 clear
 echo ""
