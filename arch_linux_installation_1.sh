@@ -59,8 +59,8 @@ pavucontrol wpa_supplicant obsidian \
 gimp eog cargo scdoc libreoffice-still \
 rhythmbox iniparser pyright fzf \
 fastfetch font-manager nodejs npm \
-scrcpy picom rofi shotcut
-
+scrcpy picom rofi shotcut xrandr \
+i3 xorg xorg-xdm dmenu i3status i3lock ttf-dejavu
 
 sudo pacman -Syu
 sudo pacman -S bluez blueman bluez-utils

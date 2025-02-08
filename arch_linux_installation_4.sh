@@ -72,7 +72,8 @@ pavucontrol wpa_supplicant obsidian \
 gimp eog cargo scdoc libreoffice-still \
 rhythmbox iniparser pyright fzf \
 fastfetch font-manager nodejs npm \
-scrcpy picom rofi shotcut xrandr
+scrcpy picom rofi shotcut xrandr \
+i3 xorg xorg-xdm dmenu i3status i3lock ttf-dejavu
 
 sudo systemctl enable ly.service
 sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/

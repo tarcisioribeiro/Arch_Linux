@@ -3,7 +3,7 @@ set $mod Mod1
 font pango:JetBrainsMono NFM 11
 
 exec --no-startup-id ~/scripts/monitor_setup.sh
-exec --no-startup-id feh --bg-fill ~/Pictures/dracula-leaves.png
+exec --no-startup-id feh --bg-fill ~/Pictures/dracula-programming-room.png
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id picom
