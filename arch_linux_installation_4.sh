@@ -43,6 +43,10 @@ yay -S deluge
 yay -S deluge-gtk
 yay -S wlogout
 yay -S github-desktop-bin
+yay -S telegram-desktop
+yay -S evolution
+yay -S discord
+yay -S i3-gaps
 
 title_blue "Instalando pacotes snap..."
 
