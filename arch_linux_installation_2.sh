@@ -1,31 +1,42 @@
 #!/usr/bin/bash
 title_red() {
+    clear
+    echo ""
     echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+    echo ""
+    sleep 3
 }
 
 title_green() {
+    clear ""
+    echo ""
     echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+    echo ""
+    sleep 3
 }
 
 title_blue() {
+    clear ""
+    echo ""
     echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+    echo ""
+    sleep 3
 }
 
 title_blue "Instalação - Parte 2"
 
-brew install eza glow tldr fd git-delta
+brew install eza glow tldr fd git-delta zoxide
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 mv ~/.config/nvim ~/.config/nvim_old
-cp -r ~/repos/Terminal/customization/nvim ~/.config
 sudo rm -r ~/.config/nvim_old
+mkdir -p ~/.config/nvim && stow -v -t ~/.config/nvim ~/repos/Arch_Linux/stow/nvim
 sudo pacman -S ruby
-
-clear
-echo ""
 
 cd ~
 cp ~/repos/Arch_Linux/wallpapers/*.png ~/Pictures/
-cp ~/repos/Arch_Linux/scripts/*.sh ~/scripts/
+cp -r ~/repos/Arch_Linux/wallpapers/wallpapers ~/Pictures/
+mkdir -p ~/scripts && stow -v -t ~/scripts ~/repos/Arch_Linux/scripts/
+
 cd ~/Downloads/
 wget https://github.com/dracula/gtk/archive/master.zip
 unzip master.zip
@@ -41,16 +52,7 @@ sudo rm -r Tela-icon-theme
 
 cd ~/Downloads
 
-gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
-gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
-gsettings set org.gnome.desktop.interface icon-theme "dracula-dark"
-gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM"
-
-clear
-
 title_blue "Instalando o Yay..."
-
-sleep 3
 
 cd ~/Downloads
 sudo pacman -S --needed git base-devel
@@ -61,8 +63,15 @@ cd ~
 sudo rm -r yay
 yay -Syu
 
-clear
-echo ""
+touch ~/.poshthemes/tj-dracula.omp.json && stow -v -t  ~/.poshthemes/tj-dracula.omp.json ~/repos/Arch_Linux/customization/zsh/tj-dracula.omp.json
+touch ~/.gitconfig && stow -v -t ~/.gitconfig ~/repos/Arch_Linux/customization/git/.gitconfig
+touch ~/.tmux.conf && stow -v -t ~/.tmux.conf ~/repos/Arch_Linux/customization/tmux/.tmux.conf
+touch ~/.config/starship.toml && stow -v -t ~/.config/starship.toml ~/repos/Terminal/customization/starship/starship.toml
+touch ~/.bashrc && stow -v -t ~/.bashrc ~/repos/Arch_Linux/shell_files/.bashrc
+touch ~/.zshrc && stow -v -t ~/.zshrc ~/repos/Arch_Linux/shell_files/.bashrc
+touch ~/.bash_aliases && stow -v -t ~/.bash_aliases ~/repos/Arch_Linux/shell_files/.bash_aliases
+touch ~/.zsh_aliases && stow -v -t ~/.zsh_aliases ~/repos/Arch_Linux/shell_files/.zsh_aliases
+
 title "Reiniciando a máquina..."
-sleep 3
+
 sudo reboot now

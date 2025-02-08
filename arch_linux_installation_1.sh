@@ -1,21 +1,27 @@
 #!/usr/bin/bash
-
 sudo pacman -S toilet zsh --noconfirm
-
 title_red() {
+    clear
+    echo ""
     echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+    echo ""
+    sleep 3
 }
 
 title_green() {
-    echo -e "\033[32m$(toilet --font pagga --filter border --width 200  "$1")\033[0m"
+    clear ""
+    echo ""
+    echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+    echo ""
+    sleep 3
 }
 
 title_blue() {
+    clear ""
+    echo ""
     echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
-}
-
-title() {
-  echo -e "$(toilet --font pagga --filter border --width 200 "$1")"
+    echo ""
+    sleep 3
 }
 
 cd ~
@@ -27,22 +33,19 @@ mkdir -p ~/.icons
 mkdir -p ~/.themes
 sudo pacman -Syu
 
-echo ""
 title "Instalação - Parte 1"
 
-echo ""
 title_green "Atualizando o sistema..."
-sleep 3
 
 sudo pacman -S curl wget iwd neofetch \
 hyprpaper nano neovim net-tools \
-vim btop htop ttf-dejavu cmake ninja clang pkgconf \
+vim btop ttf-dejavu cmake ninja clang pkgconf \
 noto-fonts noto-fonts-emoji ttf-liberation \
 gst-libav gst-plugins-good gst-plugins-bad \
 gst-plugins-ugly ffmpeg gstreamer hyprland \
 kitty xdg-desktop-portal xdg-desktop-portal-hyprland \
-zip unzip p7zip unrar \
-tar gzip wofi firefox \
+zip unzip p7zip unrar cronie \
+tar gzip wofi firefox stow feh \
 flatpak python3 python-pip vlc \
 obs-studio zsh tmux waybar \
 bat nm-connection-editor openssh ufw \
@@ -53,22 +56,21 @@ hyprlock hypridle \
 glib2 gnome-settings-daemon base-devel polkit-gnome \
 gsettings-desktop-schemas nautilus gedit \
 pavucontrol wpa_supplicant obsidian \
-gimp eog evince cargo scdoc libreoffice-still \
-rhythmbox evince iniparser pyright fzf \
-htop fastfetch font-manager nodejs npm
+gimp eog cargo scdoc libreoffice-still \
+rhythmbox iniparser pyright fzf \
+fastfetch font-manager nodejs npm \
+scrcpy picom rofi shotcut
 
-sleep 3
 
 sudo pacman -Syu
 sudo pacman -S bluez blueman bluez-utils
 
-clear
-echo ""
 title_blue "Ativação do Bluetooth"
-echo ""
 
 echo "Procure pela seção AutoEnable, e descomente a linha #AutoEnable=True. Após isso, salve e feche o arquivo."
+
 echo ""
+
 read -p "Pressione ENTER para confirmar e prosseguir."
 
 sudo nano /etc/bluetooth/main.conf
@@ -86,38 +88,32 @@ sudo gpasswd -a $USER input
 sudo systemctl enable systemd-networkd
 sudo systemctl start systemd-networkd
 
-cd ~/repos
-git clone https://github.com/tarcisioribeiro/Arch_Linux.git
+cd ~/repos/Arch_Linux/stow
 
 mkdir -p ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/hypr ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/kitty ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/waybar ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/wofi ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/nwg-bar ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/btop ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/cava ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/gtk-3.0 ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/dunst ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/wlogout ~/.config
-cp -r ~/repos/Arch_Linux/hyperdots/mimeapps.list ~/.config
+mkdir -p ~/.config/hypr && stow -v -t ~/.config/hypr hypr
+mkdir -p ~/.config/kitty && stow -v -t ~/.config/kitty kitty
+mkdir -p ~/.config/waybar && stow -v -t ~/.config/waybar waybar
+mkdir -p ~/.config/wofi && stow -v -t ~/.config/wofi wofi
+mkdir -p ~/.config/btop && stow -v -t ~/.config/btop btop
+mkdir -p ~/.config/cava && stow -v -t ~/.config/cava cava
+mkdir -p ~/.config/gtk-3.0 && stow -v -t ~/.config/gtk-3.0 gtk
+mkdir -p ~/.config/dunst && stow -v -t ~/.config/dunst dunst
+mkdir -p ~/.config/wlogout && stow -v -t ~/.config/wlogout wlogout
+mkdir -p ~/.config/nvim && stow -v -t ~/.config/nvim nvim
+touch ~/.config/mimeapps.list && stow -v -t ~/.config/mimeapps.list mimeapps.list
+touch ~/.config/picom.conf && stow -v -t ~/.config/picom.conf picom.conf
 
-clear
-
-sleep 3
-echo ""
 title_green "Alterando o shell do sistema..."
-echo ""
+
 echo "Certifique-se de digitar corretamente a sua senha."
 echo ""
-sleep 3
 read -p "Pressione ENTER para confirmar e prosseguir."
-echo ""
+
+
 chsh -s /usr/bin/zsh
 
-clear
 title_green "Instalação - Oh My ZSH"
-echo "" 
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -132,66 +128,37 @@ unzip ~/.poshthemes/themes.zip -d ~/.poshthemes
 chmod u+rw ~/.poshthemes/*.omp.*
 rm ~/.poshthemes/themes.zip
 
-cd ~/repos/
-git clone https://github.com/tarcisioribeiro/Terminal.git
-
-cd ~
-cp repos/Terminal/customization/zsh/tj-dracula.omp.json /home/tarcisio/.poshthemes
-cp repos/Terminal/customization/bash/logo-ls_Linux_x86_64.tar.gz ~/Downloads
+cp ~/repos/Arch_Linux/customization/bash/logo-ls_Linux_x86_64.tar.gz ~/Downloads
 cd ~/Downloads
 tar -zxf logo-ls_Linux_x86_64.tar.gz
 cd ~/Downloads/logo-ls_Linux_x86_64
 sudo cp logo-ls /usr/local/bin
 
 cd ~/Downloads
-rm -r logo-ls_Linux_x86_64
+sudo rm -r logo-ls_Linux_x86_64
 rm logo-ls_Linux_x86_64.tar.gz
 
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
 # Brew
-clear
-echo ""
 title_blue "Instalando o HomeBrew..."
-echo ""
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-sleep 3
 
 # Oh My Bash
-clear
-echo ""
 title_blue "Instalando o Oh My Bash..."
-echo ""
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-sleep 3
 
 # Starship
-clear
-echo ""
 title_blue "Instalando o Starship..."
-echo ""
 curl -sS https://starship.rs/install.sh | sh
-sleep 3
 
 # Tmux Plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-cp ~/repos/Terminal/customization/git/.gitconfig ~
-cp ~/repos/Terminal/customization/tmux/.tmux.conf ~
-cp ~/repos/Terminal/customization/starship/starship.toml ~/.config
-cd ~/repos/Terminal/customization/powershell/
-sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
+# Fontes
+sudo cp ~/repos/Arch_Linux/fonts/JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/DS-DIGIB.TTF /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-Italic.ttf /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-Bold.ttf /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-BoldItalic.ttf /usr/share/fonts
-
-cp ~/repos/Arch_Linux/shell_files/.bashrc ~
-cp ~/repos/Arch_Linux/shell_files/.zshrc ~
-cp ~/repos/Arch_Linux/shell_files/.bash_aliases ~
-cp ~/repos/Arch_Linux/shell_files/.zsh_aliases ~
-
-sleep 3
 
 cd ~/Downloads
 wget https://github.com/dracula/zsh-syntax-highlighting/archive/master.zip
@@ -208,12 +175,6 @@ sudo systemctl enable sshd
 
 sudo ufw allow SSH
 
-sleep 3
-
-clear
-
-echo ""
 title_blue "Reiniciando a máquina."
-sleep 3
 
 sudo reboot now

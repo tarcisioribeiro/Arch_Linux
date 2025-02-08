@@ -1,0 +1,77 @@
+@import 'colors.css';
+
+window {
+    font-family: JetBrainsMono NFM;
+    font-size: 14pt;
+    color: @comment;
+    background-color: rgba(40, 42, 54, 0.7);
+}
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    background-color: rgba(30, 31, 41, 230);
+    animation: gradient_f 10s ease-in infinite;
+    transition: all 0.1s cubic-bezier(.55, 5.0, .28, 1.682), box-shadow 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    border-radius: 40px;
+	border:0px;
+}
+
+button:focus {
+    background-size: 50%;
+	border: 0px;
+
+}
+
+button:hover {
+    background-color: @purple; 
+    color: #8be9fd;
+    background-size: 50%;
+    margin: 20px;
+    border-radius: 40px;
+	box-shadow: 0 0 30px @selection;
+	
+}
+
+button span {
+    font-size: 1.2em;
+}
+
+
+#lock {
+    background-image: image(url("./icons/lock.png"));
+}
+#lock:hover {
+    background-image: image(url("./icons/lock-hover.png"));
+}
+#logout {
+    background-image: image(url("./icons/logout.png"));
+}
+#logout:hover {
+    background-image: image(url("./icons/logout-hover.png"));
+}
+#suspend {
+    background-image: image(url("./icons/sleep.png"));
+}
+#suspend:hover {
+    background-image: image(url("./icons/sleep-hover.png"));
+}
+#shutdown {
+    background-image: image(url("./icons/power.png"));
+}
+#shutdown:hover {
+    background-image: image(url("./icons/power-hover.png"));
+}
+#reboot {
+    background-image: image(url("./icons/restart.png"));
+}
+#reboot:hover {
+    background-image: image(url("./icons/restart-hover.png"));
+}
+#hibernate {
+    background-image: image(url("./icons/hibernate.png"));
+}
+#hibernate:hover {
+    background-image: image(url("./icons/hibernate-hover.png"));
+}

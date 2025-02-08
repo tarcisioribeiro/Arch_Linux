@@ -1,14 +1,26 @@
 #!/usr/bin/bash
 title_red() {
+    clear
+    echo ""
     echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+    echo ""
+    sleep 3
 }
 
 title_green() {
+    clear ""
+    echo ""
     echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+    echo ""
+    sleep 3
 }
 
 title_blue() {
+    clear ""
+    echo ""
     echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+    echo ""
+    sleep 3
 }
 
 title_green "Instalação - Parte 3"
@@ -16,10 +28,7 @@ title_green "Instalação - Parte 3"
 systemctl --user enable pipewire.service
 systemctl --user enable hypridle.service
 
-echo ""
 title_blue "Instalando o Yay..."
-echo ""
-sleep 3
 
 cd ~/Downloads
 sudo pacman -S --needed git base-devel
@@ -30,9 +39,7 @@ cd ~
 sudo rm -r yay
 yay -Syu
 
-title_blue "Começando a instalação do VirtualBox..."
-
-sleep 3
+title_blue "Instalando o VirtualBox..."
 
 sudo pacman -Syu --noconfirm virtualbox virtualbox-host-dkms linux-headers linux-lts-headers virtualbox-guest-iso
 sudo dkms install vboxhost/$(pacman -Qi virtualbox-host-dkms | grep Version | awk '{print $3}')
@@ -45,26 +52,13 @@ yay -S --noconfirm virtualbox-ext-oracle
 sudo systemctl enable vboxweb.service
 sudo systemctl start vboxweb.service
 
-clear
-echo ""
 title_green "Instalação do Virtualbox concluída."
-echo ""
 
-sleep 3
-
-clear
-echo ""
 title_blue "Gerando chave SSH..."
-echo ""
 
 ssh-keygen
 
-clear
-echo ""
 title_blue "Instalando o snap..."
-echo ""
-
-sleep 3
 
 cd ~/Downloads
 git clone https://aur.archlinux.org/snapd.git
@@ -80,26 +74,14 @@ sudo rm -r snapd
 
 title_green "Instalação do snap concluída."
 
-sleep 3
-
-clear
-echo ""
 title_blue "Instalando o Speed Test."
-
-sleep 3
 
 cp ~/repos/Arch_Linux/packages/ookla-speedtest-1.2.0-linux-x86_64.tgz ~/Downloads
 cd ~/Downloads
 sudo tar -xvzf ookla-speedtest-1.2.0-linux-x86_64.tgz -C /usr/bin
 rm ookla-speedtest-1.2.0-linux-x86_64.tgz
 
-sleep 3
-
-clear
-echo ""
 title_blue "Baixando o Flutter..."
-echo ""
-sleep 3
 
 mkdir -p ~/development
 cd ~/Downloads
@@ -121,10 +103,6 @@ sudo rm -r snapd
 
 powerprofilesctl set performance
 
-clear
-echo ""
-title_red "Reiniciando a máquina."
-echo ""
-sleep 3
+title_green "Reiniciando a máquina."
 
 sudo reboot now
