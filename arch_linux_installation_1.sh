@@ -100,15 +100,14 @@ mkdir -p ~/.config/cava && stow -v -t ~/.config/cava cava
 mkdir -p ~/.config/gtk-3.0 && stow -v -t ~/.config/gtk-3.0 gtk
 mkdir -p ~/.config/dunst && stow -v -t ~/.config/dunst dunst
 mkdir -p ~/.config/wlogout && stow -v -t ~/.config/wlogout wlogout
-touch ~/.config/mimeapps.list && stow -v -t ~/.config/mimeapps.list mimeapps.list
-touch ~/.config/picom.conf && stow -v -t ~/.config/picom.conf picom.conf
+ln mimeapps.list ~/.config/mimeapps.list
+ln picom.conf ~/.config/picom.conf
 
 title_green "Alterando o shell do sistema..."
 
 echo "Certifique-se de digitar corretamente a sua senha."
 echo ""
 read -p "Pressione ENTER para confirmar e prosseguir."
-
 
 chsh -s /usr/bin/zsh
 
@@ -158,13 +157,6 @@ sudo cp ~/repos/Arch_Linux/fonts/DS-DIGIB.TTF /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-Italic.ttf /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-Bold.ttf /usr/share/fonts
 sudo cp ~/repos/Arch_Linux/fonts/JetBrainsMonoNerdFontMono-BoldItalic.ttf /usr/share/fonts
-
-cd ~/Downloads
-wget https://github.com/dracula/zsh-syntax-highlighting/archive/master.zip
-unzip master.zip
-cp zsh-syntax-highlighting-master/zsh-syntax-highlighting.sh ~/scripts/
-rm master.zip
-sudo rm -r zsh-syntax-highlighting-master
 
 sudo systemctl enable --now ufw.service
 sudo ufw enable

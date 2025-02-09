@@ -82,12 +82,42 @@ i3 xorg xorg-xdm dmenu i3status i3lock ttf-dejavu --noconfirm
 sudo systemctl enable ly.service
 sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/
 
-sudo rm -r ~/Documentos
-sudo rm -r ~/Imagens
-sudo rm -r ~/Modelos
-sudo rm -r ~/Músicas
-sudo rm -r ~/Público
-sudo rm -r ~/Vídeos
+remove_directories() {
+  # Definindo os diretórios a serem verificados
+  directories=(
+    "$HOME/Documentos"
+    "$HOME/Imagens"
+    "$HOME/Modelos"
+    "$HOME/Músicas"
+    "$HOME/Downloads"
+    "$HOME/Público"
+    "$HOME/Vídeos"
+  )
+
+  # Loop para verificar e remover cada diretório
+  for dir in "${directories[@]}"; do
+    if [ -d "$dir" ]; then
+      echo "Diretório $dir encontrado. Removendo..."
+      sudo rm -r "$dir"
+    else
+      echo "Diretório $dir não encontrado."
+    fi
+  done
+}
+
+remove_directories
+
+sudo ln ~/repos/Arch_Linux/shell_files/bashrc_sudo /root/.bashrc
+sudo ln ~/repos/Arch_Linux/shell_files/zshrc_sudo /root/.zshrc
+sudo ln ~/repos/Arch_Linux/shell_files/bash_aliases_sudo /root/.bash_aliases
+sudo ln ~/repos/Arch_Linux/shell_files/zsh_aliases_sudo /root/.zsh_aliases
+sudo cp -r ~/.oh-my-bash /root
+sudo cp -r ~/.oh-my-zsh /root
+sudo mkdir /root/.config
+sudo mkdir -p /root/.config/nvim && cd ~/repos/Arch_Linux/stow && stow -v -t /root/.config/nvim nvim
+
+cd ~
+mkdir Downloads
 
 title_green "Instalação concluída."
 

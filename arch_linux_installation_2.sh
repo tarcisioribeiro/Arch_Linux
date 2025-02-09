@@ -32,10 +32,12 @@ sudo rm -r ~/.config/nvim_old
 mkdir ~/.config/nvim && cd ~/repos/Arch_Linux/stow/ && stow -v -t ~/.config/nvim nvim
 sudo pacman -S ruby --noconfirm
 
-cd ~
-cp ~/repos/Arch_Linux/wallpapers/*.png ~/Pictures/
-cp -r ~/repos/Arch_Linux/wallpapers/wallpapers ~/Pictures/
-mkdir -p ~/scripts && cd ~/repos/Arch_Linux/ && stow -v -t ~/scripts scripts/ && cp ~/scripts/*.sh ~/scripts
+rm -r Pictures
+mkdir ~/Pictures
+cd ~/repos/Arch_Linux/ && stow ~/Pictures wallpapers
+mkdir -p ~/scripts && cd ~/repos/Arch_Linux/ && stow -v -t ~/scripts scripts
+sudo chsh -s /usr/bin/zsh
+sudo mkdir -p /root/scripts && cd /home/tarcisio/repos/Arch_Linux/ && sudo stow -v -t /root/scripts scripts
 
 cd ~/Downloads/
 wget https://github.com/dracula/gtk/archive/master.zip
@@ -62,8 +64,6 @@ makepkg -si
 cd ~/Downloads
 sudo rm -r yay
 yay -Syu
-
-cd ~/repos/Arch_Linux/customization
 
 archives=(
     "~/.poshthemes/tj-dracula.omp.json"
