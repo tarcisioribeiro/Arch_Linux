@@ -9,7 +9,7 @@ title_red() {
 }
 
 title_green() {
-    clear ""
+    clear
     echo ""
     echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
     echo ""
@@ -17,7 +17,7 @@ title_green() {
 }
 
 title_blue() {
-    clear ""
+    clear
     echo ""
     echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
     echo ""
@@ -33,7 +33,7 @@ mkdir -p ~/.icons
 mkdir -p ~/.themes
 sudo pacman -Syu
 
-title "Instalação - Parte 1"
+title_blue "Instalação - Parte 1"
 
 title_green "Atualizando o sistema..."
 
@@ -52,18 +52,18 @@ bat nm-connection-editor openssh ufw \
 gnome-tweaks gnome-disk-utility power-profiles-daemon \
 cliphist wl-clipboard dunst network-manager-applet \
 man-db grim slurp nwg-look \
-hyprlock hypridle \
+hyprlock hypridle stow \
 glib2 gnome-settings-daemon base-devel polkit-gnome \
 gsettings-desktop-schemas nautilus gedit \
 pavucontrol wpa_supplicant obsidian \
 gimp eog cargo scdoc libreoffice-still \
 rhythmbox iniparser pyright fzf \
 fastfetch font-manager nodejs npm \
-scrcpy picom rofi shotcut xrandr \
-i3 xorg xorg-xdm dmenu i3status i3lock ttf-dejavu
+scrcpy picom rofi shotcut xorg-xrandr \
+i3 xorg xorg-xdm dmenu i3status i3lock ttf-dejavu --noconfirm
 
 sudo pacman -Syu
-sudo pacman -S bluez blueman bluez-utils
+sudo pacman -S bluez blueman bluez-utils --noconfirm
 
 title_blue "Ativação do Bluetooth"
 
@@ -100,7 +100,6 @@ mkdir -p ~/.config/cava && stow -v -t ~/.config/cava cava
 mkdir -p ~/.config/gtk-3.0 && stow -v -t ~/.config/gtk-3.0 gtk
 mkdir -p ~/.config/dunst && stow -v -t ~/.config/dunst dunst
 mkdir -p ~/.config/wlogout && stow -v -t ~/.config/wlogout wlogout
-mkdir -p ~/.config/nvim && stow -v -t ~/.config/nvim nvim
 touch ~/.config/mimeapps.list && stow -v -t ~/.config/mimeapps.list mimeapps.list
 touch ~/.config/picom.conf && stow -v -t ~/.config/picom.conf picom.conf
 
@@ -175,6 +174,9 @@ sudo systemctl enable sshd
 
 sudo ufw allow SSH
 
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> .bashrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> .zshrc
+
 title_blue "Reiniciando a máquina."
 
-sudo reboot now
+# sudo reboot now

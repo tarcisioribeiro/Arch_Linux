@@ -8,7 +8,7 @@ title_red() {
 }
 
 title_green() {
-    clear ""
+    clear
     echo ""
     echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
     echo ""
@@ -16,7 +16,7 @@ title_green() {
 }
 
 title_blue() {
-    clear ""
+    clear
     echo ""
     echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
     echo ""
@@ -29,13 +29,14 @@ brew install eza glow tldr fd git-delta zoxide
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 mv ~/.config/nvim ~/.config/nvim_old
 sudo rm -r ~/.config/nvim_old
-mkdir -p ~/.config/nvim && stow -v -t ~/.config/nvim ~/repos/Arch_Linux/stow/nvim
-sudo pacman -S ruby
+
+ cp -r ~/repos/Arch_Linux/customization/nvim ~/.config && cd ~/repos/Arch_Linux/stow/ && stow -v -t ~/.config/nvim nvim
+sudo pacman -S ruby --noconfirm
 
 cd ~
 cp ~/repos/Arch_Linux/wallpapers/*.png ~/Pictures/
 cp -r ~/repos/Arch_Linux/wallpapers/wallpapers ~/Pictures/
-mkdir -p ~/scripts && stow -v -t ~/scripts ~/repos/Arch_Linux/scripts/
+mkdir -p ~/scripts && cd ~/repos/Arch_Linux/ && stow -v -t ~/scripts scripts/ && cp ~/scripts/*.sh ~/scripts
 
 cd ~/Downloads/
 wget https://github.com/dracula/gtk/archive/master.zip
@@ -59,19 +60,46 @@ sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
-cd ~
+cd ~/Downloads
 sudo rm -r yay
 yay -Syu
 
-touch ~/.poshthemes/tj-dracula.omp.json && stow -v -t  ~/.poshthemes/tj-dracula.omp.json ~/repos/Arch_Linux/customization/zsh/tj-dracula.omp.json
-touch ~/.gitconfig && stow -v -t ~/.gitconfig ~/repos/Arch_Linux/customization/git/.gitconfig
-touch ~/.tmux.conf && stow -v -t ~/.tmux.conf ~/repos/Arch_Linux/customization/tmux/.tmux.conf
-touch ~/.config/starship.toml && stow -v -t ~/.config/starship.toml ~/repos/Terminal/customization/starship/starship.toml
-touch ~/.bashrc && stow -v -t ~/.bashrc ~/repos/Arch_Linux/shell_files/.bashrc
-touch ~/.zshrc && stow -v -t ~/.zshrc ~/repos/Arch_Linux/shell_files/.bashrc
-touch ~/.bash_aliases && stow -v -t ~/.bash_aliases ~/repos/Arch_Linux/shell_files/.bash_aliases
-touch ~/.zsh_aliases && stow -v -t ~/.zsh_aliases ~/repos/Arch_Linux/shell_files/.zsh_aliases
+cd ~/repos/Arch_Linux/customization
 
-title "Reiniciando a máquina..."
+archives=(
+    "~/.poshthemes/tj-dracula.omp.json"
+    "~/.gitconfig"
+    "~/.tmux.conf"
+    "~/.config/starship.toml"
+    "~/.bashrc"
+    "~/.zshrc"
+    "~/.bash_aliases"
+    "~/.zsh_aliases"
+)
 
-sudo reboot now
+# Itera sobre a lista de arquivos
+for archive in "${archive[@]}"; do
+    archive_expansion=$(eval echo $archive)
+    
+    # Verifica se o arquivo existe
+    if [ -f "$archive_expansion" ]; then
+        # Remove o arquivo
+        rm -f "$archive_expansion"
+        echo "Arquivo '$archive_expansion' removido com sucesso."
+    else
+        echo "Arquivo '$archive_expansion' não encontrado."
+    fi
+done
+
+ln ~/repos/Arch_Linux/customization/zsh/tj-dracula.omp.json ~/.poshthemes/tj-dracula.omp.json
+ln ~/repos/Arch_Linux/customization/git/.gitconfig ~/.gitconfig
+ln ~/repos/Terminal/customization/tmux/.tmux.conf ~/.tmux.conf
+ln ~/repos/Terminal/customization/starship/starship.toml ~/.config/starship.toml
+ln ~/repos/Arch_Linux/customization/zsh/.bashrc ~/.bashrc
+ln ~/repos/Arch_Linux/customization/zsh/.zshrc ~/.zshrc
+ln ~/repos/Arch_Linux/customization/bash/bash_aliases ~/.bash_aliases
+ln ~/repos/Arch_Linux/customization/zsh/.zsh_aliases ~/.zsh_aliases
+
+title_green "Reiniciando a máquina..."
+
+# sudo reboot now

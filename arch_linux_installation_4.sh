@@ -8,7 +8,7 @@ title_red() {
 }
 
 title_green() {
-    clear ""
+    clear
     echo ""
     echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
     echo ""
@@ -16,7 +16,7 @@ title_green() {
 }
 
 title_blue() {
-    clear ""
+    clear
     echo ""
     echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
     echo ""
@@ -27,26 +27,26 @@ title_blue "Instalação - Parte 4"
 
 title_blue "Instalando pacotes YAY..."
 
-yay -S ly
-yay -S tdf
-yay -S upscayl-bin
-yay -S cava
-yay -S yazi
-yay -S google-chrome
-yay -S visual-studio-code-bin
-yay -S make
-yay -S gnome-calculator-gtk3
-yay -S ngrok
-yay -S hyprsunset
-yay -S wlogout
-yay -S deluge
-yay -S deluge-gtk
-yay -S wlogout
-yay -S github-desktop-bin
-yay -S telegram-desktop
-yay -S evolution
-yay -S discord
-yay -S i3-gaps
+yay -S --noconfirm ly
+yay -S --noconfirm tdf
+yay -S --noconfirm upscayl-bin
+yay -S --noconfirm cava
+yay -S --noconfirm yazi
+yay -S --noconfirm google-chrome
+yay -S --noconfirm visual-studio-code-bin
+yay -S --noconfirm make
+yay -S --noconfirm gnome-calculator-gtk3
+yay -S --noconfirm ngrok
+yay -S --noconfirm hyprsunset
+yay -S --noconfirm wlogout
+yay -S --noconfirm deluge
+yay -S --noconfirm deluge-gtk
+yay -S --noconfirm wlogout
+yay -S --noconfirm github-desktop-bin
+yay -S --noconfirm telegram-desktop
+yay -S --noconfirm evolution
+yay -S --noconfirm discord
+yay -S --noconfirm i3-gaps
 
 title_blue "Instalando pacotes snap..."
 
@@ -76,13 +76,19 @@ pavucontrol wpa_supplicant obsidian \
 gimp eog cargo scdoc libreoffice-still \
 rhythmbox iniparser pyright fzf \
 fastfetch font-manager nodejs npm \
-scrcpy picom rofi shotcut xrandr \
-i3 xorg xorg-xdm dmenu i3status i3lock ttf-dejavu
+scrcpy picom rofi shotcut xorg-xrandr \
+i3 xorg xorg-xdm dmenu i3status i3lock ttf-dejavu --noconfirm
 
 sudo systemctl enable ly.service
 sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/
 
+sudo rm -r ~/Documentos
+sudo rm -r ~/Imagens
+sudo rm -r ~/Modelos
+sudo rm -r ~/Músicas
+sudo rm -r ~/Público
+sudo rm -r ~/Vídeos
 
 title_green "Instalação concluída."
 
-sudo reboot now
+# sudo reboot now

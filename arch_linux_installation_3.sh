@@ -8,7 +8,7 @@ title_red() {
 }
 
 title_green() {
-    clear ""
+    clear
     echo ""
     echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
     echo ""
@@ -16,7 +16,7 @@ title_green() {
 }
 
 title_blue() {
-    clear ""
+    clear
     echo ""
     echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
     echo ""
@@ -27,17 +27,6 @@ title_green "Instalação - Parte 3"
 
 systemctl --user enable pipewire.service
 systemctl --user enable hypridle.service
-
-title_blue "Instalando o Yay..."
-
-cd ~/Downloads
-sudo pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ~
-sudo rm -r yay
-yay -Syu
 
 title_blue "Instalando o VirtualBox..."
 
@@ -105,4 +94,4 @@ powerprofilesctl set performance
 
 title_green "Reiniciando a máquina."
 
-sudo reboot now
+# sudo reboot now
