@@ -54,8 +54,8 @@ title_blue "Instalação - Parte 1"
 clearwait
 title_green "Atualizando o sistema..."
 sudo pacman -S curl wget iwd neofetch \
-  hyprpaper nano neovim net-tools vi git curl wget \
-  vim btop ttf-dejavu cmake ninja clang pkgconf \
+  hyprpaper nano neovim net-tools git curl wget \
+  ttf-dejavu cmake ninja clang pkgconf \
   noto-fonts noto-fonts-emoji ttf-liberation \
   gst-libav gst-plugins-good gst-plugins-bad \
   gst-plugins-ugly ffmpeg gstreamer hyprland \
@@ -63,11 +63,11 @@ sudo pacman -S curl wget iwd neofetch \
   zip unzip p7zip unrar fontconfig \
   tar gzip wofi firefox stow feh \
   flatpak python3 python-pip vlc \
-  obs-studio zsh tmux waybar btop htop \
+  obs-studio zsh tmux waybar btop \
   bat nm-connection-editor openssh ufw \
   gnome-tweaks gnome-disk-utility power-profiles-daemon \
   cliphist wl-clipboard dunst network-manager-applet \
-  man-db grim slurp nwg-look \
+  man-db grim slurp nwg-look nitrogen \
   hyprlock hypridle stow polybar \
   glib2 gnome-settings-daemon base-devel polkit-gnome \
   gsettings-desktop-schemas nautilus gedit \
