@@ -44,13 +44,10 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-. /usr/share/doc/fzf/examples/key-bindings.zsh
-
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --icons --color=always {} | head -200; else batcat -n --color=always --line-range :500 {}; fi"
 
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --icons --color=always {} | head -200'"
-
 
 _fzf_comprun() {
   local command=$1

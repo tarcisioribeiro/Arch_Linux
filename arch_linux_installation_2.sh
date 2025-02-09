@@ -29,8 +29,7 @@ brew install eza glow tldr fd git-delta zoxide
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 mv ~/.config/nvim ~/.config/nvim_old
 sudo rm -r ~/.config/nvim_old
-
- cp -r ~/repos/Arch_Linux/customization/nvim ~/.config && cd ~/repos/Arch_Linux/stow/ && stow -v -t ~/.config/nvim nvim
+mkdir ~/.config/nvim && cd ~/repos/Arch_Linux/stow/ && stow -v -t ~/.config/nvim nvim
 sudo pacman -S ruby --noconfirm
 
 cd ~
@@ -77,13 +76,10 @@ archives=(
     "~/.zsh_aliases"
 )
 
-# Itera sobre a lista de arquivos
 for archive in "${archive[@]}"; do
     archive_expansion=$(eval echo $archive)
-    
-    # Verifica se o arquivo existe
+
     if [ -f "$archive_expansion" ]; then
-        # Remove o arquivo
         rm -f "$archive_expansion"
         echo "Arquivo '$archive_expansion' removido com sucesso."
     else
@@ -95,10 +91,10 @@ ln ~/repos/Arch_Linux/customization/zsh/tj-dracula.omp.json ~/.poshthemes/tj-dra
 ln ~/repos/Arch_Linux/customization/git/.gitconfig ~/.gitconfig
 ln ~/repos/Terminal/customization/tmux/.tmux.conf ~/.tmux.conf
 ln ~/repos/Terminal/customization/starship/starship.toml ~/.config/starship.toml
-ln ~/repos/Arch_Linux/customization/zsh/.bashrc ~/.bashrc
-ln ~/repos/Arch_Linux/customization/zsh/.zshrc ~/.zshrc
-ln ~/repos/Arch_Linux/customization/bash/bash_aliases ~/.bash_aliases
-ln ~/repos/Arch_Linux/customization/zsh/.zsh_aliases ~/.zsh_aliases
+ln ~/repos/Arch_Linux/shell_files/.bashrc ~/.bashrc
+ln ~/repos/Arch_Linux/shell_files/.zshrc ~/.zshrc
+ln ~/repos/Arch_Linux/shell_files/bash_aliases ~/.bash_aliases
+ln ~/repos/Arch_Linux/shell_files/.zsh_aliases ~/.zsh_aliases
 
 title_green "Reiniciando a máquina..."
 
