@@ -19,8 +19,6 @@ i3lock \
   --inside-color=$selection$alpha \
   --ringver-color=$green$alpha \
   --ringwrong-color=$red$alpha \
-  --ringver-color=$green$alpha \
-  --ringwrong-color=$red$alpha \
   --ring-color=$blue$alpha \
   --line-uses-ring \
   --keyhl-color=$magenta$alpha \
@@ -32,6 +30,7 @@ i3lock \
   --layout-color=$blue \
   --date-color=$blue \
   --time-color=$blue \
+  --screen 2 \
   --screen 1 \
   --blur 1 \
   --clock \

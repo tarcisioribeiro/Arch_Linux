@@ -13,6 +13,9 @@ alias py='python3'
 # Net Tools
 alias ipconfig='ifconfig'
 
+# Text Editor
+alias vim="nvim"
+
 # Postgres SQL
 alias postgres="sudo -i -u postgres"
 

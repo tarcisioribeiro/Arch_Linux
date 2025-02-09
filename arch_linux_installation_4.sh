@@ -1,89 +1,81 @@
 #!/usr/bin/bash
 title_red() {
-    clear
-    echo ""
-    echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
-    echo ""
-    sleep 3
+  clear
+  echo ""
+  echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+  echo ""
+  sleep 3
 }
 
 title_green() {
-    clear
-    echo ""
-    echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
-    echo ""
-    sleep 3
+  clear
+  echo ""
+  echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+  echo ""
+  sleep 3
 }
 
 title_blue() {
-    clear
-    echo ""
-    echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
-    echo ""
-    sleep 3
+  clear
+  echo ""
+  echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
+  echo ""
+  sleep 3
+}
+
+red() {
+  echo -e "\033[31m$1\033[0m"
+}
+
+green() {
+  echo -e "\033[32m$1\033[0m"
+}
+
+blue() {
+  echo -e "\033[34m$1\033[0m"
+}
+
+clearwait() {
+  clear
+  sleep 5
 }
 
 title_blue "Instalação - Parte 4"
 
-title_blue "Instalando pacotes YAY..."
+clearwait
+blue "Instalando pacotes yay..."
+yay -S ly
+yay -S tdf
+yay -S upscayl-bin
+yay -S cava
+yay -S yazi
+yay -S google-chrome
+yay -S visual-studio-code-bin
+yay -S make
+yay -S gnome-calculator-gtk3
+yay -S ngrok
+yay -S wlogout
+yay -S deluge
+yay -S deluge-gtk
+yay -S wlogout
+yay -S github-desktop-bin
+yay -S telegram-desktop
+yay -S evolution
+yay -S discord
+yay -S i3-gaps
+yay -S i3lock-color
+yay -S asdf-vm
 
-yay -S --noconfirm ly
-yay -S --noconfirm tdf
-yay -S --noconfirm upscayl-bin
-yay -S --noconfirm cava
-yay -S --noconfirm yazi
-yay -S --noconfirm google-chrome
-yay -S --noconfirm visual-studio-code-bin
-yay -S --noconfirm make
-yay -S --noconfirm gnome-calculator-gtk3
-yay -S --noconfirm ngrok
-yay -S --noconfirm hyprsunset
-yay -S --noconfirm wlogout
-yay -S --noconfirm deluge
-yay -S --noconfirm deluge-gtk
-yay -S --noconfirm wlogout
-yay -S --noconfirm github-desktop-bin
-yay -S --noconfirm telegram-desktop
-yay -S --noconfirm evolution
-yay -S --noconfirm discord
-yay -S --noconfirm i3-gaps
-
-title_blue "Instalando pacotes snap..."
-
+clearwait
+blue "Instalando pacotes snap..."
 sudo snap install android-studio --classic
 sudo snap install dbeaver-ce
 sudo snap install youtube-music-desktop-app
-
-sudo pacman -S curl wget iwd neofetch \
-hyprpaper nano neovim net-tools \
-vim btop ttf-dejavu cmake ninja clang pkgconf \
-noto-fonts noto-fonts-emoji ttf-liberation \
-gst-libav gst-plugins-good gst-plugins-bad \
-gst-plugins-ugly ffmpeg gstreamer hyprland \
-kitty xdg-desktop-portal xdg-desktop-portal-hyprland \
-zip unzip p7zip unrar cronie \
-tar gzip wofi firefox stow feh \
-flatpak python3 python-pip vlc \
-obs-studio zsh tmux waybar \
-bat nm-connection-editor openssh ufw \
-gnome-tweaks gnome-disk-utility power-profiles-daemon \
-cliphist wl-clipboard dunst network-manager-applet \
-man-db grim slurp nwg-look \
-hyprlock hypridle \
-glib2 gnome-settings-daemon base-devel polkit-gnome \
-gsettings-desktop-schemas nautilus gedit \
-pavucontrol wpa_supplicant obsidian \
-gimp eog cargo scdoc libreoffice-still \
-rhythmbox iniparser pyright fzf \
-fastfetch font-manager nodejs npm \
-scrcpy picom rofi shotcut xorg-xrandr \
-i3 xorg xorg-xdm dmenu i3status i3lock ttf-dejavu --noconfirm
-
+sudo snap install notion-desktop
 sudo systemctl enable ly.service
-sudo cp ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/
+sudo ln ~/repos/Arch_Linux/shell_files/config.ini /etc/ly/config.ini
 
 remove_directories() {
-  # Definindo os diretórios a serem verificados
   directories=(
     "$HOME/Documentos"
     "$HOME/Imagens"
@@ -94,7 +86,6 @@ remove_directories() {
     "$HOME/Vídeos"
   )
 
-  # Loop para verificar e remover cada diretório
   for dir in "${directories[@]}"; do
     if [ -d "$dir" ]; then
       echo "Diretório $dir encontrado. Removendo..."
@@ -104,9 +95,10 @@ remove_directories() {
     fi
   done
 }
-
 remove_directories
 
+clearwait
+green "Configurando links para o usuário root"
 sudo ln ~/repos/Arch_Linux/shell_files/bashrc_sudo /root/.bashrc
 sudo ln ~/repos/Arch_Linux/shell_files/zshrc_sudo /root/.zshrc
 sudo ln ~/repos/Arch_Linux/shell_files/bash_aliases_sudo /root/.bash_aliases
@@ -116,9 +108,22 @@ sudo cp -r ~/.oh-my-zsh /root
 sudo mkdir /root/.config
 sudo mkdir -p /root/.config/nvim && cd ~/repos/Arch_Linux/stow && stow -v -t /root/.config/nvim nvim
 
+clearwait
+blue "Configurando o i3wm"
+cd ~/repos/Arch_Linux/stow/
+mkdir -p ~/.config/i3 && stow -v -t ~/.config/i3 i3
+mkdir -p ~/.config/polybar && stow -v -t ~/.config/polybar polybar
+mkdir -p ~/.config/rofi && stow -v -t ~/.config/rofi rofi
+mkdir -p ~/.config/nitrogen && stow -v -t ~/.config/nitrogen nitrogen
+
 cd ~
-mkdir Downloads
+mkdir ~/Downloads/
+
+(
+  crontab -l 2>/dev/null
+  echo "0 22 * * * shutdown"
+) | crontab -
 
 title_green "Instalação concluída."
 
-# sudo reboot now
+sudo reboot now

@@ -12,13 +12,9 @@
     ],
     "modules-right": [
         "pulseaudio",
-        "bluetooth",
         "network",
         "battery",
         "power-profiles-daemon",
-        "temperature",
-        "cpu",
-        "memory",
         "backlight",
         "keyboard-state",
         "clock",

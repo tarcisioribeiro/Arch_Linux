@@ -10,6 +10,9 @@ alias weather='curl wttr.in'
 # Languages
 alias py='python3'
 
+# Text Editor
+  alias vim="nvim"
+
 # Net Tools
 alias ipconfig='ifconfig'
 
