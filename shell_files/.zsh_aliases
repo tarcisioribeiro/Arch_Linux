@@ -13,6 +13,9 @@ alias py='python3'
 # Text Editor
 alias vim="nvim"
 
+# Docker apps
+alias mysql="docker exec -it mysql bash"
+
 # Net Tools
 alias ipconfig='ifconfig'
 
