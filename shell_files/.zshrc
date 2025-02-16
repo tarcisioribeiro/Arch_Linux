@@ -8,7 +8,7 @@ setopt hist_verify
 
 export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting copyfile copypath docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -18,7 +18,7 @@ fi
 
 eval "$(oh-my-posh init zsh --config ~/.poshthemes/tj-dracula.omp.json)"
 
-source /home/tarcisio/scripts/zsh-syntax-highlighting.sh
+source $HOME/scripts/zsh-syntax-highlighting.sh
 export PATH="$PATH:~/.local/bin"
 
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'

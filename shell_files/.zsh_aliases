@@ -19,6 +19,9 @@ alias mysql="docker exec -it mysql bash"
 # Net Tools
 alias ipconfig='ifconfig'
 
+# PostgreSQL
+alias postgres="sudo -i -u postgres"
+
 # ZSH
 alias edit-zsh="nvim ~/.zshrc"
 alias reload-zsh="source ~/.zshrc"

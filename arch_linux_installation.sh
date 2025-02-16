@@ -116,7 +116,8 @@ read -p "Pressione ENTER para confirmar e prosseguir."
 chsh -s /usr/bin/zsh
 clearwait
 title_blue "Instalação - Oh My Zsh"
-~/repos/Arch_Linux/packages/oh_my_zsh_install.sh
+cd ~/repos/Arch_Linux/
+sh packages/oh_my_zsh_install.sh
 
 clearwait
 title_blue "Instalação do Oh My Posh"
@@ -140,17 +141,19 @@ cd ~/Downloads
 sudo rm -r logo-ls_Linux_x86_64
 rm logo-ls_Linux_x86_64.tar.gz
 
+cd ~/repos/Arch_Linux
+
 clearwait
 title_blue "Instalando o HomeBrew..."
-~/repos/Arch_Linux/packages/brew_install.sh
+sh packages/brew_install.sh
 
 clearwait
 title_blue "Instalando o Oh My Bash..."
-bash ~/repos/Arch_Linux/packages/oh_my_bash_install.sh
+bash packages/oh_my_bash_install.sh
 
 clearwait
 title_blue "Instalando o Starship..."
-~/repos/Arch_Linux/packages/starship_install.sh
+sh packages/starship_install.sh
 
 clearwait
 blue "Tmux Plugins"
@@ -412,3 +415,4 @@ systemctl --user enable --now hypridle.service
 title_green "Instalação concluída."
 
 sudo reboot now
+

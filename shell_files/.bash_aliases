@@ -16,8 +16,8 @@ alias ipconfig='ifconfig'
 # Text Editor
 alias vim="nvim"
 
-# Docker apps
-alias mysql="docker exec -it mysql bash"
+# PostgreSQL
+alias postgres="sudo -i -u postgres"
 
 # ZSH
 alias edit-bash="nvim ~/.bashrc"
