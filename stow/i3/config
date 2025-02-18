@@ -2,15 +2,15 @@ set $mod Mod1
 
 font pango:JetBrainsMono NFM 11
 
-exec --no-startup-id ~/scripts/monitor_setup.sh
-exec nitrogen --restore
+exec_always --no-startup-id ~/scripts/desktop/monitor_setup.sh
+exec_always nitrogen --restore
 exec --no-startup-id dex --autostart --environment i3
 exec_always --no-startup-id killall polybar
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id picom
 
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/scripts/lock
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/scripts/desktop/lock
 
 exec --no-startup-id nm-applet
 
@@ -148,12 +148,6 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#   status_command i3status
-# }
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4

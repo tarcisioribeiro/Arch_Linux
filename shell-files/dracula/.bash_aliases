@@ -3,6 +3,7 @@ alias bat='bat --theme="Dracula"'
 alias cls='clear'
 alias eza='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
 alias glow='glow -p'
+alias lg="lazygit"
 alias ls='logo-ls -1'
 alias tree='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --tree'
 alias weather='curl wttr.in'
@@ -12,9 +13,6 @@ alias py='python3'
 
 # Net Tools
 alias ipconfig='ifconfig'
-
-# Text Editor
-alias vim="nvim"
 
 # PostgreSQL
 alias postgres="sudo -i -u postgres"

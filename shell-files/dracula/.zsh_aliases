@@ -4,14 +4,12 @@ alias cls='clear'
 alias eza='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions'
 alias glow='glow -p'
 alias ls='logo-ls -1'
+alias lg="lazygit"
 alias tree='eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --tree'
 alias weather='curl wttr.in'
 
 # Languages
 alias py='python3'
-
-# Text Editor
-alias vim="nvim"
 
 # Docker apps
 alias mysql="docker exec -it mysql bash"
@@ -20,7 +18,7 @@ alias mysql="docker exec -it mysql bash"
 alias ipconfig='ifconfig'
 
 # PostgreSQL
-alias postgres="sudo -i -u postgres"
+alias postgres="psql -U postgres -d postgres"
 
 # ZSH
 alias edit-zsh="nvim ~/.zshrc"

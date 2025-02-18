@@ -64,14 +64,14 @@ sudo pacman -S curl wget iwd neofetch \
   gst-plugins-ugly ffmpeg gstreamer hyprland \
   kitty xdg-desktop-portal xdg-desktop-portal-hyprland \
   zip unzip p7zip unrar fontconfig \
-  tar gzip wofi firefox stow feh \
-  flatpak python3 python-pip vlc \
-  obs-studio zsh tmux waybar btop \
+  tar gzip wofi firefox stow feh cronie \
+  flatpak python3 python-pip vlc mpv \
+  obs-studio zsh tmux waybar btop locate \
   bat nm-connection-editor openssh ufw \
   gnome-tweaks gnome-disk-utility power-profiles-daemon \
   cliphist wl-clipboard dunst network-manager-applet \
-  man-db grim slurp nwg-look nitrogen \
-  hyprlock hypridle stow polybar \
+  man-db grim slurp nwg-look nitrogen jdk-openjdk \
+  hyprlock hypridle stow polybar jq jre-openjdk \
   glib2 gnome-settings-daemon base-devel polkit-gnome \
   gsettings-desktop-schemas nautilus gedit \
   pavucontrol wpa_supplicant obsidian \
@@ -109,6 +109,7 @@ mkdir -p ~/.config/cava && stow -v -t ~/.config/cava cava
 mkdir -p ~/.config/gtk-3.0 && stow -v -t ~/.config/gtk-3.0 gtk
 mkdir -p ~/.config/dunst && stow -v -t ~/.config/dunst dunst
 mkdir -p ~/.config/wlogout && stow -v -t ~/.config/wlogout wlogout
+mkdir -p ~/.vim && stow -v -t ~/.vim vim
 cd ~/repos/Arch_Linux/shell-files/
 ln mimeapps.list ~/.config/mimeapps.list
 ln picom.conf ~/.config/picom.conf
@@ -140,10 +141,10 @@ title_blue "Instalação do logo-ls"
 cp ~/repos/Arch_Linux/packages/logo-ls.tar.gz ~/Downloads
 cd ~/Downloads
 tar -zxf logo-ls.tar.gz
-cd ~/Downloads/logo-ls
+cd ~/Downloads/logo-ls_Linux_x86_64/
 sudo cp logo-ls /usr/local/bin
 cd ~/Downloads
-sudo rm -r logo-ls
+sudo rm -r logo-ls_Linux_x86_64
 rm logo-ls.tar.gz
 
 cd ~/repos/Arch_Linux
@@ -169,11 +170,11 @@ tmux source ~/.tmux.conf
 clearwait
 blue "Fontes"
 cd ~/repos/Arch_Linux/fonts
-sudo JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
-sudo DS-DIGIB.TTF /usr/share/fonts
-sudo JetBrainsMonoNerdFontMono-Italic.ttf /usr/share/fonts
-sudo JetBrainsMonoNerdFontMono-Bold.ttf /usr/share/fonts
-sudo JetBrainsMonoNerdFontMono-BoldItalic.ttf /usr/share/fonts
+sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
+sudo cp DS-DIGIB.TTF /usr/share/fonts
+sudo cp JetBrainsMonoNerdFontMono-Italic.ttf /usr/share/fonts
+sudo cp JetBrainsMonoNerdFontMono-Bold.ttf /usr/share/fonts
+sudo cp JetBrainsMonoNerdFontMono-BoldItalic.ttf /usr/share/fonts
 
 sudo systemctl enable --now ufw.service
 sudo ufw enable
@@ -191,7 +192,9 @@ sleep 5
 title_blue "Instalação - Parte 2"
 clearwait
 blue "Pacotes Brew"
-brew install eza glow tldr fd git-delta zoxide yazi
+brew install eza glow tldr fd git-delta yazi
+brew install eza glow tldr fd git-delta yazi
+brew install jesseduffield/lazygit/lazygit
 
 clearwait
 blue "Lazyvim"
@@ -231,27 +234,14 @@ cd ~/Downloads
 sudo rm -r yay
 yay -Syu
 
-archives=(
-  "~/.poshthemes/tj-dracula.omp.json"
-  "~/.gitconfig"
-  "~/.tmux.conf"
-  "~/.config/starship.toml"
-  "~/.bashrc"
-  "~/.zshrc"
-  "~/.bash_aliases"
-  "~/.zsh_aliases"
-)
-
-for archive in "${archive[@]}"; do
-  archive_expansion=$(eval echo $archive)
-
-  if [ -f "$archive_expansion" ]; then
-    rm -f "$archive_expansion"
-    echo "Arquivo '$archive_expansion' removido com sucesso."
-  else
-    echo "Arquivo '$archive_expansion' não encontrado."
-  fi
-done
+rm ~/.poshthemes/tj-dracula.omp.json
+rm ~/.gitconfig
+rm ~/.tmux.conf
+rm ~/.zshrc
+rm ~/.zsh_aliases
+rm ~/.bashrc
+rm ~/.bash_aliases
+rm ~/.vimrc
 
 clearwait
 blue "Links simbólicos de arquivos"
@@ -262,6 +252,7 @@ ln ~/repos/Arch_Linux/shell-files/dracula/.bashrc ~/.bashrc
 ln ~/repos/Arch_Linux/shell-files/dracula/.zshrc ~/.zshrc
 ln ~/repos/Arch_Linux/shell-files/dracula/.bash_aliases ~/.bash_aliases
 ln ~/repos/Arch_Linux/shell-files/dracula/.zsh_aliases ~/.zsh_aliases
+ln ~/repos/Arch_Linux/shell-files/dracula/.vimrc ~/.vimrc
 rm -r ~/Pictures && mkdir -p ~/Pictures && cd ~/repos/Arch_Linux && stow -v -t ~/Pictures wallpapers
 
 sudo pacman -S --noconfirm docker docker-compose
@@ -369,27 +360,8 @@ sudo snap install youtube-music-desktop-app
 sudo snap install notion-desktop
 sudo systemctl enable ly.service
 
-remove_directories() {
-  directories=(
-    "$HOME/Documentos"
-    "$HOME/Imagens"
-    "$HOME/Modelos"
-    "$HOME/Músicas"
-    "$HOME/Downloads"
-    "$HOME/Público"
-    "$HOME/Vídeos"
-  )
-
-  for dir in "${directories[@]}"; do
-    if [ -d "$dir" ]; then
-      echo "Diretório $dir encontrado. Removendo..."
-      sudo rm -r "$dir"
-    else
-      echo "Diretório $dir não encontrado."
-    fi
-  done
-}
-remove_directories
+rm -r ~/Documentos/ && rm -r ~/Imagens/ && rm -r ~/Modelos/ && rm -r ~/Músicas/
+rm -r ~/Público/ && rm -r ~/Vídeos/
 
 clearwait
 green "Configurando links para o usuário root"
@@ -421,17 +393,37 @@ asdf plugin add php https://github.com/asdf-community/asdf-php.git
 
 systemctl --user enable --now hypridle.service
 
-# gnome-extensions install 3193
-# gnome-extensions install 19
-# gnome-extensions install 97
-gnome-extensions enable 3193
-gnome-extensions enable 19
-gnome-extensions enable 97
-
 gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
 gsettings set org.gnome.desktop.interface icon-theme "dracula-dark"
 gsettings set org.gnome.shell.extensions.user-theme name "Dracula"
 gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM 11"
+
+sudo systemctl enable --now cronie.service
+
+sudo pacman -S postgresql --noconfirm
+sudo -iu postgres initdb -D /var/lib/postgres/data
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+
+title_blue "PostgreSQL"
+clearwait
+blue "Altere sua senha, executando o seguinte comando:"
+blue "ALTER USER postgres PASSWORD 'sua_senha_aqui';"
+sleep 5
+echo ""
+read -p "Pressione ENTER para prosseguir."
+echo ""
+sudo -iu postgres psql
+
+sudo updatedb
+sudo ln -s /usr/lib/libmpv.so /usr/lib/libmpv.so.1
+
+clearwait
+blue "Instalando o DeepSeek..."
+curl -fsSL https://ollama.com/install.sh | sh
+sudo systemctl start ollama
+sudo systemctl enable ollama
+ollama run deepseek-r1
 
 title_green "Instalação concluída."
 
