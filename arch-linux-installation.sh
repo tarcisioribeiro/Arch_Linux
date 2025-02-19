@@ -63,11 +63,11 @@ sudo pacman -S curl wget iwd neofetch \
   gst-libav gst-plugins-good gst-plugins-bad \
   gst-plugins-ugly ffmpeg gstreamer hyprland \
   kitty xdg-desktop-portal xdg-desktop-portal-hyprland \
-  zip unzip p7zip unrar fontconfig \
-  tar gzip wofi firefox stow feh cronie \
-  flatpak python3 python-pip vlc mpv \
-  obs-studio zsh tmux waybar btop locate \
-  bat nm-connection-editor openssh ufw \
+  zip unzip p7zip unrar fontconfig hyprsunset \
+  tar gzip wofi firefox stow feh cronie jq unzip curl \
+  flatpak python3 python-pip vlc mpv cmatrix \
+  obs-studio zsh tmux waybar btop locate jre-openjdk \
+  bat nm-connection-editor openssh ufw jdk-openjdk \
   gnome-tweaks gnome-disk-utility power-profiles-daemon \
   cliphist wl-clipboard dunst network-manager-applet \
   man-db grim slurp nwg-look nitrogen jdk-openjdk \
@@ -76,7 +76,7 @@ sudo pacman -S curl wget iwd neofetch \
   gsettings-desktop-schemas nautilus gedit \
   pavucontrol wpa_supplicant obsidian \
   gimp eog cargo scdoc libreoffice-still \
-  rhythmbox iniparser pyright fzf \
+  rhythmbox iniparser pyright fzf postgresql \
   fastfetch font-manager nodejs npm \
   scrcpy picom rofi shotcut xorg-xrandr \
   gnome gnome-extra gnome-shell i3 \
@@ -333,8 +333,6 @@ title_blue "Instalação - Parte 4"
 clearwait
 blue "Instalando pacotes yay..."
 yay -S --noconfirm ly
-yay -S tdf
-yay -S upscayl-bin
 yay -S --noconfirm cava
 yay -S --noconfirm google-chrome
 yay -S --noconfirm visual-studio-code-bin
@@ -343,13 +341,16 @@ yay -S --noconfirm ngrok
 yay -S --noconfirm wlogout
 yay -S --noconfirm deluge
 yay -S --noconfirm deluge-gtk
-yay -S wlogout
 yay -S --noconfirm telegram-desktop
 yay -S --noconfirm evolution
 yay -S --noconfirm discord
 yay -S --noconfirm i3-gaps
 yay -S --noconfirm i3lock-color
 yay -S --noconfirm asdf-vm
+yay -S upscayl-bin
+yay -S tdf
+yay -S wlogout
+yay -S postman-bin
 
 clearwait
 blue "Instalando pacotes snap..."

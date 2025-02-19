@@ -12,7 +12,7 @@ blue() {
 }
 
 clearwait() {
-  clear && sleep 5
+  clear && sleep 1
 }
 
 SESSION_NAME="dev"
@@ -30,7 +30,7 @@ if [ $? != 0 ]; then
   tmux new-window -t $SESSION_NAME -n "monitor"
   tmux split-window -h -t $SESSION_NAME:2
   tmux send-keys -t $SESSION_NAME:2.0 "btop" C-m
-  tmux send-keys -t $SESSION_NAME:2.1 "tail -f /var/log/syslog" C-m
+  #  tmux send-keys -t $SESSION_NAME:2.1 "tail -f /var/log/syslog" C-m
 
   tmux select-layout -t $SESSION_NAME:2 even-horizontal
 fi
