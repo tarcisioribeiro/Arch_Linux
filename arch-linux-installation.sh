@@ -41,9 +41,9 @@ clearwait() {
   clear && sleep 5
 }
 
-sudo mkdir -p /mnt/sda1
-sudo mount /dev/sda1 /mnt/sda1/
-echo "/dev/sda1 /mnt/sda1 ext4 defaults,x-gvfs-show 0 2" | sudo tee -a /etc/fstab
+sudo mkdir -p /mnt/sda
+sudo mount /dev/sda /mnt/sda
+echo "/dev/sda /mnt/sda ext4 defaults,x-gvfs-show 0 2" | sudo tee -a /etc/fstab
 
 mkdir -p ~/Pictures
 mkdir -p ~/scripts
@@ -356,7 +356,6 @@ clearwait
 blue "Instalando pacotes snap..."
 sudo snap install android-studio --classic
 sudo snap install android-studio --classic
-sudo snap install dbeaver-ce
 sudo snap install youtube-music-desktop-app
 sudo snap install notion-desktop
 sudo systemctl enable ly.service
@@ -387,10 +386,6 @@ cd ~
 mkdir ~/Downloads/
 
 sudo rm -r ~/go
-
-# ASDF Packages
-asdf plugin add java https://github.com/halcyon/asdf-java.git
-asdf plugin add php https://github.com/asdf-community/asdf-php.git
 
 systemctl --user enable --now hypridle.service
 
