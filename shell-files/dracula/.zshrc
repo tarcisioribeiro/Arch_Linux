@@ -61,5 +61,3 @@ export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=nvim
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 export PATH="$PATH:$HOME/development/flutter/bin"
-export JAVA_HOME="/bin/java"
-. ~/.asdf/plugins/java/set-java-home.zsh

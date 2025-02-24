@@ -64,14 +64,14 @@ sudo pacman -S curl wget iwd neofetch \
   gst-plugins-ugly ffmpeg gstreamer hyprland \
   kitty xdg-desktop-portal xdg-desktop-portal-hyprland \
   zip unzip p7zip unrar fontconfig hyprsunset \
-  tar gzip wofi firefox stow feh cronie jq unzip curl \
+  tar gzip wofi firefox stow feh cronie unzip curl \
   flatpak python3 python-pip vlc mpv cmatrix \
-  obs-studio zsh tmux waybar btop locate jre-openjdk \
-  bat nm-connection-editor openssh ufw jdk-openjdk \
+  obs-studio zsh tmux waybar btop locate \
+  bat nm-connection-editor openssh ufw \
   gnome-tweaks gnome-disk-utility power-profiles-daemon \
   cliphist wl-clipboard dunst network-manager-applet \
-  man-db grim slurp nwg-look nitrogen jdk-openjdk \
-  hyprlock hypridle stow polybar jq jre-openjdk \
+  man-db grim slurp nwg-look nitrogen \
+  hyprlock hypridle stow polybar \
   glib2 gnome-settings-daemon base-devel polkit-gnome \
   gsettings-desktop-schemas nautilus gedit \
   pavucontrol wpa_supplicant obsidian \
@@ -79,8 +79,8 @@ sudo pacman -S curl wget iwd neofetch \
   rhythmbox iniparser pyright fzf postgresql \
   fastfetch font-manager nodejs npm \
   scrcpy picom rofi shotcut xorg-xrandr \
-  gnome gnome-extra gnome-shell i3 \
-  xorg xorg-xdm dmenu i3status ttf-dejavu --noconfirm
+  gnome gnome-shell gnome-shell-extensions \
+  xorg xorg-xdm dmenu ttf-dejavu --noconfirm
 
 clearwait
 green "Pacotes instalados."
@@ -96,23 +96,6 @@ sudo usermod -aG wheel,storage,disk $USER
 sudo gpasswd -a $USER input
 sudo systemctl enable systemd-networkd
 sudo systemctl start systemd-networkd
-
-clearwait
-blue "Links simbólicos de diretórios com o Stow"
-cd ~/repos/Arch_Linux/stow
-mkdir -p ~/.config/hypr && stow -v -t ~/.config/hypr hypr
-mkdir -p ~/.config/kitty && stow -v -t ~/.config/kitty kitty
-mkdir -p ~/.config/waybar && stow -v -t ~/.config/waybar waybar
-mkdir -p ~/.config/wofi && stow -v -t ~/.config/wofi wofi
-mkdir -p ~/.config/btop && stow -v -t ~/.config/btop btop
-mkdir -p ~/.config/cava && stow -v -t ~/.config/cava cava
-mkdir -p ~/.config/gtk-3.0 && stow -v -t ~/.config/gtk-3.0 gtk
-mkdir -p ~/.config/dunst && stow -v -t ~/.config/dunst dunst
-mkdir -p ~/.config/wlogout && stow -v -t ~/.config/wlogout wlogout
-mkdir -p ~/.vim && stow -v -t ~/.vim vim
-cd ~/repos/Arch_Linux/shell-files/
-ln mimeapps.list ~/.config/mimeapps.list
-ln picom.conf ~/.config/picom.conf
 
 clearwait
 title_green "Alterando o shell do sistema..."
@@ -182,8 +165,8 @@ sudo systemctl start sshd
 sudo systemctl enable sshd
 sudo ufw allow SSH
 
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
 
 sleep 5
 source ~/.bashrc
@@ -233,27 +216,6 @@ makepkg -si
 cd ~/Downloads
 sudo rm -r yay
 yay -Syu
-
-rm ~/.poshthemes/tj-dracula.omp.json
-rm ~/.gitconfig
-rm ~/.tmux.conf
-rm ~/.zshrc
-rm ~/.zsh_aliases
-rm ~/.bashrc
-rm ~/.bash_aliases
-rm ~/.vimrc
-
-clearwait
-blue "Links simbólicos de arquivos"
-ln ~/repos/Arch_Linux/stow/oh-my-posh/tj-dracula.omp.json ~/.poshthemes/tj-dracula.omp.json
-ln ~/repos/Arch_Linux/stow/git/.gitconfig ~/.gitconfig
-ln ~/repos/Arch_Linux/stow/starship/starship.toml ~/.config/starship.toml
-ln ~/repos/Arch_Linux/shell-files/dracula/.bashrc ~/.bashrc
-ln ~/repos/Arch_Linux/shell-files/dracula/.zshrc ~/.zshrc
-ln ~/repos/Arch_Linux/shell-files/dracula/.bash_aliases ~/.bash_aliases
-ln ~/repos/Arch_Linux/shell-files/dracula/.zsh_aliases ~/.zsh_aliases
-ln ~/repos/Arch_Linux/shell-files/dracula/.vimrc ~/.vimrc
-rm -r ~/Pictures && mkdir -p ~/Pictures && cd ~/repos/Arch_Linux && stow -v -t ~/Pictures wallpapers
 
 sudo pacman -S --noconfirm docker docker-compose
 sudo systemctl start docker
@@ -344,8 +306,6 @@ yay -S --noconfirm deluge-gtk
 yay -S --noconfirm telegram-desktop
 yay -S --noconfirm evolution
 yay -S --noconfirm discord
-yay -S --noconfirm i3-gaps
-yay -S --noconfirm i3lock-color
 yay -S --noconfirm asdf-vm
 yay -S upscayl-bin
 yay -S tdf
@@ -373,14 +333,6 @@ sudo cp -r ~/.oh-my-bash /root
 sudo cp -r ~/.oh-my-zsh /root
 sudo mkdir /root/.config
 sudo mkdir -p /root/.config/nvim && cd ~/repos/Arch_Linux/stow && stow -v -t /root/.config/nvim nvim
-
-clearwait
-blue "Configurando o i3wm"
-cd ~/repos/Arch_Linux/stow/
-mkdir -p ~/.config/i3 && stow -v -t ~/.config/i3 i3
-mkdir -p ~/.config/polybar && stow -v -t ~/.config/polybar polybar
-mkdir -p ~/.config/rofi && stow -v -t ~/.config/rofi rofi
-mkdir -p ~/.config/nitrogen && stow -v -t ~/.config/nitrogen nitrogen
 
 cd ~
 mkdir ~/Downloads/
@@ -420,6 +372,44 @@ curl -fsSL https://ollama.com/install.sh | sh
 sudo systemctl start ollama
 sudo systemctl enable ollama
 ollama run deepseek-r1
+
+clearwait
+blue "Links simbólicos de diretórios com o Stow"
+cd ~/repos/Arch_Linux/stow
+mkdir -p ~/.config/hypr && stow -v -t ~/.config/hypr hypr
+mkdir -p ~/.config/kitty && stow -v -t ~/.config/kitty kitty
+mkdir -p ~/.config/waybar && stow -v -t ~/.config/waybar waybar
+mkdir -p ~/.config/wofi && stow -v -t ~/.config/wofi wofi
+mkdir -p ~/.config/btop && stow -v -t ~/.config/btop btop
+mkdir -p ~/.config/cava && stow -v -t ~/.config/cava cava
+mkdir -p ~/.config/gtk-3.0 && stow -v -t ~/.config/gtk-3.0 gtk
+mkdir -p ~/.config/dunst && stow -v -t ~/.config/dunst dunst
+mkdir -p ~/.config/wlogout && stow -v -t ~/.config/wlogout wlogout
+mkdir -p ~/.vim && stow -v -t ~/.vim vim
+cd ~/repos/Arch_Linux/shell-files/
+ln mimeapps.list ~/.config/mimeapps.list
+ln picom.conf ~/.config/picom.conf
+
+rm ~/.poshthemes/tj-dracula.omp.json
+rm ~/.gitconfig
+rm ~/.tmux.conf
+rm ~/.zshrc
+rm ~/.zsh_aliases
+rm ~/.bashrc
+rm ~/.bash_aliases
+rm ~/.vimrc
+
+clearwait
+blue "Links simbólicos de arquivos"
+ln ~/repos/Arch_Linux/stow/oh-my-posh/tj-dracula.omp.json ~/.poshthemes/tj-dracula.omp.json
+ln ~/repos/Arch_Linux/stow/git/.gitconfig ~/.gitconfig
+ln ~/repos/Arch_Linux/stow/starship/starship.toml ~/.config/starship.toml
+ln ~/repos/Arch_Linux/shell-files/dracula/.bashrc ~/.bashrc
+ln ~/repos/Arch_Linux/shell-files/dracula/.zshrc ~/.zshrc
+ln ~/repos/Arch_Linux/shell-files/dracula/.bash_aliases ~/.bash_aliases
+ln ~/repos/Arch_Linux/shell-files/dracula/.zsh_aliases ~/.zsh_aliases
+ln ~/repos/Arch_Linux/shell-files/dracula/.vimrc ~/.vimrc
+rm -r ~/Pictures && mkdir -p ~/Pictures && cd ~/repos/Arch_Linux && stow -v -t ~/Pictures wallpapers
 
 title_green "Instalação concluída."
 
