@@ -371,7 +371,6 @@ blue "Instalando o DeepSeek..."
 curl -fsSL https://ollama.com/install.sh | sh
 sudo systemctl start ollama
 sudo systemctl enable ollama
-ollama run deepseek-r1
 
 clearwait
 blue "Links simbólicos de diretórios com o Stow"
