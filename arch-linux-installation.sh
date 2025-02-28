@@ -1,32 +1,13 @@
 #!/usr/bin/bash
+sudo pacman -Syu
 sudo pacman -S toilet zsh --noconfirm
 
-title_red() {
-  clear
-  echo ""
-  echo -e "\033[31m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
-  echo ""
-  sleep 5
-}
-
 title_green() {
-  clear
-  echo ""
-  echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
-  echo ""
-  sleep 5
+  clear && echo "" && echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m" && echo "" && sleep 2
 }
 
 title_blue() {
-  clear
-  echo ""
-  echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m"
-  echo ""
-  sleep 5
-}
-
-red() {
-  echo "" && echo -e "\033[31m$1\033[0m" && echo ""
+  clear && echo "" && echo -e "\033[34m$(toilet --font pagga --filter border --width 200 "$1")\033[0m" && echo "" && sleep 2
 }
 
 green() {
@@ -38,55 +19,42 @@ blue() {
 }
 
 clearwait() {
-  clear && sleep 5
+  clear && sleep 2
 }
 
-sudo mkdir -p /mnt/sda
-sudo mount /dev/sda /mnt/sda
-echo "/dev/sda /mnt/sda ext4 defaults,x-gvfs-show 0 2" | sudo tee -a /etc/fstab
-
-mkdir -p ~/Pictures
-mkdir -p ~/scripts
-mkdir -p ~/Downloads
-mkdir -p ~/Desktop
-mkdir -p ~/.icons
-mkdir -p ~/.themes
-sudo pacman -Syu
+mkdir -p $HOME/Pictures && mkdir -p $HOME/scripts && mkdir -p $HOME/Downloads && mkdir -p $HOME/Desktop && mkdir -p $HOME/.icons && mkdir -p $HOME/.themes
 
 title_blue "Instalação - Parte 1"
 clearwait
 title_green "Atualizando o sistema..."
-sudo pacman -S curl wget iwd neofetch \
-  hyprpaper nano neovim net-tools git curl wget \
-  ttf-dejavu cmake ninja clang pkgconf \
+sudo pacman -S curl wget iwd neofetch redshift \
+  nano neovim net-tools git curl wget i3 i3lock \
+  ttf-dejavu cmake ninja clang pkgconf xclip xsel \
   noto-fonts noto-fonts-emoji ttf-liberation \
   gst-libav gst-plugins-good gst-plugins-bad \
-  gst-plugins-ugly ffmpeg gstreamer hyprland \
-  kitty xdg-desktop-portal xdg-desktop-portal-hyprland \
-  zip unzip p7zip unrar fontconfig hyprsunset \
+  gst-plugins-ugly ffmpeg gstreamer lxqt-powermanagement \
+  kitty xdg-desktop-portal fzf stow zenity \
+  zip unzip p7zip unrar fontconfig playerctl \
   tar gzip wofi firefox stow feh cronie unzip curl \
   flatpak python3 python-pip vlc mpv cmatrix \
-  obs-studio zsh tmux waybar btop locate \
-  bat nm-connection-editor openssh ufw \
+  obs-studio zsh tmux btop locate acpi maim \
+  bat nm-connection-editor openssh ufw dmenu \
   gnome-tweaks gnome-disk-utility power-profiles-daemon \
   cliphist wl-clipboard dunst network-manager-applet \
-  man-db grim slurp nwg-look nitrogen \
-  hyprlock hypridle stow polybar \
+  man-db nitrogen mpc mpd gdk-pixbuf2 gtk3 adwaita-icon-theme librsvg \
+  stow polybar timidity++ powertop youtube-music \
   glib2 gnome-settings-daemon base-devel polkit-gnome \
-  gsettings-desktop-schemas nautilus gedit \
-  pavucontrol wpa_supplicant obsidian \
-  gimp eog cargo scdoc libreoffice-still \
-  rhythmbox iniparser pyright fzf postgresql \
-  fastfetch font-manager nodejs npm \
-  scrcpy picom rofi shotcut xorg-xrandr \
-  gnome gnome-shell gnome-shell-extensions \
-  xorg xorg-xdm dmenu ttf-dejavu --noconfirm
+  gsettings-desktop-schemas nautilus gedit powertop \
+  pavucontrol wpa_supplicant obsidian acpi scrot \
+  gimp eog cargo scdoc libreoffice-still inetutils \
+  rhythmbox iniparser pyright fzf postgresql mpd \
+  fastfetch font-manager nodejs npm xdotool xorg-xwininfo \
+  scrcpy picom rofi shotcut xorg-xrandr ranger xsettingsd \
+  lxqt-config xorg xorg-xdm dmenu ttf-dejavu --noconfirm
 
 clearwait
 green "Pacotes instalados."
 
-# Blueooth
-sudo pacman -Syu
 sudo pacman -S bluez blueman bluez-utils --noconfirm
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
@@ -94,18 +62,10 @@ sudo systemctl start bluetooth.service
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 sudo usermod -aG wheel,storage,disk $USER
 sudo gpasswd -a $USER input
-sudo systemctl enable systemd-networkd
-sudo systemctl start systemd-networkd
 
-clearwait
-title_green "Alterando o shell do sistema..."
-blue "Certifique-se de digitar corretamente a sua senha."
-read -p "Pressione ENTER para confirmar e prosseguir."
-
-chsh -s /usr/bin/zsh
 clearwait
 title_blue "Instalação - Oh My Zsh"
-cd ~/repos/Arch_Linux/
+cd $HOME/repos/Arch_Linux/
 sh packages/oh-my-zsh-install.sh
 
 clearwait
@@ -113,24 +73,24 @@ title_blue "Instalação do Oh My Posh"
 cd ~
 sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
 sudo chmod +x /usr/local/bin/oh-my-posh
-mkdir ~/.poshthemes
-wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O ~/.poshthemes/themes.zip
-unzip ~/.poshthemes/themes.zip -d ~/.poshthemes
-chmod u+rw ~/.poshthemes/*.omp.*
-rm ~/.poshthemes/themes.zip
+mkdir $HOME/.poshthemes
+wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O $HOME/.poshthemes/themes.zip
+unzip $HOME/.poshthemes/themes.zip -d $HOME/.poshthemes
+chmod u+rw $HOME/.poshthemes/*.omp.*
+rm $HOME/.poshthemes/themes.zip
 
 clearwait
 title_blue "Instalação do logo-ls"
-cp ~/repos/Arch_Linux/packages/logo-ls.tar.gz ~/Downloads
-cd ~/Downloads
+cp $HOME/repos/Arch_Linux/packages/logo-ls.tar.gz $HOME/Downloads
+cd $HOME/Downloads
 tar -zxf logo-ls.tar.gz
-cd ~/Downloads/logo-ls_Linux_x86_64/
+cd $HOME/Downloads/logo-ls_Linux_x86_64/
 sudo cp logo-ls /usr/local/bin
-cd ~/Downloads
+cd $HOME/Downloads
 sudo rm -r logo-ls_Linux_x86_64
 rm logo-ls.tar.gz
 
-cd ~/repos/Arch_Linux
+cd $HOME/repos/Arch_Linux
 
 clearwait
 title_blue "Instalando o HomeBrew..."
@@ -146,60 +106,56 @@ sh packages/starship-install.sh
 
 clearwait
 blue "Tmux Plugins"
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-ln ~/repos/Arch_Linux/stow/tmux/.tmux.conf ~/.tmux.conf
-tmux source ~/.tmux.conf
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+ln $HOME/repos/Arch_Linux/stow/tmux/.tmux.conf $HOME/.tmux.conf
+tmux new-session -d -s "dev"
+sleep 1
+tmux source $HOME/.tmux.conf
 
 clearwait
 blue "Fontes"
-cd ~/repos/Arch_Linux/fonts
+cd $HOME/repos/Arch_Linux/fonts
 sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf /usr/share/fonts
 sudo cp DS-DIGIB.TTF /usr/share/fonts
 sudo cp JetBrainsMonoNerdFontMono-Italic.ttf /usr/share/fonts
 sudo cp JetBrainsMonoNerdFontMono-Bold.ttf /usr/share/fonts
 sudo cp JetBrainsMonoNerdFontMono-BoldItalic.ttf /usr/share/fonts
 
-sudo systemctl enable --now ufw.service
-sudo ufw enable
-sudo systemctl start sshd
-sudo systemctl enable sshd
-sudo ufw allow SSH
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.bashrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.zshrc
 
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
-
-sleep 5
-source ~/.bashrc
-sleep 5
+sleep 2
+source $HOME/.bashrc
+sleep 2
 
 title_blue "Instalação - Parte 2"
 clearwait
 blue "Pacotes Brew"
-brew install eza glow tldr fd git-delta yazi
-brew install eza glow tldr fd git-delta yazi
+brew install eza glow tldr fd git-delta yazi zoxide
+brew install eza glow tldr fd git-delta yazi zoxide
 brew install jesseduffield/lazygit/lazygit
 
 clearwait
 blue "Lazyvim"
-mkdir -p ~/.config/nvim && cd ~/repos/Arch_Linux/stow/ && stow -v -t ~/.config/nvim nvim
-mkdir -p ~/scripts && cd ~/repos/Arch_Linux/ && stow -v -t ~/scripts scripts
+mkdir -p $HOME/.config/nvim && cd $HOME/repos/Arch_Linux/stow/ && stow -v -t $HOME/.config/nvim nvim
+mkdir -p $HOME/scripts && cd $HOME/repos/Arch_Linux/ && stow -v -t $HOME/scripts scripts
 sudo chsh -s /usr/bin/zsh
 sudo mkdir -p /root/scripts
-cd ~/repos/Arch_Linux
+cd $HOME/repos/Arch_Linux
 sudo stow -v -t /root/scripts scripts
 
 clearwait
 blue "Tema Dracula GTK"
-cd ~/Downloads/
+cd $HOME/Downloads/
 wget https://github.com/dracula/gtk/archive/master.zip
 unzip master.zip
 mv gtk-master Dracula
-mv Dracula ~/.themes
+mv Dracula $HOME/.themes
 rm master.zip
 
 clearwait
 blue "Tema Dracula Icons"
-cd ~/Downloads
+cd $HOME/Downloads
 git clone https://github.com/vinceliuice/Tela-icon-theme.git
 cd Tela-icon-theme
 ./install.sh -n dracula
@@ -208,12 +164,12 @@ sudo rm -r Tela-icon-theme
 
 clearwait
 title_blue "Instalando o Yay..."
-cd ~/Downloads
+cd $HOME/Downloads
 sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
-cd ~/Downloads
+cd $HOME/Downloads
 sudo rm -r yay
 yay -Syu
 
@@ -223,193 +179,128 @@ sudo systemctl enable docker
 sudo usermod -aG docker $USER
 
 systemctl --user enable pipewire.service
-systemctl --user enable hypridle.service
-
-clearwait
-blue "Instalando o VirtualBox..."
-sudo pacman -Syu --noconfirm virtualbox virtualbox-host-dkms linux-headers linux-lts-headers virtualbox-guest-iso
-sudo dkms install vboxhost/$(pacman -Qi virtualbox-host-dkms | grep Version | awk '{print $3}')
-sudo gpasswd -a $USER vboxusers
-sudo gpasswd -a $USERS vboxusers
-sudo modprobe vboxdrv
-sudo modprobe vboxnetflt
-sudo modprobe vboxnetadp
-yay -S --noconfirm virtualbox-ext-oracle
-sudo systemctl enable vboxweb.service
-sudo systemctl start vboxweb.service
 
 clearwait
 title_green "Virtualbox instalado."
 
 clearwait
-title_blue "Gerando chave SSH..."
-ssh-keygen
-
-clearwait
 title_blue "Instalando o snap..."
-cd ~/Downloads
+cd $HOME/Downloads
 git clone https://aur.archlinux.org/snapd.git
 cd snapd
 makepkg -si
 sudo systemctl enable --now snapd.socket
 sudo systemctl enable --now snapd.apparmor.service
 sudo ln -s /var/lib/snapd/snap /snap
-
-cd ~/Downloads
+cd $HOME/Downloads
 sudo rm -r snapd
-
 clearwait
 titile_green "Instalação do snap concluída."
 
 clearwait
 blue "Instalando o Speed Test."
-cp ~/repos/Arch_Linux/packages/speedtest.tgz ~/Downloads
-cd ~/Downloads
+cp $HOME/repos/Arch_Linux/packages/speedtest.tgz $HOME/Downloads
+cd $HOME/Downloads
 sudo tar -xvzf speedtest.tgz -C /usr/bin
 rm speedtest.tgz
 
 clearwait
 title_blue "Baixando o Flutter..."
-mkdir -p ~/development
-cd ~/Downloads
+mkdir -p $HOME/development
+cd $HOME/Downloads
 wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.27.1-stable.tar.xz
-tar -xf ~/Downloads/flutter_linux_3.27.1-stable.tar.xz -C ~/development/
+tar -xf $HOME/Downloads/flutter_linux_3.27.1-stable.tar.xz -C $HOME/development/
 rm flutter_linux_3.27.1-stable.tar.xz
-sudo systemctl enable systemd-networkd
-sudo systemctl start systemd-networkd
-
-mkdir -p ~/snap
-cd ~/Downloads
-cp ~/repos/Arch_Linux/packages/ytmd.zip .
-unzip ytmd.zip
-mv ytmd youtube-music-desktop app
-mv youtube-music-desktop-app ~/snap
-rm ytmd.zip
 sudo rm -r Dracula
 sudo rm -r snapd
 
 powerprofilesctl set performance
 
-title_blue "Instalação - Parte 4"
-
 clearwait
 blue "Instalando pacotes yay..."
-yay -S --noconfirm ly
-yay -S --noconfirm cava
-yay -S --noconfirm google-chrome
-yay -S --noconfirm visual-studio-code-bin
-yay -S --noconfirm make
-yay -S --noconfirm ngrok
-yay -S --noconfirm wlogout
-yay -S --noconfirm deluge
-yay -S --noconfirm deluge-gtk
-yay -S --noconfirm telegram-desktop
-yay -S --noconfirm evolution
-yay -S --noconfirm discord
-yay -S --noconfirm asdf-vm
-yay -S upscayl-bin
-yay -S tdf
-yay -S wlogout
-yay -S postman-bin
+yay -S --noconfirm ly cava google-chrome visual-studio-code-bin make ngrok deluge deluge-gtk evolution bibata-cursor-theme
+yay -S i3-gaps i3lock-color postman-bin upscayl-bin tdf youtube-music
 
 clearwait
 blue "Instalando pacotes snap..."
 sudo snap install android-studio --classic
 sudo snap install android-studio --classic
-sudo snap install youtube-music-desktop-app
-sudo snap install notion-desktop
 sudo systemctl enable ly.service
 
-rm -r ~/Documentos/ && rm -r ~/Imagens/ && rm -r ~/Modelos/ && rm -r ~/Músicas/
-rm -r ~/Público/ && rm -r ~/Vídeos/
+rm -r $HOME/Documentos/ && rm -r $HOME/Imagens/ && rm -r $HOME/Modelos/ && rm -r $HOME/Músicas/ && rm -r $HOME/Público/ && rm -r $HOME/Vídeos/
 
 clearwait
 green "Configurando links para o usuário root"
-sudo ln ~/repos/Arch_Linux/shell-files/root/.bashrc /root/.bashrc
-sudo ln ~/repos/Arch_Linux/shell-files/root/.zshrc /root/.zshrc
-sudo ln ~/repos/Arch_Linux/shell-files/root/.bash_aliases /root/.bash_aliases
-sudo ln ~/repos/Arch_Linux/shell-files/root/.zsh_aliases /root/.zsh_aliases
-sudo cp -r ~/.oh-my-bash /root
-sudo cp -r ~/.oh-my-zsh /root
+sudo ln $HOME/repos/Arch_Linux/shell-files/root/.bashrc /root/.bashrc
+sudo ln $HOME/repos/Arch_Linux/shell-files/root/.zshrc /root/.zshrc
+sudo ln $HOME/repos/Arch_Linux/shell-files/root/.bash_aliases /root/.bash_aliases
+sudo ln $HOME/repos/Arch_Linux/shell-files/root/.zsh_aliases /root/.zsh_aliases
+sudo ln $HOME/repos/Arch_Linux/shell-files/root/.vimrc /root/.vimrc
+sudo cp -r $HOME/.oh-my-bash /root
+sudo cp -r $HOME/.oh-my-zsh /root
 sudo mkdir /root/.config
-sudo mkdir -p /root/.config/nvim && cd ~/repos/Arch_Linux/stow && stow -v -t /root/.config/nvim nvim
+sudo mkdir -p /root/.config/nvim && cd $HOME/repos/Arch_Linux/stow && stow -v -t /root/.config/nvim nvim
 
 cd ~
-mkdir ~/Downloads/
+mkdir $HOME/Downloads/
 
-sudo rm -r ~/go
-
-systemctl --user enable --now hypridle.service
+sudo rm -r $HOME/go
 
 gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
 gsettings set org.gnome.desktop.interface icon-theme "dracula-dark"
 gsettings set org.gnome.shell.extensions.user-theme name "Dracula"
 gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM 11"
 
-sudo systemctl enable --now cronie.service
-
-sudo pacman -S postgresql --noconfirm
-sudo -iu postgres initdb -D /var/lib/postgres/data
-sudo systemctl enable postgresql
-sudo systemctl start postgresql
-
-title_blue "PostgreSQL"
-clearwait
-blue "Altere sua senha, executando o seguinte comando:"
-blue "ALTER USER postgres PASSWORD 'sua_senha_aqui';"
-sleep 5
-echo ""
-read -p "Pressione ENTER para prosseguir."
-echo ""
-sudo -iu postgres psql
-
 sudo updatedb
+
 sudo ln -s /usr/lib/libmpv.so /usr/lib/libmpv.so.1
 
-clearwait
-blue "Instalando o DeepSeek..."
-curl -fsSL https://ollama.com/install.sh | sh
-sudo systemctl start ollama
-sudo systemctl enable ollama
+cd $HOME/Downloads
+sudo rm -r rofi
+git clone --depth=1 https://github.com/adi1090x/rofi.git
+cd rofi
+./setup.sh
 
 clearwait
 blue "Links simbólicos de diretórios com o Stow"
-cd ~/repos/Arch_Linux/stow
-mkdir -p ~/.config/hypr && stow -v -t ~/.config/hypr hypr
-mkdir -p ~/.config/kitty && stow -v -t ~/.config/kitty kitty
-mkdir -p ~/.config/waybar && stow -v -t ~/.config/waybar waybar
-mkdir -p ~/.config/wofi && stow -v -t ~/.config/wofi wofi
-mkdir -p ~/.config/btop && stow -v -t ~/.config/btop btop
-mkdir -p ~/.config/cava && stow -v -t ~/.config/cava cava
-mkdir -p ~/.config/gtk-3.0 && stow -v -t ~/.config/gtk-3.0 gtk
-mkdir -p ~/.config/dunst && stow -v -t ~/.config/dunst dunst
-mkdir -p ~/.config/wlogout && stow -v -t ~/.config/wlogout wlogout
-mkdir -p ~/.vim && stow -v -t ~/.vim vim
-cd ~/repos/Arch_Linux/shell-files/
-ln mimeapps.list ~/.config/mimeapps.list
-ln picom.conf ~/.config/picom.conf
+cd $HOME/repos/Arch_Linux/stow
+mkdir -p $HOME/.config/btop && stow -v -t $HOME/.config/btop btop
+mkdir -p $HOME/.config/cava && stow -v -t $HOME/.config/cava cava
+mkdir -p $HOME/.config/dunst && stow -v -t $HOME/.config/dunst dunst
+mkdir -p $HOME/.config/gtk-3.0 && stow -v -t $HOME/.config/gtk-3.0 gtk-3.0
+mkdir -p $HOME/.config/kitty && stow -v -t $HOME/.config/kitty kitty
+mkdir -p $HOME/.config/polybar && stow -v -t $HOME/.config/polybar polybar
+mkdir -p $HOME/.config/rofi && rm -r $HOME/.config/rofi && mkdir -p $HOME/.config/rofi && stow -v -t $HOME/.config/rofi rofi
 
-rm ~/.poshthemes/tj-dracula.omp.json
-rm ~/.gitconfig
-rm ~/.tmux.conf
-rm ~/.zshrc
-rm ~/.zsh_aliases
-rm ~/.bashrc
-rm ~/.bash_aliases
-rm ~/.vimrc
+cd $HOME/repos/Arch_Linux/shell-files/
+ln picom.conf $HOME/.config/picom.conf
+
+rm $HOME/.poshthemes/tj-dracula.omp.json
+rm $HOME/.gitconfig
+rm $HOME/.tmux.conf
+rm $HOME/.zshrc
+rm $HOME/.zsh_aliases
+rm $HOME/.bashrc
+rm $HOME/.bash_aliases
+rm $HOME/.vimrc
 
 clearwait
 blue "Links simbólicos de arquivos"
-ln ~/repos/Arch_Linux/stow/oh-my-posh/tj-dracula.omp.json ~/.poshthemes/tj-dracula.omp.json
-ln ~/repos/Arch_Linux/stow/git/.gitconfig ~/.gitconfig
-ln ~/repos/Arch_Linux/stow/starship/starship.toml ~/.config/starship.toml
-ln ~/repos/Arch_Linux/shell-files/dracula/.bashrc ~/.bashrc
-ln ~/repos/Arch_Linux/shell-files/dracula/.zshrc ~/.zshrc
-ln ~/repos/Arch_Linux/shell-files/dracula/.bash_aliases ~/.bash_aliases
-ln ~/repos/Arch_Linux/shell-files/dracula/.zsh_aliases ~/.zsh_aliases
-ln ~/repos/Arch_Linux/shell-files/dracula/.vimrc ~/.vimrc
-rm -r ~/Pictures && mkdir -p ~/Pictures && cd ~/repos/Arch_Linux && stow -v -t ~/Pictures wallpapers
+ln $HOME/repos/Arch_Linux/stow/oh-my-posh/tj-dracula.omp.json $HOME/.poshthemes/tj-dracula.omp.json
+ln $HOME/repos/Arch_Linux/stow/git/.gitconfig $HOME/.gitconfig
+ln $HOME/repos/Arch_Linux/stow/starship/starship.toml $HOME/.config/starship.toml
+ln $HOME/repos/Arch_Linux/shell-files/dracula/.bashrc $HOME/.bashrc
+ln $HOME/repos/Arch_Linux/shell-files/dracula/.zshrc $HOME/.zshrc
+ln $HOME/repos/Arch_Linux/shell-files/dracula/.bash_aliases $HOME/.bash_aliases
+ln $HOME/repos/Arch_Linux/shell-files/dracula/.zsh_aliases $HOME/.zsh_aliases
+ln $HOME/repos/Arch_Linux/shell-files/dracula/.vimrc $HOME/.vimrc
+rm -r $HOME/Pictures && mkdir -p $HOME/Pictures && cd $HOME/repos/Arch_Linux && stow -v -t $HOME/Pictures wallpapers
+
+mkdir -p $HOME/.vim/pack/themes/start
+cd $HOME/.vim/pack/themes/start
+git clone https://github.com/dracula/vim.git dracula
+
+sudo systemctl enable systemd-networkd
+sudo systemctl start systemd-networkd
 
 title_green "Instalação concluída."
-
-sudo reboot now
