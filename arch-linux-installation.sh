@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 sudo pacman -Syu
 sudo pacman -S toilet zsh --noconfirm
+sudo pacman -S --needed git base-devel
 
 title_green() {
   clear && echo "" && echo -e "\033[32m$(toilet --font pagga --filter border --width 200 "$1")\033[0m" && echo "" && sleep 2
@@ -24,40 +25,35 @@ clearwait() {
 
 mkdir -p $HOME/Pictures && mkdir -p $HOME/scripts && mkdir -p $HOME/Downloads && mkdir -p $HOME/Desktop && mkdir -p $HOME/.icons && mkdir -p $HOME/.themes
 
-title_blue "Instalação - Parte 1"
 clearwait
 title_green "Atualizando o sistema..."
 sudo pacman -S curl wget iwd neofetch redshift \
-  nano neovim net-tools git curl wget i3 i3lock \
-  ttf-dejavu cmake ninja clang pkgconf xclip xsel \
+  nano neovim net-tools git \
+  cmake ninja clang pkgconf xclip xsel \
   noto-fonts noto-fonts-emoji ttf-liberation \
   gst-libav gst-plugins-good gst-plugins-bad \
-  gst-plugins-ugly ffmpeg gstreamer lxqt-powermanagement \
-  kitty xdg-desktop-portal fzf stow zenity \
+  gst-plugins-ugly ffmpeg gstreamer \
+  kitty xdg-desktop-portal fzf docker docker-compose \
   zip unzip p7zip unrar fontconfig playerctl \
-  tar gzip wofi firefox stow feh cronie unzip curl \
+  tar gzip firefox feh man-db nitrogen \
   flatpak python3 python-pip vlc mpv cmatrix \
   obs-studio zsh tmux btop locate acpi maim \
   bat nm-connection-editor openssh ufw dmenu \
-  gnome-tweaks gnome-disk-utility power-profiles-daemon \
-  cliphist wl-clipboard dunst network-manager-applet \
-  man-db nitrogen mpc mpd gdk-pixbuf2 gtk3 adwaita-icon-theme librsvg \
-  stow polybar timidity++ powertop youtube-music \
-  glib2 gnome-settings-daemon base-devel polkit-gnome \
-  gsettings-desktop-schemas nautilus gedit powertop \
-  pavucontrol wpa_supplicant obsidian acpi scrot \
-  gimp eog cargo scdoc libreoffice-still inetutils \
-  rhythmbox iniparser pyright fzf postgresql mpd \
-  fastfetch font-manager nodejs npm xdotool xorg-xwininfo \
-  scrcpy picom rofi shotcut xorg-xrandr ranger xsettingsd \
-  lxqt-config xorg xorg-xdm dmenu ttf-dejavu --noconfirm
+  power-profiles-daemon cliphist dunst network-manager-applet \
+  polybar timidity++ powertop xfce4-settings \
+  glib2 base-devel bluez blueman bluez-utils \
+  pavucontrol wpa_supplicant obsidian scrot \
+  gimp eog cargo scdoc inetutils iniparser pyright \
+  font-manager xdotool xorg-xwininfo xfwm4 \
+  thunar xfce4-power-manager ristretto mousepad \
+  picom orage xfce4-taskmanager xfce4-pulseaudio-plugin \
+  scrcpy rofi shotcut xorg-xrandr ranger \
+  lxqt-config xorg xorg-xdm ttf-dejavu --noconfirm
+
+flatpak install discord
 
 clearwait
 green "Pacotes instalados."
-
-sudo pacman -S bluez blueman bluez-utils --noconfirm
-sudo systemctl enable bluetooth.service
-sudo systemctl start bluetooth.service
 
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 sudo usermod -aG wheel,storage,disk $USER
@@ -95,11 +91,9 @@ cd $HOME/repos/Arch_Linux
 clearwait
 title_blue "Instalando o HomeBrew..."
 bash packages/brew-install.sh
-
 clearwait
 title_blue "Instalando o Oh My Bash..."
 bash packages/oh-my-bash-install.sh
-
 clearwait
 title_blue "Instalando o Starship..."
 sh packages/starship-install.sh
@@ -123,17 +117,6 @@ sudo cp JetBrainsMonoNerdFontMono-BoldItalic.ttf /usr/share/fonts
 
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.bashrc
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.zshrc
-
-sleep 2
-source $HOME/.bashrc
-sleep 2
-
-title_blue "Instalação - Parte 2"
-clearwait
-blue "Pacotes Brew"
-brew install eza glow tldr fd git-delta yazi zoxide
-brew install eza glow tldr fd git-delta yazi zoxide
-brew install jesseduffield/lazygit/lazygit
 
 clearwait
 blue "Lazyvim"
@@ -165,7 +148,6 @@ sudo rm -r Tela-icon-theme
 clearwait
 title_blue "Instalando o Yay..."
 cd $HOME/Downloads
-sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
@@ -173,15 +155,7 @@ cd $HOME/Downloads
 sudo rm -r yay
 yay -Syu
 
-sudo pacman -S --noconfirm docker docker-compose
-sudo systemctl start docker
-sudo systemctl enable docker
 sudo usermod -aG docker $USER
-
-systemctl --user enable pipewire.service
-
-clearwait
-title_green "Virtualbox instalado."
 
 clearwait
 title_blue "Instalando o snap..."
@@ -206,26 +180,18 @@ rm speedtest.tgz
 
 clearwait
 title_blue "Baixando o Flutter..."
-mkdir -p $HOME/development
-cd $HOME/Downloads
+mkdir -p $HOME/development && cd $HOME/Downloads
 wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.27.1-stable.tar.xz
 tar -xf $HOME/Downloads/flutter_linux_3.27.1-stable.tar.xz -C $HOME/development/
 rm flutter_linux_3.27.1-stable.tar.xz
-sudo rm -r Dracula
-sudo rm -r snapd
+sudo rm -r Dracula && sudo rm -r snapd
 
 powerprofilesctl set performance
 
 clearwait
 blue "Instalando pacotes yay..."
-yay -S --noconfirm ly cava google-chrome visual-studio-code-bin make ngrok deluge deluge-gtk evolution bibata-cursor-theme
-yay -S i3-gaps i3lock-color postman-bin upscayl-bin tdf youtube-music
-
-clearwait
-blue "Instalando pacotes snap..."
-sudo snap install android-studio --classic
-sudo snap install android-studio --classic
-sudo systemctl enable ly.service
+yay -S --noconfirm ly cava google-chrome visual-studio-code-bin make deluge deluge-gtk android-studio postman-bin
+yay -S upscayl-bin tdf youtube-music i3-gaps i3lock-color
 
 rm -r $HOME/Documentos/ && rm -r $HOME/Imagens/ && rm -r $HOME/Modelos/ && rm -r $HOME/Músicas/ && rm -r $HOME/Público/ && rm -r $HOME/Vídeos/
 
@@ -245,11 +211,6 @@ cd ~
 mkdir $HOME/Downloads/
 
 sudo rm -r $HOME/go
-
-gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
-gsettings set org.gnome.desktop.interface icon-theme "dracula-dark"
-gsettings set org.gnome.shell.extensions.user-theme name "Dracula"
-gsettings set org.gnome.desktop.interface font-name "JetBrainsMono NFM 11"
 
 sudo updatedb
 
@@ -276,14 +237,7 @@ rm -r $HOME/.config/rofi && mkdir -p $HOME/.config/rofi && stow -v -t $HOME/.con
 cd $HOME/repos/Arch_Linux/shell-files/
 ln picom.conf $HOME/.config/picom.conf
 
-rm $HOME/.poshthemes/tj-dracula.omp.json
-rm $HOME/.gitconfig
-rm $HOME/.tmux.conf
-rm $HOME/.zshrc
-rm $HOME/.zsh_aliases
-rm $HOME/.bashrc
-rm $HOME/.bash_aliases
-rm $HOME/.vimrc
+rm $HOME/.poshthemes/tj-dracula.omp.json && rm $HOME/.gitconfig && rm $HOME/.tmux.conf && rm $HOME/.zshrc && rm $HOME/.zsh_aliases && rm $HOME/.bashrc && rm $HOME/.bash_aliases && rm $HOME/.vimrc
 
 clearwait
 blue "Links simbólicos de arquivos"
@@ -301,7 +255,30 @@ mkdir -p $HOME/.vim/pack/themes/start
 cd $HOME/.vim/pack/themes/start
 git clone https://github.com/dracula/vim.git dracula
 
+sleep 2
+source $HOME/.bashrc
+sleep 2
+
+brew install eza glow tldr fd git-delta yazi zoxide
+brew install jesseduffield/lazygit/lazygit
+
+systemctl --user enable pipewire.service
 sudo systemctl enable systemd-networkd
 sudo systemctl start systemd-networkd
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl enable ly.service
+
+xfconf-query -c xsettings -p /Net/ThemeName -s "Dracula"
+xfconf-query -c xsettings -p /Net/IconThemeName -s "dracula-dark"
+xfconf-query -c xfwm4 -p /general/theme -s "Dracula" --create -t string
+xfconf-query -c xfwm4 -p /general/theme -s "Dracula"
+xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "Bibata-Modern-Ice"
+xfconf-query -c xsettings -p /Gtk/FontName -s "JetBrainsMono NFM 11"
+
 
 title_green "Instalação concluída."
+
+sudo reboot now
