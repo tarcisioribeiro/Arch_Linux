@@ -270,6 +270,7 @@ mkdir -p $HOME/.config/dunst && stow -v -t $HOME/.config/dunst dunst
 mkdir -p $HOME/.config/gtk-3.0 && stow -v -t $HOME/.config/gtk-3.0 gtk-3.0
 mkdir -p $HOME/.config/kitty && stow -v -t $HOME/.config/kitty kitty
 mkdir -p $HOME/.config/polybar && stow -v -t $HOME/.config/polybar polybar
+mkdir -p $HOME/.config/nitrogen && stow -v -t $HOME/.config/nitrogen nitrogen
 rm -r $HOME/.config/rofi && mkdir -p $HOME/.config/rofi && stow -v -t $HOME/.config/rofi rofi
 
 cd $HOME/repos/Arch_Linux/shell-files/
