@@ -19,8 +19,6 @@ i3lock \
   --inside-color=$selection$alpha \
   --ringver-color=$green$alpha \
   --ringwrong-color=$red$alpha \
-  --ringver-color=$green$alpha \
-  --ringwrong-color=$red$alpha \
   --ring-color=$blue$alpha \
   --line-uses-ring \
   --keyhl-color=$magenta$alpha \
@@ -32,15 +30,16 @@ i3lock \
   --layout-color=$blue \
   --date-color=$blue \
   --time-color=$blue \
+  --screen 2 \
   --screen 1 \
   --blur 1 \
   --clock \
   --indicator \
   --time-str="%H:%M:%S" \
   --date-str="%A %e %B %Y" \
-  --verif-text="Verificando..." \
-  --wrong-text="Senha incorreta" \
-  --noinput="Sem Input" \
+  --verif-text="Checando..." \
+  --wrong-text="Senha errada" \
+  --noinput="Sem entrada" \
   --lock-text="Bloqueando..." \
   --lockfailed="Falha ao bloquear" \
   --radius=120 \
@@ -48,8 +47,8 @@ i3lock \
   --pass-media-keys \
   --pass-screen-keys \
   --pass-volume-keys \
- --time-font="JetBrainsMono NFM" \
- --date-font="JetBrainsMono NFM" \
- --layout-font="JetBrainsMono NFM" \
- --verif-font="JetBrainsMono NFM" \
- --wrong-font="JetBrainsMono NFM" \
+  --time-font="JetBrainsMono NFM" \
+  --date-font="JetBrainsMono NFM" \
+  --layout-font="JetBrainsMono NFM" \
+  --verif-font="JetBrainsMono NFM" \
+  --wrong-font="JetBrainsMono NFM" \

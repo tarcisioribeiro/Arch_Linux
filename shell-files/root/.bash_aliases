@@ -26,6 +26,3 @@ alias reload-bash="source ~/.bashrc"
 # Virtualbox
 alias show_nvim_keybinds="glow ~/.config/nvim/key_commands.md"
 alias show_hypr_keybinds="glow ~/repos/Arch_Linux/README.md"
-
-# IA
-alias ollama="ollama run deepseek-r1"

@@ -130,3 +130,4 @@ export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 export PATH="$PATH:$HOME/development/flutter/bin"
 
 eval "$(starship init bash)"
+. ~/.asdf/plugins/java/set-java-home.bash

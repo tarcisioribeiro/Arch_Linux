@@ -2,15 +2,17 @@ set $mod Mod1
 
 font pango:JetBrainsMono NFM 11
 
-exec --no-startup-id ~/scripts/desktop/monitor_setup.sh
-exec_always ~/scripts/desktop/start_picom.sh
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id ~/scripts/monitor_setup.sh
+exec nitrogen --restore
 exec --no-startup-id dex --autostart --environment i3
 exec_always --no-startup-id killall polybar
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 exec --no-startup-id xrdb ~/.Xresources
-exec --no-startup-id nm-applet
+exec --no-startup-id picom
+
 exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/scripts/lock
+
+exec --no-startup-id nm-applet
 
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -21,20 +23,18 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+a exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'JetBrainsMono NFM' -p 'dmenu%'"
+bindsym $mod+a exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu%'"
 
 # start a terminal
 bindsym $mod+Return exec kitty
 bindsym $mod+e exec nautilus
-bindsym $mod+o exec obsidian
-bindsym $mod+d exec google-chrome-stable
-bindsym $mod+t exec code
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
+bindsym $mod+d exec "google-chrome-stable"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -132,24 +132,8 @@ bindsym $mod+Shift+r restart
 # Block i3 Session
 bindsym $mod+l exec "~/scripts/lock"
 
-# Power Menu
-bindsym $mod+Shift+l exec "~/.config/rofi/powermenu/type-4/powermenu.sh"
-# Screenshot
-bindsym $mod+Shift+p exec "~/.config/rofi/applets/bin/screenshot.sh"
-# Brightness
-bindsym $mod+Shift+j exec "~/.config/rofi/applets/bin/brightness.sh"
-# Battery
-bindsym $mod+b exec "~/.config/rofi/applets/bin/battery.sh"
-# Music Player
-bindsym $mod+m exec "~/.config/rofi/applets/bin/mpd.sh"
-# Browser Links
-bindsym $mod+g exec "~/.config/rofi/applets/bin/quicklinks.sh"
-# Root Apps
-bindsym $mod+Shift+e exec "~/.config/rofi/applets/bin/appasroot.sh"
-# Apps
-bindsym $mod+Shift+n exec "~/.config/rofi/applets/bin/apps.sh"
-# Volume
-bindsym $mod+Shift+a exec "~/.config/rofi/applets/bin/volume.sh"
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+l exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -164,6 +148,12 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+# bar {
+#   status_command i3status
+# }
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
@@ -197,13 +187,3 @@ gaps outer 5
 ################# i3-radius #######################
 smart_borders on
 smart_borders no_gaps
-
-################ Windows Rules ####################
-for_window [class="Org.gnome.Nautilus"] floating enable, move position center
-for_window [class="Pavucontrol"] floating enable, move position center
-for_window [class="Gnome-calculator"] floating enable, move position center
-for_window [class="Blueman-manager"] floating enable, move position center
-for_window [class="Gedit"] floating enable, move position center
-for_window [class="Gnome-terminal"] floating enable, move position center
-for_window [class="obs"] floating enable, move position center
-for_window [class="obsidian"] floating disable
