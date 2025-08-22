@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/bash
 set -e
 
 msg_color() {
@@ -7,7 +6,6 @@ msg_color() {
   echo -e "\n\033[$1m$2\033[0m\n"
   sleep 2
 }
-
 msg_color "34" "Instalando o Oh My ZSH..."
 REPO_DIR="$HOME/Development/Linux_Mint"
 TERMINALS_DIR="$REPO_DIR/packages/terminals"
@@ -45,14 +43,17 @@ tar -zxf logo-ls_Linux_x86_64.tar.gz
 sudo cp logo-ls_Linux_x86_64/logo-ls /usr/local/bin
 rm -r logo-ls_Linux_x86_64 logo-ls_Linux_x86_64.tar.gz
 
+msg_color "34" "Ativando o acesso aos apps Flatpak..."
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 msg_color "34" "Instalando o HomeBrew..."
 cd "$REPO_DIR/packages/package-managers" && ./brew_install.sh || exit
 
-msg_color "34" "Instalando o Oh My Bash..."
-cd "$TERMINALS_DIR" && ./oh_my_bash_install.sh || exit
+# msg_color "34" "Instalando o Oh My Bash..."
+# cd "$TERMINALS_DIR" && ./oh_my_bash_install.sh || exit
 
-msg_color "34" "Instalando o Starship..."
-cd "$TERMINALS_DIR" && ./starship_install.sh || exit
+# msg_color "34" "Instalando o Starship..."
+# cd "$TERMINALS_DIR" && ./starship_install.sh || exit
 
 msg_color "34" "Configurando Tmux..."
 git clone --quiet https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
@@ -70,17 +71,9 @@ echo ". $HOME/.asdf/asdf.sh" >>~/.zshrc
 cd "$HOME/Development/Linux_Mint/stow" || exit
 
 declare -a configs=(
-  "autostart"
-  "btop"
   "cava"
-  "dunst"
-  "i3"
   "lazygit"
-  "nitrogen"
-  "polybar"
-  "rofi"
   "vim"
-  "ranger"
 )
 
 for config in "${configs[@]}"; do
@@ -91,11 +84,6 @@ for config in "${configs[@]}"; do
   mkdir -p "$target_dir"
   stow -v -t "$target_dir" "$config"
 done
-
-if [ -e "$HOME/.config/picom.conf" ]; then
-  rm "$HOME/.config/picom.conf"
-fi
-ln -s "$HOME/Development/Linux_Mint/stow/picom.conf" "$HOME/.config/picom.conf"
 
 if [ -e "$HOME/Xresources" ]; then
   rm "$HOME/Xresources"
@@ -140,9 +128,6 @@ mv dracula.xml ~/.local/share/gedit/styles/
 files=(
   "$HOME/.zshrc:$HOME/Development/Linux_Mint/customization/zsh/.zshrc"
   "$HOME/.zsh_aliases:$HOME/Development/Linux_Mint/customization/zsh/.zsh_aliases"
-  "$HOME/.bashrc:$HOME/Development/Linux_Mint/customization/bash/.bashrc"
-  "$HOME/.bash_aliases:$HOME/Development/Linux_Mint/customization/bash/.bash_aliases"
-  "$HOME/.config/starship.toml:$HOME/Development/Linux_Mint/customization/starship/starship.toml"
   "$HOME/.gitconfig:$HOME/Development/Linux_Mint/customization/git/.gitconfig"
 )
 
