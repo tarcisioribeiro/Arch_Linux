@@ -1,9 +1,0 @@
-style "cs-scrollbar-style" {
-
-}
-
-gtk-icon-theme-name="dracula-icons"
-gtk-theme-name="Dracula"
-gtk-font-name="JetBrainsMono Nerd Font 12"
-
-class "GtkScrollbar" style "cs-scrollbar-style"

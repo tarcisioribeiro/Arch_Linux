@@ -6,10 +6,25 @@ msg_color() {
   echo -e "\n\033[$1m$2\033[0m\n"
   sleep 2
 }
+
+sudo pacman -S wget git tmux curl nano eog \
+  fastfetch stow flatpak nwg-look zsh gnome-disk-utility \
+  cpupower cava cronie nodejs npm kitty --noconfirm
+
 msg_color "34" "Instalando o Oh My ZSH..."
-REPO_DIR="$HOME/Development/Linux_Mint"
-TERMINALS_DIR="$REPO_DIR/packages/terminals"
+REPO_DIR="$HOME/Development/Arch_Linux/"
+TERMINALS_DIR="$REPO_DIR/packages/"
 CUSTOMIZATION_DIR="$REPO_DIR/customization"
+
+rm -rf "$HOME/.oh-my-zsh/"
+rm -rf "$HOME/.poshthemes/"
+rm -rf "$HOME/.tmux/"
+rm -rf "$HOME/.themes/Dracula/"
+rm -rf "$HOME/.local/share/icons/dracula/"
+rm -rf "$HOME/.local/share/icons/dracula-light/"
+rm -rf "$HOME/.local/share/icons/dracula-dark/"
+rm -rf "$HOME/.zshrc"
+rm -rf "$HOME/.zsh_aliases"
 
 cd "$TERMINALS_DIR" && ./oh_my_zsh_install.sh || exit
 
@@ -35,6 +50,10 @@ sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf "$F
 sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf "$LOCAL_FONT_DIR"
 sudo cp JetBrainsMonoNerdFontMono-*.ttf "$FONT_DIR"
 sudo cp JetBrainsMonoNerdFontMono-*.ttf "$LOCAL_FONT_DIR"
+sudo cp FantasqueSansMNerdFont-Regular.ttf "$FONT_DIR"
+sudo cp FantasqueSansMNerdFont-Regular.ttf "$LOCAL_FONT_DIR"
+sudo cp FantasqueSansMNerdFontMono-Regular.ttf "$FONT_DIR"
+sudo cp FantasqueSansMNerdFontMono-Regular.ttf "$LOCAL_FONT_DIR"
 
 msg_color "34" "Instalando logo-ls..."
 cp "$CUSTOMIZATION_DIR/bash/logo-ls_Linux_x86_64.tar.gz" "$HOME/Downloads"
@@ -47,13 +66,7 @@ msg_color "34" "Ativando o acesso aos apps Flatpak..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 msg_color "34" "Instalando o HomeBrew..."
-cd "$REPO_DIR/packages/package-managers" && ./brew_install.sh || exit
-
-# msg_color "34" "Instalando o Oh My Bash..."
-# cd "$TERMINALS_DIR" && ./oh_my_bash_install.sh || exit
-
-# msg_color "34" "Instalando o Starship..."
-# cd "$TERMINALS_DIR" && ./starship_install.sh || exit
+cd "$REPO_DIR/packages" && ./brew_install.sh || exit
 
 msg_color "34" "Configurando Tmux..."
 git clone --quiet https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
@@ -64,16 +77,15 @@ tmux kill-session -t "dev"
 
 msg_color "34" "Configurando HomeBrew no shell..."
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' | tee -a "$HOME/.bashrc" "$HOME/.zshrc" >/dev/null
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
-echo ". $HOME/.asdf/asdf.sh" >>~/.bashrc
-echo ". $HOME/.asdf/asdf.sh" >>~/.zshrc
 
-cd "$HOME/Development/Linux_Mint/stow" || exit
+cd "$HOME/Development/Arch_Linux/stow" || exit
 
 declare -a configs=(
   "cava"
   "lazygit"
-  "vim"
+  "gtk-3.0"
+  "gtk-4.0"
+  "kitty"
 )
 
 for config in "${configs[@]}"; do
@@ -88,20 +100,19 @@ done
 if [ -e "$HOME/Xresources" ]; then
   rm "$HOME/Xresources"
 fi
-ln -s "$HOME/Development/Linux_Mint/stow/Xresources" "$HOME/Xresources"
+ln -s "$HOME/Development/Arch_Linux/stow/Xresources" "$HOME/Xresources"
 
 if [ -e "$HOME/.xprofile" ]; then
   rm "$HOME/.xprofile"
 fi
-ln -s "$HOME/Development/Linux_Mint/stow/.xprofile" "$HOME/.xprofile"
+ln -s "$HOME/Development/Arch_Linux/stow/.xprofile" "$HOME/.xprofile"
 
 if [ -e "$HOME/Xauthority" ]; then
   rm "$HOME/Xauthority"
 fi
-ln -s "$HOME/Development/Linux_Mint/stow/Xauthority" "$HOME/Xauthority"
+ln -s "$HOME/Development/Arch_Linux/stow/Xauthority" "$HOME/Xauthority"
 
-cd "$HOME/Development/Linux_Mint/" || exit
-mkdir -p "$HOME/Pictures" && stow -v -t "$HOME/Pictures" wallpapers
+cd "$HOME/Development/Arch_Linux/" || exit
 mkdir -p "$HOME/scripts" && stow -v -t "$HOME/scripts" scripts
 
 cd "$HOME/Downloads/" || exit
@@ -117,18 +128,10 @@ cd Tela-icon-theme || exit
 cd ..
 sudo rm -r Tela-icon-theme
 
-cd "$HOME/Development/Linux_Mint/packages/programs/" || exit
-./i3lock-color.sh
-
-cd "$HOME/Downloads" || exit
-wget https://raw.githubusercontent.com/dracula/gedit/master/dracula.xml
-mkdir -p ~/.local/share/gedit/styles/
-mv dracula.xml ~/.local/share/gedit/styles/
-
 files=(
-  "$HOME/.zshrc:$HOME/Development/Linux_Mint/customization/zsh/.zshrc"
-  "$HOME/.zsh_aliases:$HOME/Development/Linux_Mint/customization/zsh/.zsh_aliases"
-  "$HOME/.gitconfig:$HOME/Development/Linux_Mint/customization/git/.gitconfig"
+  "$HOME/.zshrc:$HOME/Development/Arch_Linux/customization/zsh/.zshrc"
+  "$HOME/.zsh_aliases:$HOME/Development/Arch_Linux/customization/zsh/.zsh_aliases"
+  "$HOME/.gitconfig:$HOME/Development/Arch_Linux/customization/git/.gitconfig"
 )
 
 for file in "${files[@]}"; do
