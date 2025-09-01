@@ -1,84 +1,160 @@
-# Atalhos de Teclado do i3
+# 🐧 Arch Linux Setup Automatizado
 
-## Aplicações
+Uma solução completa para configuração automatizada do Arch Linux com tema Dracula, ferramentas de produtividade e ambiente de desenvolvimento otimizado.
+
+## 📋 Visão Geral
+
+Este projeto automatiza a instalação e configuração de um ambiente Arch Linux completo, incluindo:
+
+- **Gerenciador de Janelas**: i3wm com configurações personalizadas
+- **Terminal**: ZSH com Oh My Posh e tema Dracula
+- **Tema Visual**: Dracula aplicado consistentemente em todo o sistema
+- **Ferramentas de Desenvolvimento**: Git, Docker, VS Code, Node.js, e mais
+- **Utilitários**: Tmux, FZF, Yazi, Cava, e outras ferramentas modernas
+
+## 🚀 Instalação Rápida
+
+```bash
+git clone https://github.com/seu-usuario/Arch_Linux.git ~/Development/Arch_Linux
+cd ~/Development/Arch_Linux
+./installation_1.sh
+```
+
+## 📦 Scripts de Instalação
+
+### `installation_1.sh` - Configuração Base
+- Instala pacotes essenciais do sistema
+- Configura ZSH com Oh My ZSH e Oh My Posh
+- Instala fontes Nerd Font
+- Configura Tmux e Stow
+- Aplica tema Dracula (GTK, ícones)
+
+### `installation_2.sh` - Aplicações e Ferramentas
+- Instala aplicações via Flatpak
+- Configura aplicações AUR (yay)
+- Instala Steam, VS Code, GitHub Desktop
+- Configura tema Dracula para TTY e Yazi
+
+### `installation_3.sh` - Ferramentas Avançadas
+- Instala Ollama (IA local)
+- Configura Docker e Portainer
+- Instala Open WebUI
+- Otimiza performance do CPU
+
+## 🗂️ Estrutura do Projeto
+
+```
+Arch_Linux/
+├── customization/          # Configurações personalizadas
+│   ├── bash/              # Configurações do Bash
+│   ├── git/               # Configurações do Git
+│   ├── tmux/              # Configurações do Tmux
+│   ├── vim/               # Configurações do Vim
+│   └── zsh/               # Configurações do ZSH
+├── fonts/                 # Fontes Nerd Font
+├── packages/              # Scripts de instalação
+├── scripts/               # Scripts utilitários
+├── stow/                  # Dotfiles gerenciados pelo Stow
+└── README.md             # Atalhos do i3wm
+```
+
+## ⌨️ Atalhos Principais do i3
+
 | Atalho | Ação |
 |--------|------|
-| `$mod+Return` | Abrir terminal (Alacritty) |
-| `$mod+e` | Abrir gerenciador de arquivos (Nautilus) |
-| `$mod+o` | Abrir Obsidian |
-| `$mod+d` | Abrir Google Chrome |
-| `$mod+t` | Abrir VS Code |
+| `Super + Return` | Terminal (Alacritty) |
+| `Super + d` | Google Chrome |
+| `Super + t` | VS Code |
+| `Super + e` | Gerenciador de arquivos |
+| `Super + q` | Fechar janela |
+| `Super + f` | Tela cheia |
 
-## Controle de Janelas
-| Atalho | Ação |
-|--------|------|
-| `$mod+q` | Fechar janela focada |
-| `$mod+Left` | Focar à esquerda |
-| `$mod+Down` | Focar para baixo |
-| `$mod+Up` | Focar para cima |
-| `$mod+Right` | Focar à direita |
-| `$mod+Shift+Left` | Mover janela à esquerda |
-| `$mod+Shift+Down` | Mover janela para baixo |
-| `$mod+Shift+Up` | Mover janela para cima |
-| `$mod+Shift+Right` | Mover janela à direita |
-| `$mod+h` | Divisão horizontal |
-| `$mod+v` | Divisão vertical |
-| `$mod+f` | Alternar modo tela cheia |
-| `$mod+s` | Mudar layout para empilhado |
-| `$mod+w` | Mudar layout para abas |
-| `$mod+j` | Alternar layout |
-| `$mod+Shift+space` | Alternar entre tiling e flutuante |
-| `$mod+c` | Alternar entre janelas flutuantes e tiling |
-| `$mod+p` | Focar contêiner pai |
+[Ver todos os atalhos](README.md)
 
-## Redshift
-| Atalho | Ação |
-|--------|------|
-| `$mod+Shift+s` | Modo Redshift |
-| `a` | Modo automático |
-| `r` | Resetar temperatura |
-| `2` | Temperatura 2500K |
-| `3` | Temperatura 3000K |
-| `4` | Temperatura 4000K |
-| `5` | Temperatura 5000K |
-| `Return` ou `Escape` | Sair do modo |
+## 🎨 Tema Dracula
 
-## Workspaces
-| Atalho | Ação |
-|--------|------|
-| `$mod+1` a `$mod+0` | Alternar para workspace correspondente |
-| `$mod+Shift+1` a `$mod+Shift+0` | Mover janela para workspace correspondente |
+O tema Dracula está aplicado em:
+- Terminal (ZSH/Oh My Posh)
+- GTK 3.0 e 4.0
+- Ícones do sistema
+- TTY (console)
+- Aplicações (Yazi, Cava, etc.)
 
-## Sistema e Utilitários
-| Atalho | Ação |
-|--------|------|
-| `$mod+Shift+c` | Recarregar configuração |
-| `$mod+Shift+r` | Reiniciar i3 |
-| `$mod+l` | Bloquear sessão |
-| `$mod+Shift+l` | Menu de energia (Rofi) |
-| `$mod+Shift+p` | Captura de tela |
-| `$mod+Shift+j` | Controle de brilho |
-| `$mod+b` | Status da bateria |
-| `$mod+m` | Player de música |
-| `$mod+g` | Acesso rápido a links |
-| `$mod+Shift+e` | Aplicativos root |
-| `$mod+Shift+n` | Lista de aplicativos |
-| `$mod+Shift+a` | Controle de volume |
+## ⚠️ Pré-requisitos
 
-## Volume e Microfone
-| Atalho | Ação |
-|--------|------|
-| `XF86AudioRaiseVolume` | Aumentar volume em 10% |
-| `XF86AudioLowerVolume` | Diminuir volume em 10% |
-| `XF86AudioMute` | Alternar mudo |
-| `XF86AudioMicMute` | Alternar mudo do microfone |
+- **Sistema**: Arch Linux
+- **Conexão**: Internet ativa
+- **Privilégios**: Sudo configurado
+- **Espaço**: ~2GB livres
 
-## Modo de Redimensionamento
-| Atalho | Ação |
-|--------|------|
-| `$mod+r` | Entrar no modo de redimensionamento |
-| `Left` | Reduzir largura |
-| `Down` | Aumentar altura |
-| `Up` | Reduzir altura |
-| `Right` | Aumentar largura |
-| `Return` ou `Escape` | Sair do modo |
+## 🔧 Personalização
+
+### Modificar Tema
+Edite os arquivos em `customization/` para personalizar:
+- Cores do terminal: `customization/zsh/.zshrc`
+- Atalhos do i3: Veja documentação do i3wm
+- Alias do ZSH: `customization/zsh/.zsh_aliases`
+
+### Adicionar Aplicações
+Modifique `installation_2.sh` para incluir suas aplicações preferidas.
+
+## 🛠️ Solução de Problemas
+
+### Erro de Conexão
+```bash
+ping -c 3 8.8.8.8  # Testar conectividade
+```
+
+### Reinstalar Oh My ZSH
+```bash
+rm -rf ~/.oh-my-zsh
+./packages/oh_my_zsh_install.sh
+```
+
+### Verificar Logs
+```bash
+journalctl -xe  # Logs do sistema
+```
+
+## 📚 Ferramentas Incluídas
+
+### Desenvolvimento
+- Git com Delta (diff colorido)
+- VS Code
+- Node.js + npm
+- Docker + Portainer
+- GitHub Desktop
+
+### Terminal
+- ZSH + Oh My ZSH + Oh My Posh
+- Tmux (multiplexer)
+- FZF (fuzzy finder)
+- Yazi (file manager)
+- Fastfetch (system info)
+
+### Multimídia
+- Cava (visualizador de áudio)
+- Steam + emuladores
+- Telegram, Postman
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch: `git checkout -b feature/nova-funcionalidade`
+3. Commit suas mudanças: `git commit -m 'Adiciona nova funcionalidade'`
+4. Push para a branch: `git push origin feature/nova-funcionalidade`
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para detalhes.
+
+## 📞 Suporte
+
+- **Issues**: Abra uma issue no GitHub
+- **Discussões**: Use as discussões do repositório
+- **Email**: seu-email@example.com
+
+---
+
+**⭐ Se este projeto foi útil, considere dar uma estrela no GitHub!**

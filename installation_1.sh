@@ -1,41 +1,134 @@
 #!/usr/bin/bash
 set -e
 
+# Função para exibir mensagens coloridas
 msg_color() {
   clear
   echo -e "\n\033[$1m$2\033[0m\n"
   sleep 2
 }
 
-sudo pacman -S wget git tmux curl nano eog \
-  fastfetch stow flatpak nwg-look zsh gnome-disk-utility \
-  cpupower cava cronie nodejs npm kitty --noconfirm
+# Função para verificar se um comando existe
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
 
-msg_color "34" "Instalando o Oh My ZSH..."
+# Função para verificar se é Arch Linux
+check_arch_linux() {
+  if [[ ! -f /etc/arch-release ]]; then
+    msg_color "31" "ERRO: Este script é apenas para Arch Linux!"
+    exit 1
+  fi
+}
+
+# Função para verificar conexão com internet
+check_internet() {
+  if ! ping -c 1 8.8.8.8 >/dev/null 2>&1; then
+    msg_color "31" "ERRO: Sem conexão com a internet!"
+    exit 1
+  fi
+}
+
+# Função para backup de arquivos importantes
+backup_file() {
+  local file="$1"
+  if [[ -f "$file" ]]; then
+    cp "$file" "${file}.backup.$(date +%Y%m%d_%H%M%S)"
+    msg_color "33" "Backup criado: ${file}.backup.$(date +%Y%m%d_%H%M%S)"
+  fi
+}
+
+# Função para instalação segura de pacotes
+safe_pacman_install() {
+  local packages=("$@")
+  msg_color "34" "Instalando pacotes: ${packages[*]}"
+  
+  if ! sudo pacman -S "${packages[@]}" --needed --noconfirm; then
+    msg_color "31" "ERRO: Falha na instalação de pacotes: ${packages[*]}"
+    return 1
+  fi
+}
+
+# Verificações iniciais
+msg_color "34" "Verificando pré-requisitos..."
+check_arch_linux
+check_internet
+
+# Instalação de pacotes essenciais
+safe_pacman_install wget git tmux curl nano eog fastfetch stow flatpak \
+  nwg-look zsh gnome-disk-utility cpupower cava cronie nodejs npm kitty
+
+# Definição de diretórios
 REPO_DIR="$HOME/Development/Arch_Linux/"
 TERMINALS_DIR="$REPO_DIR/packages/"
 CUSTOMIZATION_DIR="$REPO_DIR/customization"
 
-rm -rf "$HOME/.oh-my-zsh/"
-rm -rf "$HOME/.poshthemes/"
-rm -rf "$HOME/.tmux/"
-rm -rf "$HOME/.themes/Dracula/"
-rm -rf "$HOME/.local/share/icons/dracula/"
-rm -rf "$HOME/.local/share/icons/dracula-light/"
-rm -rf "$HOME/.local/share/icons/dracula-dark/"
-rm -rf "$HOME/.zshrc"
-rm -rf "$HOME/.zsh_aliases"
+# Verificar se o diretório do projeto existe
+if [[ ! -d "$REPO_DIR" ]]; then
+  msg_color "31" "ERRO: Diretório do projeto não encontrado em $REPO_DIR"
+  exit 1
+fi
 
-cd "$TERMINALS_DIR" && ./oh_my_zsh_install.sh || exit
+msg_color "34" "Instalando o Oh My ZSH..."
+
+# Fazer backup e remover configurações antigas
+backup_file "$HOME/.zshrc"
+backup_file "$HOME/.zsh_aliases"
+
+# Remover diretórios antigos (com confirmação se não estiver vazio)
+for dir in "$HOME/.oh-my-zsh/" "$HOME/.poshthemes/" "$HOME/.tmux/" \
+           "$HOME/.themes/Dracula/" "$HOME/.local/share/icons/dracula/" \
+           "$HOME/.local/share/icons/dracula-light/" "$HOME/.local/share/icons/dracula-dark/"; do
+  if [[ -d "$dir" ]]; then
+    rm -rf "$dir"
+  fi
+done
+
+# Remover arquivos de configuração antigos
+for file in "$HOME/.zshrc" "$HOME/.zsh_aliases"; do
+  if [[ -f "$file" ]]; then
+    rm -f "$file"
+  fi
+done
+
+# Instalar Oh My ZSH
+if [[ -f "$TERMINALS_DIR/oh_my_zsh_install.sh" ]]; then
+  cd "$TERMINALS_DIR" && ./oh_my_zsh_install.sh
+  if [[ $? -ne 0 ]]; then
+    msg_color "31" "ERRO: Falha na instalação do Oh My ZSH"
+    exit 1
+  fi
+else
+  msg_color "31" "ERRO: Script oh_my_zsh_install.sh não encontrado"
+  exit 1
+fi
 
 msg_color "34" "Instalando o Oh My Posh..."
-sudo wget -q https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
+
+# Baixar e instalar Oh My Posh
+if ! sudo wget -q https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh; then
+  msg_color "31" "ERRO: Falha no download do Oh My Posh"
+  exit 1
+fi
+
 sudo chmod +x /usr/local/bin/oh-my-posh
+
+# Baixar e instalar temas
 mkdir -p "$HOME/.poshthemes"
-wget -q https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O "$HOME/.poshthemes/themes.zip"
+if ! wget -q https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O "$HOME/.poshthemes/themes.zip"; then
+  msg_color "31" "ERRO: Falha no download dos temas do Oh My Posh"
+  exit 1
+fi
+
 unzip -q "$HOME/.poshthemes/themes.zip" -d "$HOME/.poshthemes"
 rm "$HOME/.poshthemes/themes.zip"
-ln -sf "$CUSTOMIZATION_DIR/zsh/tj-dracula.omp.json" "$HOME/.poshthemes/tj-dracula.omp.json"
+
+# Link para tema customizado
+if [[ -f "$CUSTOMIZATION_DIR/zsh/tj-dracula.omp.json" ]]; then
+  ln -sf "$CUSTOMIZATION_DIR/zsh/tj-dracula.omp.json" "$HOME/.poshthemes/tj-dracula.omp.json"
+else
+  msg_color "33" "AVISO: Tema customizado tj-dracula.omp.json não encontrado"
+fi
 
 msg_color "34" "Criando diretórios..."
 mkdir -p "$HOME/Development" "$HOME/.icons" "$HOME/.themes" "$HOME/scripts"

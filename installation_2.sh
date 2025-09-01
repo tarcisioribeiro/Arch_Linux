@@ -1,17 +1,64 @@
 #!/bin/bash
+set -e
+
+# Cores para mensagens
+msg_color() {
+  echo -e "\n\033[$1m$2\033[0m\n"
+  sleep 1
+}
+
+# Verificar se homebrew está instalado
+if ! command -v brew >/dev/null 2>&1; then
+  msg_color "31" "ERRO: Homebrew não está instalado!"
+  exit 1
+fi
+
+# Instalar pacotes via Homebrew
+msg_color "34" "Instalando pacotes via Homebrew..."
 brew install git-delta onefetch
 
-flatpak install flathub com.getpostman.Postman
-flatpak install flathub org.telegram.desktop
-flatpak install flathub com.snes9x.Snes9x
-flatpak install flathub org.duckstation.DuckStation
-flatpak install flathub net.pcsx2.PCSX2
-flatpak install flathub com.heroicgameslauncher.hgl
+# Instalar aplicações via Flatpak
+msg_color "34" "Instalando aplicações via Flatpak..."
+flatpak_apps=(
+  "com.getpostman.Postman"
+  "org.telegram.desktop" 
+  "com.snes9x.Snes9x"
+  "org.duckstation.DuckStation"
+  "net.pcsx2.PCSX2"
+  "com.heroicgameslauncher.hgl"
+)
 
-yay -S visual-studio-code-bin
-yay -S yazi
-yay -S steam
-yay -S github-desktop
+for app in "${flatpak_apps[@]}"; do
+  if ! flatpak install flathub "$app" -y; then
+    msg_color "33" "AVISO: Falha na instalação de $app"
+  fi
+done
+
+# Verificar se yay está instalado
+if ! command -v yay >/dev/null 2>&1; then
+  msg_color "33" "AVISO: yay não está instalado. Instalando..."
+  sudo pacman -S --needed git base-devel --noconfirm
+  git clone https://aur.archlinux.org/yay.git /tmp/yay
+  cd /tmp/yay
+  makepkg -si --noconfirm
+  cd -
+  rm -rf /tmp/yay
+fi
+
+# Instalar pacotes AUR
+msg_color "34" "Instalando pacotes AUR..."
+aur_packages=(
+  "visual-studio-code-bin"
+  "yazi"
+  "steam"
+  "github-desktop"
+)
+
+for package in "${aur_packages[@]}"; do
+  if ! yay -S "$package" --noconfirm; then
+    msg_color "33" "AVISO: Falha na instalação de $package"
+  fi
+done
 
 echo "Instalação concluída!"
 
