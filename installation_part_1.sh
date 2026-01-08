@@ -24,7 +24,7 @@ sudo pacman -S git curl fzf wget fastfetch btop htop ttf-dejavu noto-fonts \
 	noto-fonts-emoji ttf-liberation gst-libav gst-plugins-bad gst-plugins-good \
 	gst-plugins-ugly ffmpeg gstreamer hyrpland kitty xdg-desktop-portal \
 	xdg-desktop-portal-hyprland zip unzip p7zip unrar tar gzip wofi thunar \
-	xed flatpak python3 vlc obs-studio zsh tmux waybar
+	xed flatpak python3 vlc obs-studio zsh tmux waybar gnome-disk-utility
 
 # Função para exibir mensagens coloridas
 msg_color() {
@@ -122,8 +122,9 @@ load_brew() {
 # INSTALAÇÃO BASE
 # ============================================================================
 install_base() {
-    msg_color "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "$BLUE"
-    msg_color "🔧 INICIANDO CONFIGURAÇÃO BASE" "$BLUE"
+    msg_color "\n" "$BLUE"
+    msg_color "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    msg_color "║          🔧 INICIANDO CONFIGURAÇÃO BASE                ║" "$BLUE"
     msg_color "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" "$BLUE"
 
     # Instalar pacotes essenciais
@@ -259,8 +260,7 @@ install_base() {
     declare -a configs=(
         "cava"
         "lazygit"
-	"nvim"
-	"hypr"
+	    "hypr"
         "gtk-3.0"
         "gtk-4.0"
         "kitty"
@@ -368,7 +368,7 @@ install_apps() {
         "visual-studio-code-bin"
         "yazi"
         "steam"
-	"google-chrome"
+	    "google-chrome"
         "github-desktop"
     )
 
