@@ -17,6 +17,15 @@ TERMINALS_DIR="$REPO_DIR/packages"
 CUSTOMIZATION_DIR="$REPO_DIR/customization"
 BREW_INSTALLED=false
 
+mkdir -p "$HOME/Downloads"
+sudo pacman -Syu
+sudo pacman -S git curl wget nano fastfetch vim vi neovim zip unzip github-cli
+sudo pacman -S git curl fzf wget fastfetch btop htop ttf-dejavu noto-fonts \
+	noto-fonts-emoji ttf-liberation gst-libav gst-plugins-bad gst-plugins-good \
+	gst-plugins-ugly ffmpeg gstreamer hyrpland kitty xdg-desktop-portal \
+	xdg-desktop-portal-hyprland zip unzip p7zip unrar tar gzip wofi thunar \
+	xed flatpak python3 vlc obs-studio zsh tmux waybar
+
 # Função para exibir mensagens coloridas
 msg_color() {
     echo -e "${2}${1}${NC}"
@@ -28,8 +37,8 @@ show_header() {
     clear
     echo -e "${BLUE}"
     echo "╔═══════════════════════════════════════════════════════════╗"
-    echo "║                  ARCH LINUX SETUP                        ║"
-    echo "║            Instalação Unificada v2.0                     ║"
+    echo "║                  ARCH LINUX SETUP                         ║"
+    echo "║            Instalação Unificada v2.0                      ║"
     echo "╚═══════════════════════════════════════════════════════════╝"
     echo -e "${NC}\n"
 }
@@ -190,10 +199,6 @@ install_base() {
     sudo mkdir -p "$FONT_DIR"
 
     cd "$REPO_DIR/fonts" || return 1
-    sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf "$FONT_DIR"
-    sudo cp JetBrains_Mono_Medium_Nerd_Font_Complete_Mono_Windows_Compatible.ttf "$LOCAL_FONT_DIR"
-    sudo cp JetBrainsMonoNerdFontMono-*.ttf "$FONT_DIR" 2>/dev/null || true
-    sudo cp JetBrainsMonoNerdFontMono-*.ttf "$LOCAL_FONT_DIR" 2>/dev/null || true
     sudo cp FantasqueSansMNerdFont-Regular.ttf "$FONT_DIR" 2>/dev/null || true
     sudo cp FantasqueSansMNerdFont-Regular.ttf "$LOCAL_FONT_DIR" 2>/dev/null || true
     sudo cp FantasqueSansMNerdFontMono-Regular.ttf "$FONT_DIR" 2>/dev/null || true
@@ -254,6 +259,8 @@ install_base() {
     declare -a configs=(
         "cava"
         "lazygit"
+	"nvim"
+	"hypr"
         "gtk-3.0"
         "gtk-4.0"
         "kitty"
@@ -361,6 +368,7 @@ install_apps() {
         "visual-studio-code-bin"
         "yazi"
         "steam"
+	"google-chrome"
         "github-desktop"
     )
 
@@ -524,7 +532,7 @@ install_theme_dracula() {
 # ============================================================================
 install_complete() {
     msg_color "\n╔═══════════════════════════════════════════════════════════╗" "$GREEN"
-    msg_color "║         INICIANDO INSTALAÇÃO COMPLETA                   ║" "$GREEN"
+    msg_color "║         INICIANDO INSTALAÇÃO COMPLETA                       ║" "$GREEN"
     msg_color "╚═══════════════════════════════════════════════════════════╝\n" "$GREEN"
 
     install_base
@@ -599,3 +607,5 @@ main() {
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     main "$@"
 fi
+
+sudo reboot now
